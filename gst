@@ -2,14 +2,12 @@
 # Report git status on all repo's.
 
 readonly -a GIT_REPO=(
+    'bin'
+    'kz-deb'
     'kz-docs'
     'kz-scripts'
-    'kz-deb'
     'kz-uploads'
-    'scripts'
-    'c'
-    'java'
-    'python'
+    'work'
     )
 declare -i repo=0
 
