@@ -1,0 +1,15 @@
+echo "\
+.adobe/Flash_Player/AssetCache
+.cache
+.ccache
+.gvfs
+.Private
+.recent-applications.xbel
+.recently-used.xbel
+snap/*/*/.cache
+.steam/root
+.thumbnails
+.var/app/*/cache
+.xsession-errors" > $HOME/.kz-fbackup-exclude
+
+rsync --archive --delete --verbose --exclude-from=$HOME/.kz-fbackup-exclude --delete-excluded $HOME/ /media/$USER/Samsung_500GB/kz-fbackup-$HOSTNAME-$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
