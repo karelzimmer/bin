@@ -1,5 +1,5 @@
 #!/bin/bash
-# Repost git status on all repo's.
+# Report git status on all repo's.
 
 readonly -a GIT_REPO=(
     'kz-docs'
