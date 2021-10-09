@@ -27,4 +27,4 @@ rsync   --archive                                   \
 
 # rsync error: some files/attrs were not transferred (see previous errors):
 # chmod a+r /home/$USER/.config/nautilus-actions
-# chmod 775 /home/$USER/.local/share/teamviewer*/drive_c/users/karel/*
+# chmod 775 /home/$USER/.local/share/teamviewer*/drive_c/users/$USER/*
