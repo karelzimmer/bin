@@ -4,7 +4,7 @@
 
 # Instellingen
 
-readonly PROGNAME=lsa.sh
+readonly PROGNAME=lsash
 if [[ $1 ]]; then
     echo "Gebruik: $PROGNAME"
     exit 0

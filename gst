@@ -1,5 +1,6 @@
 #!/bin/bash
-# Report git status on all repo's.
+
+# Report git status of all repo's.
 
 readonly -a GIT_REPO=(
     'bin'
