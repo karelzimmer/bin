@@ -26,8 +26,6 @@ readonly UP_1_LINE=$(tput cuu1)
 declare opdr1=''
 declare opdr2=''
 
-# Lijst voor 'sed -i' bijvoorbeeld:
-# $(find . -type f -executable -not -name '*~' -printf ' %f') common.sh
 opdr1="(
     (
         find    .                   \
