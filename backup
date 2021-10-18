@@ -4,7 +4,7 @@ target=$(ls --directory /media/"$USER"/*)
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
-cat << EOF > /tmp/$exclude
+cat << EOF > /tmp/"$exclude"
 .adobe/Flash_Player/AssetCache
 .cache
 .ccache
@@ -25,8 +25,8 @@ rsync   --archive                       \
         --verbose                       \
         --human-readable                \
         --delete                        \
-        --exclude-from=/tmp/$exclude    \
+        --exclude-from=/tmp/"$exclude"  \
         --delete-excluded               \
         --ignore-errors                 \
         "$source"/                      \
-        "$target"/backup-"$HOSTNAME"-"$distro"-"$USER"
+        "$target/backup-$HOSTNAME-$distro-$USER"

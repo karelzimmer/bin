@@ -4,14 +4,14 @@ target=$HOME
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
-cat << EOF > /tmp/$exclude
+cat << EOF > /tmp/"$exclude"
 $(find /etc/skel -type f -exec basename '{}' \;)
 EOF
 
-rsync   --archive                                       \
-        --verbose                                       \
-        --human-readable                                \
-        --exclude-from=/tmp/$exclude                    \
-        --ignore-errors                                 \
-        "$source"/backup-"$HOSTNAME"-"$distro"-"$USER"/ \
+rsync   --archive                                   \
+        --verbose                                   \
+        --human-readable                            \
+        --exclude-from=/tmp/"$exclude"              \
+        --ignore-errors                             \
+        "$source/backup-$HOSTNAME-$distro-$USER"/   \
         "$target"
