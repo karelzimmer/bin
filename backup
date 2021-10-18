@@ -1,26 +1,32 @@
 #!/bin/bash
+source=$HOME
 target=$(ls --directory /media/"$USER"/*)
+exclude=$(mktemp -t 'backup-XXXXXXXXXX')
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
-rsync   --archive                                   \
-        --verbose                                   \
-        --human-readable                            \
-        --delete                                    \
-        --exclude='.adobe/Flash_Player/AssetCache'  \
-        --exclude='.cache'                          \
-        --exclude='.ccache'                         \
-        --exclude='.git'                            \
-        --exclude='.gvfs'                           \
-        --exclude='.Private'                        \
-        --exclude='__pycache__'                     \
-        --exclude='.recent-applications.xbel'       \
-        --exclude='.recently-used.xbel'             \
-        --exclude='snap/*/*/.cache'                 \
-        --exclude='.steam/root'                     \
-        --exclude='.thumbnails'                     \
-        --exclude='.var/app/*/cache'                \
-        --exclude='.xsession-errors'                \
-        --delete-excluded                           \
-        --ignore-errors                             \
-        "$HOME"/                                    \
+cat << EOF > /tmp/$exclude
+.adobe/Flash_Player/AssetCache
+.cache
+.ccache
+.git
+.gvfs
+.Private
+__pycache__
+.recent-applications.xbel
+.recently-used.xbel
+snap/*/*/.cache
+.steam/root
+.thumbnails
+.var/app/*/cache
+.xsession-errors
+EOF
+
+rsync   --archive                       \
+        --verbose                       \
+        --human-readable                \
+        --delete                        \
+        --exclude-from=/tmp/$exclude    \
+        --delete-excluded               \
+        --ignore-errors                 \
+        "$source"/                      \
         "$target"/backup-"$HOSTNAME"-"$distro"-"$USER"
