@@ -1,0 +1,17 @@
+#!/bin/bash
+source=$(ls --directory /media/"$USER"/*)
+target=$HOME
+exclude=$(mktemp -t 'backup-XXXXXXXXXX')
+distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+
+cat << EOF > "$exclude"
+$(find /etc/skel -type f -exec basename '{}' \;)
+EOF
+
+rsync   --archive                                   \
+        --verbose                                   \
+        --human-readable                            \
+        --exclude-from="$exclude"                   \
+        --ignore-errors                             \
+        "$source/backup-$HOSTNAME-$distro-$USER"/   \
+        "$target"
