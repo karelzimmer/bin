@@ -1,6 +1,9 @@
 #!/bin/bash
 source=$HOME
 target=$(ls --directory /media/"$USER"/*)
+if [[ -z $target ]]; then
+    exit 1
+fi
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
