@@ -30,3 +30,5 @@ rsync   --archive                   \
         --ignore-errors             \
         "$source"/                  \
         "$target/backup-$HOSTNAME-$distro-$USER"
+
+rm "$exclude"
