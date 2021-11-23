@@ -1,5 +1,7 @@
 #!/bin/bash
-# Herstel Persoonlijke map.
+
+# Persoonlijke map herstellen.
+
 source=$(ls --directory /media/"$USER"/*)
 if [[ -z $source ]]; then
     exit 1
