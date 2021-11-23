@@ -1,4 +1,5 @@
 #!/bin/bash
+# Herstel Persoonlijke map.
 source=$(ls --directory /media/"$USER"/*)
 if [[ -z $source ]]; then
     exit 1

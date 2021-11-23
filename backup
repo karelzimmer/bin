@@ -1,4 +1,5 @@
 #!/bin/bash
+# Back-up Persoonlijke map.
 source=$HOME
 target=$(ls --directory /media/"$USER"/*)
 if [[ -z $target ]]; then
