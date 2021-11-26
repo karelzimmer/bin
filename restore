@@ -18,7 +18,6 @@ rsync   --archive                                   \
         --verbose                                   \
         --human-readable                            \
         --exclude-from="$exclude"                   \
-        --ignore-errors                             \
         "$source/backup-$HOSTNAME-$distro-$USER"/   \
         "$target"
 

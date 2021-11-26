@@ -32,7 +32,6 @@ rsync   --archive                   \
         --delete                    \
         --exclude-from="$exclude"   \
         --delete-excluded           \
-        --ignore-errors             \
         "$source"/                  \
         "$target/backup-$HOSTNAME-$distro-$USER"
 
