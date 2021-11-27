@@ -3,10 +3,10 @@
 # Persoonlijke map herstellen.
 
 source=$(ls --directory /media/"$USER"/*)
+target=$HOME
 if [[ -z $source ]]; then
     exit 1
 fi
-target=$HOME
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
