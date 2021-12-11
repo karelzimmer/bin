@@ -5,7 +5,7 @@
 target=$(ls --directory /media/"$USER"/* 2> /dev/null)
 target=$HOME
 if [[ -z $source ]]; then
-    echo 'Sluit USB harddisk aan.'
+    echo 'Sluit USB-harddisk aan.'
     exit 1
 fi
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
