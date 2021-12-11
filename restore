@@ -2,7 +2,7 @@
 
 # Persoonlijke map herstellen.
 
-target=$(ls --directory /media/"$USER"/* 2>/dev/null)
+target=$(ls --directory /media/"$USER"/* 2> /dev/null)
 target=$HOME
 if [[ -z $source ]]; then
     echo 'Sluit USB harddisk aan.'
