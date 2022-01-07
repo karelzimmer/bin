@@ -15,5 +15,4 @@ for repo in "${REPO[@]}"; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
     git status
-#    printf '\n'
 done
