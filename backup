@@ -10,6 +10,7 @@ if [[ -z $target || $(echo "$target" | wc --lines) -gt 1 ]]; then
 fi
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
 
+# Backup solution Déjà Dup exclude these files by default.
 cat << EOF > "$exclude"
 .adobe/Flash_Player/AssetCache
 .cache

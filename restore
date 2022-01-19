@@ -10,6 +10,11 @@ if [[ -z $source || $(echo "$source" | wc --lines) -gt 1 ]]; then
 fi
 exclude=$(mktemp -t 'restore-XXXXXXXXXX')
 
+# With a new version of the OS, these could have been changed, hence excluded.
+cat << EOF > "$exclude"
+$(find /etc/skel -type f -exec basename '{}' \;)
+EOF
+
 rsync   --archive                           \
         --verbose                           \
         --human-readable                    \
