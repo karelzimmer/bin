@@ -29,6 +29,7 @@ EOF
 
 rsync   --archive                   \
         --progress                  \
+        --verbose                   \
         --human-readable            \
         --delete                    \
         --exclude-from="$exclude"   \

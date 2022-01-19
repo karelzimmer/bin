@@ -17,6 +17,7 @@ EOF
 
 rsync   --archive                           \
         --progress                          \
+        --verbose                           \
         --human-readable                    \
         --exclude-from="$exclude"           \
         "$source/backup-$HOSTNAME-$USER"/   \
