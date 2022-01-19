@@ -9,6 +9,7 @@ if [[ -z $target || $(echo "$target" | wc --lines) -gt 1 ]]; then
     exit 1
 fi
 exclude=$(mktemp -t 'backup-XXXXXXXXXX')
+rc=0
 
 # Backup solution Déjà Dup exclude these files by default.
 cat << EOF > "$exclude"
@@ -27,14 +28,16 @@ snap/*/*/.cache
 .xsession-errors
 EOF
 
-rsync   --archive                   \
-        --progress                  \
-        --verbose                   \
-        --human-readable            \
-        --delete                    \
-        --exclude-from="$exclude"   \
-        --delete-excluded           \
-        "$source"/                  \
-        "$target/backup-$HOSTNAME-$USER"
+rsync   --archive                           \
+        --progress                          \
+        --verbose                           \
+        --human-readable                    \
+        --delete                            \
+        --exclude-from="$exclude"           \
+        --delete-excluded                   \
+        "$source"/                          \
+        "$target/backup-$HOSTNAME-$USER"    || rc=$?
 
 rm "$exclude"
+
+exit $rc
