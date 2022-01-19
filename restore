@@ -16,7 +16,7 @@ $(find /etc/skel -type f -exec basename '{}' \;)
 EOF
 
 rsync   --archive                           \
-        --verbose                           \
+        --progress                          \
         --human-readable                    \
         --exclude-from="$exclude"           \
         "$source/backup-$HOSTNAME-$USER"/   \

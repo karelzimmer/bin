@@ -28,7 +28,7 @@ snap/*/*/.cache
 EOF
 
 rsync   --archive                   \
-        --verbose                   \
+        --progress                  \
         --human-readable            \
         --delete                    \
         --exclude-from="$exclude"   \
