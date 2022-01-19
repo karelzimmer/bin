@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Persoonlijke map herstellen.
+# Back-up van Persoonlijke map terugzetten.
 
 source=$(ls --directory /media/"$USER"/* 2> /dev/null)
 target=$HOME
@@ -8,18 +8,9 @@ if [[ -z $source || $(echo "$source" | wc --lines) -gt 1 ]]; then
     echo 'Sluit één USB-harddisk aan.'
     exit 1
 fi
-exclude=$(mktemp -t 'backup-XXXXXXXXXX')
-distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
-cat << EOF > "$exclude"
-$(find /etc/skel -type f -exec basename '{}' \;)
-EOF
-
-rsync   --archive                                   \
-        --verbose                                   \
-        --human-readable                            \
-        --exclude-from="$exclude"                   \
-        "$source/backup-$HOSTNAME-$distro-$USER"/   \
+rsync   --archive                           \
+        --verbose                           \
+        --human-readable                    \
+        "$source/backup-$HOSTNAME-$USER"/   \
         "$target"
-
-rm "$exclude"

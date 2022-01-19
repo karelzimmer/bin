@@ -8,32 +8,10 @@ if [[ -z $target || $(echo "$target" | wc --lines) -gt 1 ]]; then
     echo 'Sluit één USB-harddisk aan.'
     exit 1
 fi
-exclude=$(mktemp -t 'backup-XXXXXXXXXX')
-distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-
-cat << EOF > "$exclude"
-.adobe/Flash_Player/AssetCache
-.cache
-.ccache
-.git
-.gvfs
-.Private
-.recent-applications.xbel
-.recently-used.xbel
-snap/*/*/.cache
-.steam/root
-.thumbnails
-.var/app/*/cache
-.xsession-errors
-EOF
 
 rsync   --archive                   \
         --verbose                   \
         --human-readable            \
         --delete                    \
-        --exclude-from="$exclude"   \
-        --delete-excluded           \
         "$source"/                  \
-        "$target/backup-$HOSTNAME-$distro-$USER"
-
-rm "$exclude"
+        "$target/backup-$HOSTNAME-$USER"
