@@ -8,9 +8,13 @@ if [[ -z $source || $(echo "$source" | wc --lines) -gt 1 ]]; then
     echo 'Sluit één USB-harddisk aan.'
     exit 1
 fi
+exclude=$(mktemp -t 'restore-XXXXXXXXXX')
 
 rsync   --archive                           \
         --verbose                           \
         --human-readable                    \
+        --exclude-from="$exclude"           \
         "$source/backup-$HOSTNAME-$USER"/   \
         "$target"
+
+rm "$exclude"
