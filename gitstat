@@ -3,16 +3,16 @@
 # Git status van alle repo's.
 
 readonly -a REPO=(
-    'bin'
-    'kz-deb'
-    'kz-docs'
-    'kz-scripts'
-    'kz-uploads'
-    'work'
+    "$HOME/bin"
+    "$HOME/kz-deb"
+    "$HOME/kz-docs"
+    "$HOME/kz-scripts"
+    "$HOME/kz-uploads"
+    "$HOME/work"
     )
 
 for repo in "${REPO[@]}"; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    cd "$HOME/$repo" || exit 1
+    cd "$repo" || exit 1
     git status
 done
