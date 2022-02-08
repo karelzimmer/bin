@@ -1,0 +1,219 @@
+#!/usr/bin/bash
+###############################################################################
+# Scripts archiveren.                                                         #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+###############################################################################
+
+###############################################################################
+# Global constants                                                            #
+###############################################################################
+
+readonly ARCHIVE_FROM=$HOME/kz-uploads/dist/data/linux
+readonly ARCHIVE_TO=$HOME/kz-uploads/app/data/linux-archief
+readonly DELETE_FROM_1=$HOME/kz-scripts
+readonly DELETE_FROM_2=$HOME/kz-docs
+readonly DELETE_FROM_3=$HOME/kz-deb
+
+
+###############################################################################
+# Global variables                                                            #
+###############################################################################
+
+declare -a SELECTION_ARGUMENT=()
+ARCHIVED=false
+ARGUMENT_SELECTION=false
+DELETED=false
+
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+REWRITE_LINE=$(tput cuu1;tput el)
+
+
+###############################################################################
+# Functions                                                                   #
+###############################################################################
+
+function check_input {
+    local -i    search4_arg_num=0
+    local       dir=''
+
+    while [[ "$*" ]]; do
+        ARGUMENT_SELECTION=true
+        SELECTION_ARGUMENT[$search4_arg_num]=$(basename "$1")
+        ((++search4_arg_num))
+        shift
+    done
+
+    for dir in  "$ARCHIVE_FROM"     \
+                "$ARCHIVE_TO"       \
+                "$DELETE_FROM_1"    \
+                "$DELETE_FROM_2"    \
+                "$DELETE_FROM_3"; do
+        if ! [[ -d $dir ]]; then
+            printf '%s\n' "Map '$dir' bestaat niet."
+            exit 1
+        fi
+    done
+
+    request_input
+}
+
+
+function request_input {
+    if $ARGUMENT_SELECTION; then
+        return 0
+    fi
+    read -rp 'Wat archiveren/verwijderen? [leeg=alles]: '
+    SELECTION_ARGUMENT[0]=$REPLY
+}
+
+
+function process_input {
+    local basename=''
+    local dirname=''
+    local files_found=false
+    local search4=''
+
+    for search4 in "${SELECTION_ARGUMENT[@]}"; do
+        while read -r file; do
+
+            files_found=true
+
+            dirname=$(dirname   "$file")
+            basename=$(basename "$file")
+
+            if [[ $dirname == $ARCHIVE_FROM* ]]; then
+                process_archive
+            else
+                process_delete
+            fi
+        done < <(
+            find    "$ARCHIVE_FROM"         \
+                    "$DELETE_FROM_1"        \
+                    "$DELETE_FROM_2"        \
+                    "$DELETE_FROM_3"        \
+                    -iname                  \
+                    '*'"$search4"'*'        \
+                    -not -path '*/.git/*'   \
+                    -type f                 \
+                    -print                  |
+                    sort
+            )
+        if ! $files_found; then
+            printf '%s\n' "Geen bestanden gevonden met '$search4' in de naam."
+        fi
+        files_found=false
+    done
+
+}
+
+
+function process_archive {
+    printf '%s\n' "
+$basename
+$dirname"
+    while true; do
+        # < /dev/tty want FD 1 al in gebruik door for-while constructie.
+        read -rp 'archiveren/Overslaan/stoppen? [a/O/s]: ' < /dev/tty
+        case $REPLY in
+            a*|A*)
+                archive_file
+                break
+                ;;
+            o*|O*|'')
+               printf '%s\n' 'Overgeslagen.'
+                break
+                ;;
+            s*|S*)
+                printf '%s\n' 'Gestopt.'
+                exit 0
+                ;;
+            *)
+                printf '%s' "${REWRITE_LINE}"
+                continue
+                ;;
+        esac
+    done
+}
+
+
+function archive_file {
+    local olddir=''
+    local newdir=''
+
+    olddir=$dirname
+    newdir=${olddir//dist/app}
+    newdir=${newdir//linux/linux-archief}
+    mv "$olddir/$basename" "$newdir" |& $LOGCMD
+    printf '%s\n' 'Gearchiveerd.'
+    ARCHIVED=true
+}
+
+
+function process_delete {
+    printf '%s\n' "
+$basename
+$dirname"
+    while true; do
+        # < /dev/tty want FD 1 al in gebruik door for-while constructie.
+        read -rp 'verwijderen/Overslaan/stoppen? [v/O/s]: ' < /dev/tty
+        case $REPLY in
+            v*|V*)
+                delete_file
+                break
+                ;;
+            o*|O*|'')
+                printf '%s\n' 'Overgeslagen.'
+                break
+                ;;
+            s*|S*)
+                printf '%s\n' 'Gestopt.'
+                exit 0
+                ;;
+            *)
+                printf '%s' "${REWRITE_LINE}"
+                continue
+                ;;
+        esac
+    done
+}
+
+
+function delete_file {
+    rm "$file" |& $LOGCMD
+    printf '%s\n' 'Verwijderd.'
+    DELETED=true
+}
+
+
+function term_script {
+    if $DELETED; then
+        TEXT="\nEr zijn bestanden verwijderd."
+    else
+        TEXT="\nEr zijn geen bestanden verwijderd."
+    fi
+    if $ARCHIVED; then
+        TEXT+="\nEr zijn bestanden gearchiveerd."
+    else
+        TEXT+="\nEr zijn geen bestanden gearchiveerd."
+    fi
+    printf '%b\n' "$TEXT"
+    if  $DELETED || $ARCHIVED; then
+        printf '%s\n' 'Pas website aan en commit de wijzigingen!'
+    fi
+    exit 0
+}
+
+
+###############################################################################
+# Main line                                                                   #
+###############################################################################
+
+function main {
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
