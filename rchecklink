@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Reverse-checklink.
+
+# Perl script checklink (W3C® Link Checker) controleert of links geledig zijn,
+# d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
+# Dit Bash script doet het omgekeerde: worden alle bestanden gebruikt?
+
+DIR1=/home/karel/kz-uploads/app/data
+DIR2=/home/karel/kz-uploads/dist/data
+HTML=/home/karel/kz-uploads/dist/html
+
+todo=0
+skip=0
+fine=0
+total=0
+
+echo 'Bestanden niet in gebruik:'
+while read -r file; do
+    ((++total))
+    if ! grep -r "$(basename "$file")" $HTML &> /dev/null; then
+        case $file in
+            *pc*|*PC*|*sv*|*SV*|*home/LF*|*kz-zga-*|*kz-vm-hugowin732*)
+                ((++skip))
+                continue
+                ;;
+        esac
+        ((++todo))
+        echo "$file"
+    else
+        ((++fine))
+    fi
+done < <(find $DIR1 $DIR2 -type f -print | sort)
+echo "
+$total bestanden gevonden, $todo niet in gebruik, $fine in gebruik, \
+$skip overgeslagen (computer-specifieke bestanden)
+
+Neem deze bestanden na onderzoek op in html gevolgd door:
+- kz build
+- kz deploy
+of deze bestanden verwijderen uit:
+- $DIR1/
+- $DIR2/
+gebruik hiervoor:
+- sudo updatedb
+- locate <file>
+- rm <file>
+
+Verschillen tussen app/ en dist/:"
+diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/
+echo "
+Controleer de geldigheid van links:"
+checklink --broken --summary /home/karel/kz-uploads/dist/html/linux*
