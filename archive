@@ -114,10 +114,14 @@ $basename
 $dirname"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
-        read -rp 'archiveren/Overslaan/stoppen? [a/O/s]: ' < /dev/tty
+        read -rp 'archiveren/Overslaan/stoppen? [a/d/O/s]: ' < /dev/tty
         case $REPLY in
             a*|A*)
                 archive_file
+                break
+                ;;
+            d*|D*)
+                delete_file
                 break
                 ;;
             o*|O*|'')
