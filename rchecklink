@@ -50,4 +50,4 @@ Verschillen tussen app/ en dist/:"
 diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/
 echo "
 Controleer de geldigheid van links:"
-checklink --broken --summary /home/karel/kz-uploads/dist/html/linux*
+linkchecker /home/karel/kz-uploads/dist/html/linux*
