@@ -20,7 +20,11 @@ while read -r file; do
     ((++total))
     if ! grep -r "$(basename "$file")" $HTML &> /dev/null; then
         case $file in
-            *pc*|*PC*|*sv*|*SV*|*home/LF*|*kz-zga-*|*kz-vm-hugowin732*)
+            *-pc0*|*-pc-*|*-PC0*|*-PC-*|*-PC10*|*-sv0*|*-SV0*)
+                ((++skip))
+                continue
+                ;;
+            *home/LF*|*kz-zga-*|*kz-vm-hugowin732*)
                 ((++skip))
                 continue
                 ;;
