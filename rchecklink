@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eEu
 
 # Reverse-checklink.
 
@@ -6,14 +7,14 @@
 # d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
 # Dit Bash script doet het omgekeerde: worden alle bestanden gebruikt?
 
-DIR1=/home/karel/kz-uploads/app/data
-DIR2=/home/karel/kz-uploads/dist/data
-HTML=/home/karel/kz-uploads/dist/html
+readonly DIR1=/home/karel/kz-uploads/app/data
+readonly DIR2=/home/karel/kz-uploads/dist/data
+readonly HTML=/home/karel/kz-uploads/dist/html
 
-todo=0
-skip=0
-fine=0
-total=0
+declare -i todo=0
+declare -i skip=0
+declare -i fine=0
+declare -i total=0
 
 echo 'Bestanden niet in gebruik:'
 while read -r file; do
@@ -51,7 +52,8 @@ gebruik hiervoor:
 - rm <file>
 
 Verschillen tussen app/ en dist/:"
-diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/
+diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
+    true
 echo "
 Controleer de geldigheid van links:"
 checklink   --broken            \

@@ -4,6 +4,8 @@
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
+set -eEu
+
 
 ###############################################################################
 # Global constants                                                            #
@@ -15,18 +17,17 @@ readonly DELETE_FROM_1=$HOME/kz-scripts
 readonly DELETE_FROM_2=$HOME/kz-docs
 readonly DELETE_FROM_3=$HOME/kz-deb
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
 
+declare ARCHIVED=false
+declare ARGUMENT_SELECTION=false
+declare DELETED=false
 declare -a SELECTION_ARGUMENT=()
-ARCHIVED=false
-ARGUMENT_SELECTION=false
-DELETED=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-REWRITE_LINE=$(tput cuu1;tput el)
+declare REWRITE_LINE=''
 
 
 ###############################################################################
@@ -54,6 +55,10 @@ function check_input {
             exit 1
         fi
     done
+
+    if [[ -t 1 ]]; then
+        REWRITE_LINE=$(tput cuu1;tput el)
+    fi
 
     request_input
 }

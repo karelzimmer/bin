@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eEu
 
 # Git status van alle repo's.
 
