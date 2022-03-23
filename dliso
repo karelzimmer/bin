@@ -123,7 +123,7 @@ function download_checksums {
 
 function term_script {
     echo "Om de $SEARCH_FOR-controlebestanden op te splitsen voer uit:
-    kzspsum
+    spsum
 
 Om de beeldbestanden (.iso) te controleren voer uit:
     cd $TARGET;$SEARCH_FOR --check --ignore-missing *.$SEARCH_FOR; cd -"
