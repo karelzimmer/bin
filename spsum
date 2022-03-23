@@ -1,0 +1,149 @@
+#!/usr/bin/bash
+###############################################################################
+# Controlebestanden opsplitsen.                                               #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+###############################################################################
+
+PROGRAM_NAME=kz-spsum
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+
+
+###############################################################################
+# Global constants                                                            #
+###############################################################################
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGELINE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+
+readonly SEARCHDIR=$HOME/Downloads
+readonly HASHPROG=sha256sum
+
+
+###############################################################################
+# Global variables                                                            #
+###############################################################################
+
+ISO_FILE=''
+ISO_FILE_FOUND=false
+
+
+###############################################################################
+# Functions                                                                   #
+###############################################################################
+
+function check_input {
+    local -i    getopt_rc=0
+    local       parsed=''
+
+    parsed=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
+        )       || getopt_rc=$?
+    if [[ $getopt_rc -ne 0 ]]; then
+        echo "$USAGELINE" >&2
+        exit 1
+    fi
+    eval set -- "$parsed"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        error 'Te veel argumenten.'
+        echo "$USAGELINE" >&2
+        exit 1
+    fi
+}
+
+
+function process_input {
+    cd "$SEARCHDIR" || exit 1
+
+    for ISO_FILE in *.iso; do
+
+        if ! [[ -f "$ISO_FILE" ]]; then
+            continue
+        fi
+
+        ISO_FILE_FOUND=true
+
+        create_checksum_file
+
+    done
+
+    if ! $ISO_FILE_FOUND; then
+        echo "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
+        exit 2
+    fi
+}
+
+
+function create_checksum_file {
+    local -a    files=()
+    local -i    grep_rc=0
+
+    if [[ -e $ISO_FILE.$HASHPROG ]]; then
+        printf '%s\n\n' "Beeldbestand $ISO_FILE heeft al controlebestand \
+$ISO_FILE.$HASHPROG."0
+        return 
+    else
+        for file in *; do
+            files+=("$file")
+        done
+        grep    --word-regexp           \
+                --regexp=" $ISO_FILE"   \
+                --regexp="*$ISO_FILE"   \
+                --exclude=*.iso         \
+                --exclude=*512*         \
+                --exclude-dir=*         \
+                --no-filename           \
+                -- "${files[@]}"        \
+                > "$ISO_FILE.$HASHPROG" 2> >($LOGCMD) || grep_rc=$?
+        if [[ $grep_rc -ne 0 ]]; then
+            printf '%s\n\n' "Geen controlesom gevonden voor $ISO_FILE." >&2
+        else
+            printf '%s\n\n' "Controlebestand $ISO_FILE.$HASHPROG aangemaakt."
+       fi
+    fi
+}
+
+
+function term_script {
+    rm --force --verbose -- *SHA* |& $LOGCMD
+    if $ISO_FILE_FOUND; then
+        echo "Om de beeldbestanden (.iso) te controleren voer uit:
+    cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -
+
+Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
+    kz dliso --checksums"
+    fi
+    exit 0
+}
+
+
+###############################################################################
+# Main line                                                                   #
+###############################################################################
+
+function main {
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
