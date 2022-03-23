@@ -13,7 +13,7 @@ DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT='c'
+readonly OPTIONS_SHORT=c
 readonly OPTIONS_LONG=checksums
 readonly USAGELINE="Gebruik: $DISPLAY_NAME [-c|--checksums]"
 

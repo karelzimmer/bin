@@ -13,9 +13,9 @@ DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGELINE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly OPTIONS_SHORT=
+readonly OPTIONS_LONG=
+readonly USAGELINE="Gebruik: $DISPLAY_NAME"
 
 readonly SEARCHDIR=$HOME/Downloads
 readonly HASHPROG=sha256sum
