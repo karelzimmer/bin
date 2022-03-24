@@ -18,7 +18,8 @@ readonly OPTIONS_LONG=
 readonly USAGELINE="Gebruik: $DISPLAY_NAME"
 
 readonly SEARCHDIR=$HOME/Downloads
-readonly HASHPROG=sha256sum
+readonly CHECKSUM=sha256
+readonly HASHPROG=${CHECKSUM}sum
 
 
 ###############################################################################
@@ -123,7 +124,7 @@ $ISO_FILE.$HASHPROG."0
 
 
 function term_script {
-    rm --force --verbose -- *SHA* |& $LOGCMD
+    rm --force --verbose -- *${CHECKSUM^^}* |& $LOGCMD
     if $ISO_FILE_FOUND; then
         echo "Om de beeldbestanden (.iso) te controleren voer uit:
     cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -
