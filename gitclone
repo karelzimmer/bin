@@ -1,0 +1,25 @@
+#!/bin/bash
+set -eu
+
+# Git clone van alle repo's die niet door 'kz getdeb' wordt gedaan.
+
+readonly -a REPO=(
+    "$HOME/ansible"
+    "$HOME/c"
+    "$HOME/java"
+    "$HOME/python"
+    "$HOME/scripts"
+    )
+
+git config --global credential.helper store
+for repo in "${REPO[@]}"; do
+    base=$(basename "$repo")
+    printf "$(tput bold)%s$(tput sgr0)\n" "$base"
+    if ! git    clone                                       \
+                "https://github.com/karelzimmer/$base.git"  \
+                "$repo"                                     2> /dev/null
+    then
+        cd "$repo" || exit 1
+        git pull
+    fi
+done
