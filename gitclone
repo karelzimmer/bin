@@ -4,10 +4,7 @@ set -eu
 # Git clone van alle repo's die niet door 'kz getdeb' wordt gedaan.
 
 readonly -a REPO=(
-    "$HOME/ansible"
-    "$HOME/c"
-    "$HOME/java"
-    "$HOME/python"
+    "$HOME/programs"
     "$HOME/scripts"
     )
 

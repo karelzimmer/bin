@@ -4,15 +4,12 @@ set -eu
 # Git status van alle repo's.
 
 readonly -a REPO=(
-    "$HOME/ansible"
     "$HOME/bin"
-    "$HOME/c"
-    "$HOME/java"
     "$HOME/kz-deb"
     "$HOME/kz-docs"
     "$HOME/kz-scripts"
     "$HOME/kz-uploads"
-    "$HOME/python"
+    "$HOME/programs"
     "$HOME/scripts"
     )
 
