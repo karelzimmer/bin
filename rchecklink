@@ -25,7 +25,7 @@ while read -r file; do
                 ((++skip))
                 continue
                 ;;
-            *home/LF*|*kz-zga-*|*kz-vm-hugowin732*)
+            *home/LF*|*kz-cockpit*|*kz-webmin*|*kz-zga-*|*kz-vm-hugowin732*)
                 ((++skip))
                 continue
                 ;;
@@ -51,7 +51,7 @@ gebruik hiervoor:
 - locate <file>
 - rm <file>
 
-Verschillen tussen app/ en dist/:"
+Verschillen tussen app/ en dist/ (linux, icaclient, en kz is oké):"
 diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
     true
 echo "
