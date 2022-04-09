@@ -1,9 +1,14 @@
 #!/bin/bash
 set -eu
 
-# Git clone van alle repo's die niet door 'kz getdeb' wordt gedaan.
+# Git clone van alle repo's.
 
 readonly -a REPO=(
+    "$HOME/bin"
+    "$HOME/kz-deb"
+    "$HOME/kz-docs"
+    "$HOME/kz-scripts"
+    "$HOME/kz-uploads"
     "$HOME/programs"
     "$HOME/scripts"
     )
