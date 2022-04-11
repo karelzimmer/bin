@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-# Git clone van alle repo's.
+# Git clone/pull van alle repo's.
 
 readonly -a REPO=(
     "$HOME/bin"
