@@ -13,6 +13,7 @@ readonly -a REPO=(
     "$HOME/scripts"
     )
 
+git config --global pull.ff only
 git config --global credential.helper store
 for repo in "${REPO[@]}"; do
     base=$(basename "$repo")
