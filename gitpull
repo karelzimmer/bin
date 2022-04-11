@@ -23,7 +23,7 @@ for repo in "${REPO[@]}"; do
                 "$repo"                                     2> /dev/null
     then
         cd "$repo" || exit 1
-        git clean -d  -f .
+        # git clean -d  -f .
         git pull
     fi
 done
