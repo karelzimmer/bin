@@ -5,8 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-PROGRAM_NAME=kz-spsum
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+PROGRAM_NAME=spsum
 
 
 ###############################################################################
@@ -15,7 +14,7 @@ DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly OPTIONS_SHORT=
 readonly OPTIONS_LONG=
-readonly USAGELINE="Gebruik: $DISPLAY_NAME"
+readonly USAGELINE="Gebruik: $PROGRAM_NAME"
 
 readonly SEARCHDIR=$HOME/Downloads
 readonly CHECKSUM=sha256
@@ -42,7 +41,7 @@ function check_input {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --name          "$PROGRAM_NAME"     \
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne 0 ]]; then
