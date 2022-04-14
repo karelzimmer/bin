@@ -14,7 +14,6 @@ while read -r repo; do
                 "$repo"                                     2> /dev/null
     then
         cd "$repo" || exit 1
-        # git clean -d  -f .
         git pull
     fi
 done < /home/karel/bin/repo.list
