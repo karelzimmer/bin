@@ -1,21 +1,12 @@
 #!/bin/bash
-set -eu
+set -o errexit
+set -o nounset
 
-# Git status van alle repo's.
+# Git status van alle repo's in repo.list.
 
-readonly -a REPO=(
-    "$HOME/bin"
-    "$HOME/kz-deb"
-    "$HOME/kz-docs"
-    "$HOME/kz-scripts"
-    "$HOME/kz-uploads"
-    "$HOME/programs"
-    "$HOME/scripts"
-    )
-
-for repo in "${REPO[@]}"; do
+while read -r repo; do
     base=$(basename "$repo")
     printf "$(tput bold)%s$(tput sgr0)\n" "$base"
     cd "$repo" || exit 1
     git status
-done
+done < /home/karel/bin/repo.list

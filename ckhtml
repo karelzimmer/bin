@@ -5,7 +5,8 @@
 #                                                                             #
 # Geschreven door Karel Zimmer <printf '%s\n'@karelzimmer.nl>.                         #
 ###############################################################################
-set -eu
+set -o errexit
+set -o nounset
 
 ###############################################################################
 # Global constants                                                            #

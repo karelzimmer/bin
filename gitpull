@@ -1,21 +1,12 @@
 #!/bin/bash
-set -eu
+set -o errexit
+set -o nounset
 
-# Git clone/pull van alle repo's.
-
-readonly -a REPO=(
-    "$HOME/bin"
-    "$HOME/kz-deb"
-    "$HOME/kz-docs"
-    "$HOME/kz-scripts"
-    "$HOME/kz-uploads"
-    "$HOME/programs"
-    "$HOME/scripts"
-    )
+# Git clone/pull van alle repo's in repo.list.
 
 git config --global pull.ff only
 git config --global credential.helper store
-for repo in "${REPO[@]}"; do
+while read -r repo; do
     base=$(basename "$repo")
     printf "$(tput bold)%s$(tput sgr0)\n" "$base"
     if ! git    clone                                       \
@@ -26,4 +17,4 @@ for repo in "${REPO[@]}"; do
         # git clean -d  -f .
         git pull
     fi
-done
+done < /home/karel/bin/repo.list

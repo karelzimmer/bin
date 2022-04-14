@@ -1,5 +1,6 @@
 #!/bin/bash
-set -eu
+set -o errexit
+set -o nounset
 
 # Reverse-checklink.
 
