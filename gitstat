@@ -5,7 +5,6 @@ set -o nounset
 # Git status van alle repo's in repo.list.
 
 while read -r repo; do
-    # base=$(basename "$repo")
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
     git status
