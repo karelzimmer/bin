@@ -7,6 +7,6 @@ set -o nounset
 while read -r repo; do
     base=$(basename "$repo")
     printf "$(tput bold)%s$(tput sgr0)\n" "$base"
-    cd "$repo" || exit 1
+    eval cd "$repo" || exit 1
     git status
 done < /home/karel/bin/repo.list

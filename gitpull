@@ -13,7 +13,7 @@ while read -r repo; do
                 "https://github.com/karelzimmer/$base.git"  \
                 "$repo"                                     2> /dev/null
     then
-        cd "$repo" || exit 1
+        eval cd "$repo" || exit 1
         git pull
     fi
 done < /home/karel/bin/repo.list
