@@ -1,7 +1,7 @@
-$HOME/bin
-$HOME/kz-deb
-$HOME/kz-docs
-$HOME/kz-scripts
-$HOME/kz-uploads
-$HOME/programs
-$HOME/scripts
+bin
+kz-deb
+kz-docs
+kz-scripts
+kz-uploads
+programs
+scripts

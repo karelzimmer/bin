@@ -7,13 +7,12 @@ set -o nounset
 git config --global pull.ff only
 git config --global credential.helper store
 while read -r repo; do
-    base=$(basename "$repo")
-    printf "$(tput bold)%s$(tput sgr0)\n" "$base"
+    printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     if ! git    clone                                       \
-                "https://github.com/karelzimmer/$base.git"  \
-                "$repo"                                     2> /dev/null
+                "https://github.com/karelzimmer/$repo.git"  \
+                "$HOME/$repo"                               2> /dev/null
     then
-        eval cd "$repo" || exit 1
+        cd "$HOME/$repo" || exit 1
         git pull
     fi
-done < /home/karel/bin/repo.list
+done < "$HOME"/bin/repo.list
