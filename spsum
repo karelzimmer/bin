@@ -112,7 +112,7 @@ $ISO_FILE.$HASHPROG."0
                 --exclude-dir=*         \
                 --no-filename           \
                 -- "${files[@]}"        \
-                > "$ISO_FILE.$HASHPROG" 2> >($LOGCMD) || grep_rc=$?
+                > "$ISO_FILE.$HASHPROG" || grep_rc=$?
         if [[ $grep_rc -ne 0 ]]; then
             printf '%s\n\n' "Geen controlesom gevonden voor $ISO_FILE." >&2
         else
@@ -123,7 +123,7 @@ $ISO_FILE.$HASHPROG."0
 
 
 function term_script {
-    rm --force --verbose -- *${CHECKSUM^^}* |& $LOGCMD
+    rm --force --verbose -- *${CHECKSUM^^}*
     if $ISO_FILE_FOUND; then
         echo "Om de beeldbestanden (.iso) te controleren voer uit:
     cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -

@@ -155,7 +155,7 @@ function archive_file {
     olddir=$dirname
     newdir=${olddir//dist/app}
     newdir=${newdir//linux/linux-archief}
-    mv "$olddir/$basename" "$newdir" |& $LOGCMD
+    mv "$olddir/$basename" "$newdir"
     printf '%s\n' 'Gearchiveerd.'
     ARCHIVED=true
 }
@@ -191,7 +191,7 @@ $dirname"
 
 
 function delete_file {
-    rm "$file" |& $LOGCMD
+    rm "$file"
     printf '%s\n' 'Verwijderd.'
     DELETED=true
 }

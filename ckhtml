@@ -64,7 +64,7 @@ function validate_css {
     cd "$CSS_DIR" || exit 1
 
     for filename in *.css; do
-        google-chrome "$CSS_VALIDATOR_URL$CSS_URL/$filename" |& $LOGCMD
+        google-chrome "$CSS_VALIDATOR_URL$CSS_URL/$filename"
     done
 }
 
@@ -75,7 +75,7 @@ function validate_html {
     cd "$HTML_DIR" || exit 1
 
     for filename in *.html; do
-        google-chrome "$HTML_VALIDATOR_URL$HTML_URL/$filename" |& $LOGCMD
+        google-chrome "$HTML_VALIDATOR_URL$HTML_URL/$filename"
     done
 }
 

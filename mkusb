@@ -210,7 +210,7 @@ function create_usb_stick {
 gestart."
         if ! qemu-system-x86_64 -enable-kvm     \
                                 -m 2048         \
-                                -hda $DEVICE    |& $LOGCMD; then
+                                -hda $DEVICE; then
             true
         fi
 
