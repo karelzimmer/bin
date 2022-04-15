@@ -55,6 +55,10 @@ gebruik hiervoor:
 Verschillen tussen app/ en dist/ (linux, icaclient, en kz is oké):"
 diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
     true
+if ! command -v checklink 1> /dev/null; then
+    echo 'Installeer checklink...'
+    sudo apt-get install --yes w3c-linkchecker
+fi
 echo "
 Controleer de geldigheid van links:"
 checklink   --broken            \
