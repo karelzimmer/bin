@@ -60,13 +60,14 @@ if ! command -v checklink 1> /dev/null; then
     sudo apt-get install --yes w3c-linkchecker
 fi
 echo "
-Controleer de geldigheid van links:"
-checklink   --broken            \
-            --summary           \
-            --suppress-broken   \
+Controleer de geldigheid van links (linux.html + linux-archief.html):"
+checklink   --broken                                \
+            --summary                               \
+            --suppress-broken                       \
             -1:"https://jigsaw.w3.org/css-validator/validator?uri=karelzimmer.\
-nl%2Fcss%2Fstijlblad.css"       \
-            --suppress-broken   \
+nl%2Fcss%2Fstijlblad.css"                           \
+            --suppress-broken                       \
             -1:"https://validator.w3.org/check?uri=http%3A%2F%2Fkarelzimmer.nl\
-%2Fhtml%2Fcontact.html"         \
-            /home/karel/kz-uploads/dist/html/linux*
+%2Fhtml%2Fcontact.html"                             \
+            https://karelzimmer.nl/html/linux.html \
+            https://karelzimmer.nl/html/linux-archief.html
