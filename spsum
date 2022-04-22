@@ -96,28 +96,22 @@ function create_checksum_file {
     local -a    files=()
     local -i    grep_rc=0
 
-    if [[ -e $ISO_FILE.$HASHPROG ]]; then
-        printf '%s\n\n' "Beeldbestand $ISO_FILE heeft al controlebestand \
-$ISO_FILE.$HASHPROG."0
-        return 
+    for file in *; do
+        files+=("$file")
+    done
+    grep    --word-regexp           \
+            --regexp=" $ISO_FILE"   \
+            --regexp="*$ISO_FILE"   \
+            --exclude=*.iso         \
+            --exclude=*512*         \
+            --exclude-dir=*         \
+            --no-filename           \
+            -- "${files[@]}"        \
+            > "$ISO_FILE.$HASHPROG" || grep_rc=$?
+    if [[ $grep_rc -ne 0 ]]; then
+        printf '%s\n\n' "Geen controlesom gevonden voor $ISO_FILE." >&2
     else
-        for file in *; do
-            files+=("$file")
-        done
-        grep    --word-regexp           \
-                --regexp=" $ISO_FILE"   \
-                --regexp="*$ISO_FILE"   \
-                --exclude=*.iso         \
-                --exclude=*512*         \
-                --exclude-dir=*         \
-                --no-filename           \
-                -- "${files[@]}"        \
-                > "$ISO_FILE.$HASHPROG" || grep_rc=$?
-        if [[ $grep_rc -ne 0 ]]; then
-            printf '%s\n\n' "Geen controlesom gevonden voor $ISO_FILE." >&2
-        else
-            printf '%s\n\n' "Controlebestand $ISO_FILE.$HASHPROG aangemaakt."
-       fi
+        printf '%s\n\n' "Controlebestand $ISO_FILE.$HASHPROG aangemaakt."
     fi
 }
 
