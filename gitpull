@@ -10,9 +10,11 @@ while read -r repo; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     if ! git    clone                                       \
                 "https://github.com/karelzimmer/$repo.git"  \
-                "$HOME/$repo"                               2> /dev/null
-    then
+                "$HOME/$repo"                               ; then
         cd "$HOME/$repo" || exit 1
-        git pull
+        if ! git pull; then
+            git clean -fd
+            git pull
+        fi
     fi
 done < "$HOME"/bin/repo.list
