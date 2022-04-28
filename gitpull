@@ -1,21 +1,18 @@
 #!/bin/bash
 set -o errexit
 set -o nounset
-program_name=$(basename "$0")
-log=/tmp/"$program_name".log
-date &>> "$log"
 
 # Git clone/pull van alle repo's in repo.list.
 
 git config --global pull.ff only
 git config --global credential.helper store
 while read -r repo; do
-    echo "$repo" | tee --append /tmp/"$program_name"
+    printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     if ! git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo" \
-            &>> "$log"; then
+        2> /dev/null; then
         cd "$HOME/$repo" || exit 1
-        if ! git pull &>> "$log"; then
-            git clean -d --force &>> "$log"
+        if ! git pull; then
+            git clean -d --force
             git pull
         fi
     fi
