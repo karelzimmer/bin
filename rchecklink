@@ -22,7 +22,7 @@ while read -r file; do
     ((++total))
     if ! grep -r "$(basename "$file")" $HTML &> /dev/null; then
         case $file in
-            *-pc0*|*-pc-*|*-PC0*|*-PC-*|*-PC10*|*-sv0*|*-SV0*)
+            *-pc0*|*-pc-*|*-PC0*|*-PC10.sh)
                 ((++skip))
                 continue
                 ;;
@@ -70,5 +70,5 @@ nl%2Fcss%2Fstijlblad.css"                           \
             --suppress-broken                       \
             -1:"https://validator.w3.org/check?uri=http%3A%2F%2Fkarelzimmer.nl\
 %2Fhtml%2Fcontact.html"                             \
-            https://karelzimmer.nl/html/linux.html \
-            https://karelzimmer.nl/html/linux-archief.html
+            https://karelzimmer.nl/html/linux.html  \
+            https://karelzimmer.nl/html/linux-archief.html 2> /dev/null
