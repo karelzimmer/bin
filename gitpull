@@ -11,7 +11,6 @@ while read -r repo; do
     if ! git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo" \
         2> /dev/null; then
         cd "$HOME/$repo" || exit 1
-        git clean -d --force
         git pull
     fi
 done < "$HOME"/bin/repo.list
