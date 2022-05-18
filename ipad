@@ -1,0 +1,14 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+
+# Scan netwerk voor ip-adressen.
+
+if ! command -v nmap 1> /dev/null; then
+    sudo apt install nmap
+fi
+
+echo 'Uitvoeren ip...'
+ip a
+echo -e '\nUitvoeren nmap...'
+nmap -sP 192.168.1.0/24
