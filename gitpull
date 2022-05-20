@@ -2,15 +2,13 @@
 set -o errexit
 set -o nounset
 
-# Git clone/pull van alle repo's in repo.list.
+# Git pull (clone als nodig) van alle repo's in repo.list.
 
 git config --global pull.ff only
 git config --global credential.helper store
 while read -r repo; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    if ! git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo" \
-        2> /dev/null; then
-        cd "$HOME/$repo" || exit 1
-        git pull
+    if ! (cd "$HOME/$repo" && git pull); then
+        git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo"
     fi
 done < "$HOME"/bin/repo.list
