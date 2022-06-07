@@ -7,5 +7,5 @@ set -o nounset
 while read -r repo; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
-    git status
+    git status | sed '/^$/d'
 done < "$HOME"/bin/repo.list
