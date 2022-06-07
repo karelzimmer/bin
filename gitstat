@@ -3,6 +3,7 @@ set -o errexit
 set -o nounset
 
 # Git status van alle repo's in repo.list.
+# Verwijder lege regels en bekende regels uit de output.
 
 while read -r repo; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
