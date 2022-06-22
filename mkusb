@@ -7,7 +7,6 @@
 
 PROGRAM_NAME=mkusb
 
-
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -19,7 +18,6 @@ readonly USAGELINE="Gebruik: $PROGRAM_NAME"
 readonly DEVICE=/dev/sdb
 readonly SOURCE=/home/${SUDO_USER:-$USER}/Downloads
 
-
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -28,7 +26,6 @@ NO_FILES_FOUND=true
 
 # Terminalattributen, zie 'man termecho'.  Gebruik ${<variabele-naam>}.
 REWRITE_LINE=$(tput cuu1;tput el)
-
 
 ###############################################################################
 # Functions
@@ -231,7 +228,6 @@ function term_script {
     exit 0
 }
 
-
 ###############################################################################
 # Script
 ###############################################################################
@@ -241,6 +237,5 @@ function main {
     process_input
     term_script
 }
-
 
 main "$@"
