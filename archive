@@ -1,15 +1,15 @@
 #!/bin/bash
 ###############################################################################
-# Scripts archiveren.                                                         #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Scripts archiveren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 set -o errexit
 set -o nounset
 
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly ARCHIVE_FROM=$HOME/kz-uploads/dist/data/linux
@@ -19,7 +19,7 @@ readonly DELETE_FROM_2=$HOME/kz-docs
 readonly DELETE_FROM_3=$HOME/kz-deb
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 declare ARCHIVED=false
@@ -32,7 +32,7 @@ declare REWRITE_LINE=''
 
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -217,7 +217,7 @@ function term_script {
 
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

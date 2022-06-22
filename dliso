@@ -1,15 +1,15 @@
 #!/bin/bash
 ###############################################################################
-# Beeldbestanden downloaden.                                                  #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Beeldbestanden downloaden.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_NAME=dliso
 
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=c
@@ -31,7 +31,7 @@ OPTION_CHECKSUMS=false
 
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -131,7 +131,7 @@ Om de beeldbestanden (.iso) te controleren voer uit:
 
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

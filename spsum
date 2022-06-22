@@ -1,15 +1,15 @@
 #!/bin/bash
 ###############################################################################
-# Controlebestanden opsplitsen.                                               #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Controlebestanden opsplitsen.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_NAME=spsum
 
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=
@@ -22,7 +22,7 @@ readonly HASHPROG=${CHECKSUM}sum
 
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 ISO_FILE=''
@@ -30,7 +30,7 @@ ISO_FILE_FOUND=false
 
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -130,7 +130,7 @@ Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
 
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

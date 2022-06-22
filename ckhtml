@@ -1,15 +1,15 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Webbestanden valideren.                                                     #
-#                                                                             #
-# Geschreven door Karel Zimmer <printf '%s\n'@karelzimmer.nl>.                         #
+# Webbestanden valideren.
+#
+# Geschreven door Karel Zimmer <printf '%s\n'@karelzimmer.nl>.
 ###############################################################################
 set -o errexit
 set -o nounset
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly CSS_DIR=$HOME/kz-uploads/dist/css
@@ -24,12 +24,12 @@ readonly HTML_VALIDATOR_URL='http://validator.w3.org/check?uri='
 
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function process_input {
@@ -87,7 +87,7 @@ function term_script {
 
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {
