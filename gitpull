@@ -8,7 +8,7 @@ git config --global pull.ff only
 git config --global credential.helper store
 while read -r repo; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    if ! (cd "$HOME/$repo" && git pull); then
+    if ! (cd "$HOME/$repo" 2> /dev/null && git pull); then
         git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo"
     fi
 done < "$HOME"/bin/repo.list
