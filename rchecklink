@@ -32,7 +32,7 @@ while read -r file; do
                 ;;
         esac
         ((++todo))
-        echo "$file"
+        echo "rm $file"
     else
         ((++fine))
     fi
