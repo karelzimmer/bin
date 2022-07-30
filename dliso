@@ -118,11 +118,10 @@ function download_checksums {
 
 
 function term_script {
-    echo "Om de $SEARCH_FOR-controlebestanden op te splitsen voer uit:
-    spsum
+    echo "Om de $SEARCH_FOR-controlebestanden op te splitsen voer uit: spsum
 
-Om de beeldbestanden (.iso) te controleren voer uit:
-    cd $TARGET;$SEARCH_FOR --check --ignore-missing *.$SEARCH_FOR; cd -"
+Om de beeldbestanden (.iso) te controleren voer uit: cd $TARGET;$SEARCH_FOR \
+--check --ignore-missing *.$SEARCH_FOR; cd -"
     exit 0
 }
 

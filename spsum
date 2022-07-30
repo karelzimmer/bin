@@ -106,7 +106,8 @@ function create_checksum_file {
             -- "${files[@]}"        \
             > "$ISO_FILE.$HASHPROG" || grep_rc=$?
     if [[ $grep_rc -ne 0 ]]; then
-        printf '%s\n\n' "Geen controlesom gevonden voor $ISO_FILE." >&2
+        printf '%s\n\n' "Geen controlesom gevonden/aangemaakt voor \
+$ISO_FILE." >&2
     else
         printf '%s\n\n' "Controlebestand $ISO_FILE.$HASHPROG aangemaakt."
     fi
@@ -119,8 +120,8 @@ function term_script {
         echo "Om de beeldbestanden (.iso) te controleren voer uit: cd \
 $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -
 
-Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit: kz \
-dliso --checksums"
+Om de controlebestanden (.${HASHPROG}s) voor Ubuntu opnieuw te downloaden voer
+uit: kz dliso --checksums"
     fi
     exit 0
 }
