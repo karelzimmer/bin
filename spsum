@@ -116,11 +116,11 @@ function create_checksum_file {
 function term_script {
     rm --force --verbose -- *${CHECKSUM^^}*
     if $ISO_FILE_FOUND; then
-        echo "Om de beeldbestanden (.iso) te controleren voer uit:
-    cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -
+        echo "Om de beeldbestanden (.iso) te controleren voer uit: cd \
+$SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -
 
-Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
-    kz dliso --checksums"
+Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit: kz \
+dliso --checksums"
     fi
     exit 0
 }
