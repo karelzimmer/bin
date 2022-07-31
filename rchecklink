@@ -17,7 +17,7 @@ declare -i skip=0
 declare -i fine=0
 declare -i total=0
 
-echo 'Bestanden niet in gebruik:'
+printf '%s\n' 'Bestanden niet in gebruik:'
 while read -r file; do
     ((++total))
     if ! grep -r "$(basename "$file")" $HTML &> /dev/null; then
@@ -32,12 +32,12 @@ while read -r file; do
                 ;;
         esac
         ((++todo))
-        echo "rm $file"
+        printf '%s\n' "rm $file"
     else
         ((++fine))
     fi
 done < <(find $DIR1 $DIR2 -type f -print | sort)
-echo "
+printf '%s\n' "
 $total bestanden gevonden, $todo niet in gebruik, $fine in gebruik, \
 $skip overgeslagen (computer-specifieke bestanden)
 
@@ -56,10 +56,10 @@ Verschillen tussen app/ en dist/ (linux, icaclient, en kz is oké):"
 diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
     true
 if ! command -v checklink 1> /dev/null; then
-    echo 'Installeer checklink...'
+    printf '%s\n' 'Installeer checklink...'
     sudo apt-get install --yes w3c-linkchecker
 fi
-echo "
+printf '%s\n' "
 Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
 Controleer de geldigheid van links (linux.html + linux-archief.html):"
 checklink   --broken                                \

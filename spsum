@@ -42,7 +42,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne 0 ]]; then
-        echo "$USAGELINE" >&2
+        printf '%s\n' "$USAGELINE" >&2
         exit 1
     fi
     eval set -- "$parsed"
@@ -61,7 +61,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         error 'Te veel argumenten.'
-        echo "$USAGELINE" >&2
+        printf '%s\n' "$USAGELINE" >&2
         exit 1
     fi
 }
@@ -83,7 +83,7 @@ function process_input {
     done
 
     if ! $ISO_FILE_FOUND; then
-        echo "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
+        printf '%s\n' "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
         exit 2
     fi
 }
@@ -115,13 +115,14 @@ $ISO_FILE." >&2
 
 
 function term_script {
+    # ${CHECKSUM^^}: All chars in $CHECKSUM --> uppercase.
     rm --force --verbose -- *${CHECKSUM^^}*
     if $ISO_FILE_FOUND; then
-        echo "Om de beeldbestanden (.iso) te controleren voer uit: cd \
-$SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd -
+        printf '%s\n' "Om de beeldbestanden (.iso) te controleren voer uit: \
+cd $SEARCHDIR; $HASHPROG --check --ignore-missing *.$HASHPROG; cd -
 
-Om de controlebestanden (.${HASHPROG}s) voor Ubuntu opnieuw te downloaden voer
-uit: kz dliso --checksums"
+Om de controlebestanden (.${HASHPROG}s) voor Ubuntu opnieuw te downloaden \
+voer uit: kz dliso --checksums"
     fi
     exit 0
 }
