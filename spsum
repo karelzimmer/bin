@@ -74,6 +74,8 @@ function process_input {
 
         if ! [[ -f "$ISO_FILE" ]]; then
             continue
+        elif [[ -f "$ISO_FILE.$HASHPROG" ]]; then
+            continue
         fi
 
         ISO_FILE_FOUND=true
@@ -83,7 +85,7 @@ function process_input {
     done
 
     if ! $ISO_FILE_FOUND; then
-        printf '%s\n' "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
+        printf '%s\n' "Geen controlebestanden om aan te maken in $SEARCHDIR."
         exit 2
     fi
 }
@@ -96,15 +98,15 @@ function create_checksum_file {
     for file in *; do
         files+=("$file")
     done
-    grep    --word-regexp           \
-            --regexp=" $ISO_FILE"   \
-            --regexp="*$ISO_FILE"   \
-            --exclude=*.iso         \
-            --exclude=*512*         \
-            --exclude-dir=*         \
-            --no-filename           \
-            -- "${files[@]}"        \
-            > "$ISO_FILE.$HASHPROG" || grep_rc=$?
+    grep    --word-regexp               \
+            --regexp=" $ISO_FILE"       \
+            --regexp=' *'"$ISO_FILE"    \
+            --exclude=*.iso             \
+            --exclude=*512*             \
+            --exclude-dir=*             \
+            --no-filename               \
+            -- "${files[@]}"            \
+            > "$ISO_FILE.$HASHPROG"     || grep_rc=$?
     if [[ $grep_rc -ne 0 ]]; then
         printf '%s\n\n' "Geen controlesom gevonden/aangemaakt voor \
 $ISO_FILE." >&2

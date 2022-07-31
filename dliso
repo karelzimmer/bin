@@ -17,7 +17,7 @@ readonly USAGELINE="Gebruik: $PROGRAM_NAME [-c|--checksums]"
 
 readonly HASHPROG=sha256sum
 # ${HASHPROG^^}: All chars in $CHECKSUM --> uppercase.
-readonly CHECKSUM=${HASHPROG^^}s
+readonly CHECKSUM=${HASHPROG^^}S
 readonly SOURCE_1=http://releases.ubuntu.com
 readonly SOURCE_2=http://cdimage.ubuntu.com
 readonly TARGET=$HOME/Downloads
