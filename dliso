@@ -16,6 +16,7 @@ readonly OPTIONS_LONG=checksums
 readonly USAGELINE="Gebruik: $PROGRAM_NAME [-c|--checksums]"
 
 readonly HASHPROG=sha256sum
+# ${HASHPROG,,}: All chars in $CHECKSUM --> lowercase (is already the case :-).
 # ${HASHPROG^^}: All chars in $CHECKSUM --> uppercase.
 readonly CHECKSUM=${HASHPROG^^}S
 readonly SOURCE_1=http://releases.ubuntu.com

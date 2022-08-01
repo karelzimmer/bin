@@ -73,8 +73,10 @@ function process_input {
     for ISO_FILE in *.iso; do
 
         if ! [[ -f "$ISO_FILE" ]]; then
+            # No regular file.
             continue
         elif [[ -f "$ISO_FILE.$HASHPROG" ]]; then
+            # Checksumfile already exists, otherwise grep would emptied it.
             continue
         fi
 
