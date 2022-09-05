@@ -6,16 +6,7 @@ set -o nounset
 
 git config --global pull.ff only
 git config --global credential.helper store
-repo_list=$(
-    find    "$HOME"         \
-            -maxdepth 2     \
-            -name .git      \
-            -type d         \
-            -print          |
-    cut     --delimiter='/' \
-            --fields=4      |
-    sort
-    )
+repo_list='ansible bin c kz-deb kz-docs kz-scripts kz-uploads python scripts'
 for repo in $repo_list; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     if ! (cd "$HOME/$repo" 2> /dev/null && git pull); then
