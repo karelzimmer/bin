@@ -5,7 +5,7 @@ set -o nounset
 # Scan netwerk voor ip-adressen.
 
 if ! command -v nmap 1> /dev/null; then
-    sudo apt install nmap
+    sudo apt-get install --yes nmap
 fi
 
 printf '%s\n' 'Uitvoeren ip...'
