@@ -8,5 +8,5 @@ git config --global pull.ff only
 git config --global credential.helper store
 while read -r repo; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo"
+    git clone "https://github.com/karelzimmer/$repo.git" "$HOME/$repo" || true
 done < "$HOME"/bin/repo.list
