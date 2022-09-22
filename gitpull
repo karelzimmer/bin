@@ -7,11 +7,15 @@ set -o nounset
 git config --global pull.ff only
 git config --global credential.helper store
 user=karelzimmer
+# Get all public repositories for user with curl via GitHub REST API,
+# extract required info with jq (Command-line JSON processor), and
+# remove double qoutes with sed.
 repo_list=$(
     curl --silent "https://api.github.com/users/$user/repos" |
     jq '.[] | {name: .name}' | jq .name | sed 's/"//g'
     )
 for repo in $repo_list; do
+    # Skip special repository.
     if [[ $repo = "$user" ]]; then
         continue
     fi
