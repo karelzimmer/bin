@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# Git status van alle repo's.
+# Git status van alle lokale repo's.
 # Verwijder lege regels en bekende regels uit de output.
 
 repo_list=$(
