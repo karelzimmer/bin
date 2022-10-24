@@ -8,9 +8,9 @@ set -o nounset
 # d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
 # Dit Bash script doet het omgekeerde: worden alle bestanden gebruikt?
 
-readonly DIR1=/home/karel/kz-uploads/app/data
-readonly DIR2=/home/karel/kz-uploads/dist/data
-readonly HTML=/home/karel/kz-uploads/dist/html
+readonly dir1=/home/karel/kz-uploads/app/data
+readonly dir2=/home/karel/kz-uploads/dist/data
+readonly html=/home/karel/kz-uploads/dist/html
 
 declare -i todo=0
 declare -i skip=0
@@ -20,7 +20,7 @@ declare -i total=0
 printf '%s\n' 'Bestanden niet in gebruik:'
 while read -r file; do
     ((++total))
-    if ! grep -r "$(basename "$file")" $HTML &> /dev/null; then
+    if ! grep -r "$(basename "$file")" $html &> /dev/null; then
         case $file in
             *-pc0*|*-pc-*|*-PC0*|*-PC10.sh|*debian.sh*|*debian-user.sh*)
                 ((++skip))
@@ -36,7 +36,7 @@ while read -r file; do
     else
         ((++fine))
     fi
-done < <(find $DIR1 $DIR2 -type f -print | sort)
+done < <(find $dir1 $dir2 -type f -print | sort)
 printf '%s\n' "
 $total bestanden gevonden, $todo niet in gebruik, $fine in gebruik, \
 $skip overgeslagen (computer-specifieke bestanden)
@@ -45,8 +45,8 @@ Neem deze bestanden na onderzoek op in html gevolgd door:
 - kz build
 - kz deploy
 of deze bestanden verwijderen uit:
-- $DIR1/
-- $DIR2/
+- $dir1/
+- $dir2/
 gebruik hiervoor:
 - sudo updatedb
 - locate <file>

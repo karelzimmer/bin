@@ -11,24 +11,24 @@ PROGRAM_NAME=dliso
 # Global constants
 ###############################################################################
 
-readonly OPTIONS_SHORT=c
-readonly OPTIONS_LONG=checksums
-readonly USAGELINE="Gebruik: $PROGRAM_NAME [-c|--checksums]"
+readonly options_short=c
+readonly options_long=checksums
+readonly usageline="Gebruik: $PROGRAM_NAME [-c|--checksums]"
 
-readonly HASHPROG=sha256sum
-# ${HASHPROG,,}: All chars in $CHECKSUM --> lowercase (is already the case :-).
-# ${HASHPROG^^}: All chars in $CHECKSUM --> uppercase.
-readonly CHECKSUM=${HASHPROG^^}S
-readonly SOURCE_1=http://releases.ubuntu.com
-readonly SOURCE_2=http://cdimage.ubuntu.com
-readonly TARGET=$HOME/Downloads
+readonly hashprog=sha256sum
+# ${hashprog,,}: All chars in $checksum --> lowercase (is already the case :-).
+# ${hashprog^^}: All chars in $checksum --> uppercase.
+readonly checksum=${hashprog^^}S
+readonly source_1=http://releases.ubuntu.com
+readonly source_2=http://cdimage.ubuntu.com
+readonly target=$HOME/Downloads
 
 ###############################################################################
 # Gobal variables
 ###############################################################################
 
-FULL_VS=$(lsb_release --description --short | cut --delimiter=' ' --fields=2)
-OPTION_CHECKSUMS=false
+full_vs=$(lsb_release --description --short | cut --delimiter=' ' --fields=2)
+option_checksums=false
 
 ###############################################################################
 # Functions
@@ -40,13 +40,13 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
                 --name          "$PROGRAM_NAME"     \
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        printf '%s\n' "$usageline" >&2
         exit 1
     fi
     eval set -- "$parsed"
@@ -54,7 +54,7 @@ function check_input {
     while true; do
         case $1 in
             -c|--checksums)
-                OPTION_CHECKSUMS=true
+                option_checksums=true
                 shift
                 ;;
             --)
@@ -69,21 +69,21 @@ function check_input {
 
     if [[ "$*" ]]; then
         error 'Te veel argumenten.'
-        printf '%s\n' "$USAGELINE" >&2
+        printf '%s\n' "$usageline" >&2
         exit 1
     fi
 }
 
 
 function process_input {
-    read -rp  "Wat is de Ubuntu-versie? [$FULL_VS]: "
+    read -rp  "Wat is de Ubuntu-versie? [$full_vs]: "
     if [[ $REPLY ]]; then
-        FULL_VS="$REPLY"
+        full_vs="$REPLY"
     fi
 
-    if $OPTION_CHECKSUMS; then
+    if $option_checksums; then
         download_checksums
-        printf '%s\n' "Controlebestanden zijn gedownload en staan in $TARGET."
+        printf '%s\n' "Controlebestanden zijn gedownload en staan in $target."
     else
         download_isos
         download_checksums
@@ -92,14 +92,14 @@ function process_input {
 
 
 function download_isos {
-    cd "$TARGET" || exit 1
+    cd "$target" || exit 1
     rm --force {u,xu,lu}buntu-*.iso*
 
     URL_LIST="\
-$SOURCE_1/$FULL_VS/ubuntu-$FULL_VS-desktop-amd64.iso
-$SOURCE_1/$FULL_VS/ubuntu-$FULL_VS-live-server-amd64.iso
-$SOURCE_2/lubuntu/releases/$FULL_VS/release/lubuntu-$FULL_VS-desktop-amd64.iso
-$SOURCE_2/xubuntu/releases/$FULL_VS/release/xubuntu-$FULL_VS-desktop-amd64.iso"
+$source_1/$full_vs/ubuntu-$full_vs-desktop-amd64.iso
+$source_1/$full_vs/ubuntu-$full_vs-live-server-amd64.iso
+$source_2/lubuntu/releases/$full_vs/release/lubuntu-$full_vs-desktop-amd64.iso
+$source_2/xubuntu/releases/$full_vs/release/xubuntu-$full_vs-desktop-amd64.iso"
 
     # max-args=1 zorgt ervoor dat per invoerregel 1 opdracht wordt gestart.
     # max-procs=4 zorgt ervoor dat maximaal 4 parallele taken worden gestart.
@@ -108,24 +108,24 @@ $SOURCE_2/xubuntu/releases/$FULL_VS/release/xubuntu-$FULL_VS-desktop-amd64.iso"
 
 
 function download_checksums {
-    cd "$TARGET" || exit 1
+    cd "$target" || exit 1
     rm --force {u,xu,lu}buntu-*-SHA256SUMS
 
-    wget    --output-document=ubuntu-$CHECKSUM    \
-            $SOURCE_1/"$FULL_VS"/$CHECKSUM
-    wget    --output-document=xubuntu-$CHECKSUM   \
-            $SOURCE_2/xubuntu/releases/"$FULL_VS"/release/$CHECKSUM
-    wget    --output-document=lubuntu-$CHECKSUM   \
-            $SOURCE_2/lubuntu/releases/"$FULL_VS"/release/$CHECKSUM
+    wget    --output-document=ubuntu-$checksum    \
+            $source_1/"$full_vs"/$checksum
+    wget    --output-document=xubuntu-$checksum   \
+            $source_2/xubuntu/releases/"$full_vs"/release/$checksum
+    wget    --output-document=lubuntu-$checksum   \
+            $source_2/lubuntu/releases/"$full_vs"/release/$checksum
 }
 
 
 function term_script {
-    printf '%s\n' "Om de $CHECKSUM-controlebestanden op te splitsen voer uit: \
+    printf '%s\n' "Om de $checksum-controlebestanden op te splitsen voer uit: \
 spsum
 
 Om de beeldbestanden (.iso) te controleren voer uit: cd \
-$TARGET; $HASHPROG --check --ignore-missing *.$CHECKSUM; cd -"
+$target; $hashprog --check --ignore-missing *.$checksum; cd -"
     exit 0
 }
 
