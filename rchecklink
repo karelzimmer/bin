@@ -26,7 +26,7 @@ while read -r file; do
                 ((++skip))
                 continue
                 ;;
-            *home/LF*|*kz-cockpit*|*kz-webmin*|*kz-zga-*|*kz-vm-hugowin732*)
+            *home/LF*|*kz-cockpit*|*kz-webmin*|*kz-vm-hugowin732*)
                 ((++skip))
                 continue
                 ;;
