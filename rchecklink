@@ -22,11 +22,11 @@ while read -r file; do
     ((++total))
     if ! grep -r "$(basename "$file")" $html &> /dev/null; then
         case $file in
-            *-pc0*|*-pc-*|*-PC0*|*-PC10.sh|*debian.sh*|*debian-user.sh*)
+            *-pc0*|*-pc-*|*debian.sh*|*debian-user.sh*|*kz-vm-hugowin732*)
                 ((++skip))
                 continue
                 ;;
-            *home/LF*|*kz-cockpit*|*kz-webmin*|*kz-vm-hugowin732*)
+            *home/LF*)
                 ((++skip))
                 continue
                 ;;
