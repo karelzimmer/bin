@@ -5,11 +5,11 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-PROGRAM_NAME=dliso
+###############################################################################
+# Constants
+###############################################################################
 
-###############################################################################
-# Global constants
-###############################################################################
+readonly program_name='dliso'
 
 readonly options_short=c
 readonly options_long=checksums
@@ -68,7 +68,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        error 'Te veel argumenten.'
+        error "$program_name: te veel argumenten"
         printf '%s\n' "$usageline" >&2
         exit 1
     fi

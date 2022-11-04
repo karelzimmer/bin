@@ -2,8 +2,10 @@
 set -o errexit
 set -o nounset
 
-# Git pull (clone als nodig) van alle public repo's.
+# gitpull: git pull (clone als nodig) van alle public repo's
 
+git config --global user.name 'Karel Zimmer'
+git config --global user.email 'info@karelzimmer.nl'
 git config --global pull.ff only
 git config --global credential.helper store
 user=karelzimmer

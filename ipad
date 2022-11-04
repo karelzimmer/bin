@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# Scan netwerk voor ip-adressen.
+# pad: scan netwerk voor ip-adressen
 
 if ! command -v nmap 1> /dev/null; then
     sudo apt-get install --yes nmap

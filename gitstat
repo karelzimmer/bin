@@ -2,8 +2,7 @@
 set -o errexit
 set -o nounset
 
-# Git status van alle lokale repo's.
-# Verwijder lege regels en bekende regels uit de output.
+# gitstat: git status van alle lokale repo's.
 
 repo_list=$(
     find    "$HOME"         \
@@ -18,6 +17,7 @@ repo_list=$(
 for repo in $repo_list; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
+    # Verwijder lege en bekende regels uit de output.
     git status                                                  |
         sed '/On branch main/d'                                 |
         sed "/Your branch is up to date with 'origin\/main'./d" |

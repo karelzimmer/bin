@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# Reverse-checklink.
+# rcheckling: reverse-checklink
 
 # Perl script checklink (W3C® Link Checker) controleert of links geldig zijn,
 # d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
