@@ -6,7 +6,7 @@ set -o nounset
 
 repo_list=$(
     find    "$HOME"         \
-            -maxdepth 2     \
+		   	-maxdepth 2     \
             -name .git      \
             -type d         \
             -print          |
