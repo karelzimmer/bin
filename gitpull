@@ -4,10 +4,6 @@ set -o nounset
 
 # gitpull: git pull (clone als nodig) van alle public repo's
 
-git config --global user.name 'Karel Zimmer'
-git config --global user.email 'info@karelzimmer.nl'
-git config --global pull.ff only
-git config --global credential.helper store
 user=karelzimmer
 # Get all public repositories for <user> with curl via GitHub REST API, and
 # extract required info with jq.
