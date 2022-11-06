@@ -33,7 +33,8 @@ readonly html_validator_url='http://validator.w3.org/check?uri='
 ###############################################################################
 
 function process_input {
-    local dir=''
+    local       dir=''
+    local -i    number_of_processes=0
 
     for dir in "$css_dir" "$html_dir"; do
         if ! [[ -d $dir ]]; then
@@ -42,13 +43,18 @@ function process_input {
         fi
     done
 
-    if ! pgrep --count --full '/opt/google/chrome/chrome' &> /dev/null; then
+    number_of_processes=$(
+        pgrep --count --full '/opt/google/chrome/chrome' || true
+        )
+    if [[ $number_of_processes -eq 0 ]]; then
         printf '%s\n' 'Google Chrome webrowser is nog niet gestart,
 start nu eerst de Google Chrome webrowser.'
         read -rp "Druk op Enter-toets wanneer Google Chrome webrowser is \
 gestart [Enter]: "
-        if ! pgrep --count --full '/opt/google/chrome/chrome' &> /dev/null
-        then
+        number_of_processes=$(
+            pgrep --count --full '/opt/google/chrome/chrome' || true
+            )
+        if [[ $number_of_processes -eq 0 ]]; then
             printf '%s\n' 'Google Chrome webrowser is niet gestart.'
             exit 1
         fi
