@@ -47,8 +47,9 @@ function process_input {
         pgrep --count --full '/opt/google/chrome/chrome' || true
         )
     if [[ $number_of_processes -eq 0 ]]; then
-        printf '%s\n' 'Google Chrome webrowser is nog niet gestart,
-start nu eerst de Google Chrome webrowser.'
+        printf  '%s\n%s\n'                                      \
+                'Google Chrome webrowser is nog niet gestart,'  \
+                'start nu eerst de Google Chrome webrowser.'
         read -rp "Druk op Enter-toets wanneer Google Chrome webrowser is \
 gestart [Enter]: "
         number_of_processes=$(
