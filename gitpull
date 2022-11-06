@@ -17,8 +17,10 @@ for repo in $repo_list; do
         continue
     fi
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    if ! (cd "$HOME/$repo" 2> /dev/null && git pull); then
-        # Doe een git clone als de git pull mislukt.
+    if [[ -d "$HOME/$repo" ]]; then
+        cd "$HOME/$repo"
+        git pull
+    else
         git clone "https://github.com/$user/$repo.git" "$HOME/$repo"
     fi
 done

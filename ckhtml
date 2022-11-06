@@ -42,12 +42,13 @@ function process_input {
         fi
     done
 
-    if ! pgrep 'chrome' &> /dev/null; then
+    if ! pgrep --count --full '/opt/google/chrome/chrome' &> /dev/null; then
         printf '%s\n' 'Google Chrome webrowser is nog niet gestart,
 start nu eerst de Google Chrome webrowser.'
         read -rp "Druk op Enter-toets wanneer Google Chrome webrowser is \
 gestart [Enter]: "
-        if ! pgrep 'chrome' &> /dev/null; then
+        if ! pgrep --count --full '/opt/google/chrome/chrome' &> /dev/null
+        then
             printf '%s\n' 'Google Chrome webrowser is niet gestart.'
             exit 1
         fi
