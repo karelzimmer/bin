@@ -20,7 +20,7 @@ declare -i total=0
 printf '%s\n' 'Bestanden niet in gebruik:'
 while read -r file; do
     ((++total))
-    if ! grep -r "$(basename "$file")" $html &> /dev/null; then
+    if ! grep --recursive --quiet "$(basename "$file")" $html; then
         case $file in
             *-pc0*|*-pc-*|*debian.sh*|*debian-user.sh*|*kz-vm-hugowin732*)
                 ((++skip))
