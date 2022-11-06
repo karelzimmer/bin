@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# pad: scan netwerk voor ip-adressen
+# ipad: scan netwerk voor ip-adressen
 
 printf '%s\n' 'Uitvoeren ip...'
 ip a
