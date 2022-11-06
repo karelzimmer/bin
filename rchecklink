@@ -55,10 +55,6 @@ gebruik hiervoor:
 Verschillen tussen app/ en dist/ (linux, icaclient, en kz is oké):"
 diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
     true
-if ! command -v checklink 1> /dev/null; then
-    printf '%s\n' 'Installeer checklink...'
-    sudo apt-get install --yes w3c-linkchecker
-fi
 printf '%s\n' "
 Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
 Controleer de geldigheid van links 'linux.html':"
