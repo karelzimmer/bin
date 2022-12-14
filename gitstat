@@ -17,5 +17,12 @@ repo_list=$(
 for repo in $repo_list; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
-    git status
+    # Remove empty and well known lines from output.
+    git status                                                      |
+        sed '/On branch main/d'                                     |
+        sed '/On branch master/d'                                   |
+        sed "/Your branch is up to date with 'origin\/main'./d"     |
+        sed "/Your branch is up to date with 'origin\/master'./d"   |
+        sed '/^$/d'                                                 |
+        sed '/nothing to commit, working tree clean/d'
 done
