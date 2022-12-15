@@ -24,5 +24,6 @@ for repo in $repo_list; do
         sed "/Your branch is up to date with 'origin\/main'./d"     |
         sed "/Your branch is up to date with 'origin\/master'./d"   |
         sed '/^$/d'                                                 |
-        sed '/nothing to commit, working tree clean/d'
+        sed '/nothing to commit, working tree clean/d'              |
+        sed '/nothing to commit, working directory clean/d'
 done
