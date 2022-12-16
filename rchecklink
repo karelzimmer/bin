@@ -57,13 +57,5 @@ diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
     true
 printf '%s\n' "
 Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
-Controleer de geldigheid van links 'linux.html':"
-checklink   --broken                                \
-            --summary                               \
-            --suppress-broken                       \
-            -1:"https://jigsaw.w3.org/css-validator/validator?uri=karelzimmer.\
-nl%2Fcss%2Fstijlblad.css"                           \
-            --suppress-broken                       \
-            -1:"https://validator.w3.org/check?uri=http%3A%2F%2Fkarelzimmer.nl\
-%2Fhtml%2Fcontact.html"                             \
-            https://karelzimmer.nl/html/linux.html
+Controleer de geldigheid van links in linux.html:"
+checklink --summary https://karelzimmer.nl/html/linux.html 2> /dev/null
