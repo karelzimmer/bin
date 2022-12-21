@@ -1,0 +1,21 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+
+# lsrv0097: synchronise ~ on lsrv0097 with lsrv0100
+
+# Because:
+# [zimmerce@lsrv0097 ~]$ gitpull
+# /home/zimmerce/bin/gitpull: line 15: jq: command not found
+#
+# Run gitpull on lsrv0100 (that works, has jq), and then
+# run this script to get lsrv0097 in sync with lsrv0100.
+
+readonly source=$HOME
+readonly target=zimmerce@lsrv0097:/home/zimmerce
+
+rsync   --archive   \
+        --verbose   \
+        --delete    \
+        "$source"/  \
+        "$target"/
