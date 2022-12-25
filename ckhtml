@@ -12,17 +12,17 @@ set -o nounset
 # Constants
 ###############################################################################
 
-readonly program_name='ckhtml'
+program_name='ckhtml'
 
-readonly css_dir=$HOME/kz-uploads/dist/css
-readonly html_dir=$HOME/kz-uploads/dist/html
+css_dir=$HOME/kz-uploads/dist/css
+html_dir=$HOME/kz-uploads/dist/html
 
-readonly home_url=https://karelzimmer.nl
-readonly css_url=$home_url/css
-readonly html_url=$home_url/html
+home_url=https://karelzimmer.nl
+css_url=$home_url/css
+html_url=$home_url/html
 
-readonly css_validator_url='http://jigsaw.w3.org/css-validator/validator?uri='
-readonly html_validator_url='http://validator.w3.org/check?uri='
+css_validator_url='http://jigsaw.w3.org/css-validator/validator?uri='
+html_validator_url='http://validator.w3.org/check?uri='
 
 ###############################################################################
 # Variables

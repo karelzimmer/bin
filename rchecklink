@@ -8,9 +8,9 @@ set -o nounset
 # d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
 # Dit Bash script doet het omgekeerde: worden alle bestanden gebruikt?
 
-readonly dir1=/home/karel/kz-uploads/app/data
-readonly dir2=/home/karel/kz-uploads/dist/data
-readonly html=/home/karel/kz-uploads/dist/html
+dir1=/home/karel/kz-uploads/app/data
+dir2=/home/karel/kz-uploads/dist/data
+html=/home/karel/kz-uploads/dist/html
 
 declare -i todo=0
 declare -i skip=0

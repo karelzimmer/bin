@@ -9,19 +9,19 @@
 # Constants
 ###############################################################################
 
-readonly program_name='dliso'
+program_name='dliso'
 
-readonly options_short=c
-readonly options_long=checksums
-readonly usageline="Gebruik: $PROGRAM_NAME [-c|--checksums]"
+options_short=c
+options_long=checksums
+usageline="Gebruik: $PROGRAM_NAME [-c|--checksums]"
 
-readonly hashprog=sha256sum
+hashprog=sha256sum
 # ${hashprog,,}: All chars in $checksum --> lowercase (is already the case :-).
 # ${hashprog^^}: All chars in $checksum --> uppercase.
-readonly checksum=${hashprog^^}S
-readonly source_1=http://releases.ubuntu.com
-readonly source_2=http://cdimage.ubuntu.com
-readonly target=$HOME/Downloads
+checksum=${hashprog^^}S
+source_1=http://releases.ubuntu.com
+source_2=http://cdimage.ubuntu.com
+target=$HOME/Downloads
 
 ###############################################################################
 # Gobal variables

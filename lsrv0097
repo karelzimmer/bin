@@ -11,8 +11,8 @@ set -o nounset
 # Run gitpull on lsrv0100 (that works, has jq), and then
 # run this script to get lsrv0097 in sync with lsrv0100.
 
-readonly source=$HOME
-readonly target=zimmerce@lsrv0097:/home/zimmerce
+source=$HOME
+target=zimmerce@lsrv0097:/home/zimmerce
 
 rsync   --archive   \
         --verbose   \

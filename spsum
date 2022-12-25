@@ -9,15 +9,15 @@
 # Constants
 ###############################################################################
 
-readonly program_name='spsum'
+program_name='spsum'
 
-readonly options_short=
-readonly options_long=
-readonly usageline="Gebruik: $PROGRAM_NAME"
+options_short=
+options_long=
+usageline="Gebruik: $PROGRAM_NAME"
 
-readonly searchdir=$HOME/Downloads
-readonly checksum=sha256
-readonly hashprog=${checksum}sum
+searchdir=$HOME/Downloads
+checksum=sha256
+hashprog=${checksum}sum
 
 ###############################################################################
 # Variables
