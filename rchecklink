@@ -39,7 +39,7 @@ while read -r file; do
 done < <(find $dir1 $dir2 -type f -print | sort)
 printf '%s\n' "
 $total bestanden gevonden, $todo niet in gebruik, $fine in gebruik, \
-$skip overgeslagen (computer-specifieke bestanden)
+$skip overgeslagen (computer/gebruiker-specifieke bestanden)
 
 Neem deze bestanden na onderzoek op in html gevolgd door:
 - kz build
@@ -52,7 +52,7 @@ gebruik hiervoor:
 - locate <file>
 - rm <file>
 
-Verschillen tussen app/ en dist/ (linux, icaclient, en kz is oké):"
+Verschillen tussen app/ en dist/ (linux en kz is oké):"
 diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
     true
 printf '%s\n' "
