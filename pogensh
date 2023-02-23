@@ -2,8 +2,10 @@
 set -o errexit
 set -o nounset
 
-# pogen.sh: generate .pot and merge with existing .po for Shell scripts
+# pogensh: generate .pot and merge with existing .po for Shell scripts
 
 cd ~/kz-scripts/usr/bin
+echo "Generate kz.pot"
 xgettext --language=Shell --join-existing --no-location --output=kz.pot "$1"
+echo "Generate kz.po"
 msgmerge --update --backup=none --previous --no-location ../share/locale/nl/LC_MESSAGES/kz.po kz.pot

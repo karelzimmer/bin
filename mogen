@@ -5,5 +5,7 @@ set -o nounset
 # mogen: generate .mo and copy it to the correct location
 
 cd ~/kz-scripts/usr/bin
+echo "Generate kz.mo"
 msgfmt --output-file=../share/locale/nl/LC_MESSAGES/kz.mo ../share/locale/nl/LC_MESSAGES/kz.po
+echo "Deploy kz.mo"
 sudo cp ../share/locale/nl/LC_MESSAGES/kz.mo /usr/share/locale/nl/LC_MESSAGES/kz.mo
