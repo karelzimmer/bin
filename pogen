@@ -1,0 +1,29 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+
+# pogensh: update .pot and merge with existing .po for Shell and Python scripts
+
+language='Pipo'
+
+cd ~/kz-scripts/usr/bin
+
+if [[ -z "$*" ]]; then
+    echo 'Gebruik: pogen SCRIPT'
+    exit 1
+fi
+
+if grep --quiet '^# shellcheck ' "$1"; then
+    language='Shell'
+elif grep --quiet '^import ' "$1"; then
+    language='Python'
+else
+    echo 'Kan taal (Shell of Python) niet bepalen.'
+    exit 1
+fi
+
+echo "Update kz.pot..."
+xgettext --language=$language --join-existing --no-location --output=kz.pot "$1"
+echo 'Merge kz.po...'
+msgmerge --update --backup=none --previous --no-location ../share/locale/nl/LC_MESSAGES/kz.po kz.pot
+echo 'Nu vertalen...'
