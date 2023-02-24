@@ -22,8 +22,8 @@ else
     exit 1
 fi
 
-echo "Update kz.pot..."
+echo 'Update kz.pot...'
 xgettext --language=$language --join-existing --no-location --output=kz.pot "$1"
-echo 'Merge kz.po...'
+echo 'Update kz.po...'
 msgmerge --update --backup=none --previous --no-location ../share/locale/nl/LC_MESSAGES/kz.po kz.pot
 echo 'Nu vertalen...'
