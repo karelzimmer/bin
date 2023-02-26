@@ -11,9 +11,7 @@ cd ~/kz-scripts/usr/bin
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT'
     exit 1
-fi
-
-if grep --quiet '^# shellcheck ' "$1"; then
+elif grep --quiet '^# shellcheck ' "$1"; then
     language='Shell'
 elif grep --quiet '^import ' "$1"; then
     language='Python'
