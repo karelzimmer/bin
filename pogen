@@ -16,7 +16,7 @@ elif grep --quiet '^# shellcheck ' "$1"; then
 elif grep --quiet '^import ' "$1"; then
     language='Python'
 else
-    echo 'Kan taal (Shell of Python) niet bepalen.'
+    echo 'Kan de taal (Shell of Python) niet bepalen.'
     exit 1
 fi
 
