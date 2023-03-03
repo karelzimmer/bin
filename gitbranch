@@ -17,6 +17,5 @@ repo_list=$(
 for repo in $repo_list; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
-    # Remove empty and known lines from output.
     git branch
 done
