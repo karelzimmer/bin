@@ -1,0 +1,22 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+
+# gitbranch: show git branches of all local repos
+
+repo_list=$(
+    find    "$HOME"         \
+		   	-maxdepth 2     \
+            -name .git      \
+            -type d         \
+            -print          |
+    cut     --delimiter='/' \
+            --fields=4      |
+    sort
+    )
+for repo in $repo_list; do
+    printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
+    cd "$HOME/$repo" || exit 1
+    # Remove empty and known lines from output.
+    git branch
+done
