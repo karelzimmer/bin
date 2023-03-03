@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# gitpull: git pull van alle public repo's van <user>
+# gitpull: git pull of all <user> public repos
 
 user=karelzimmer
 # Get all public repositories for <user> with curl via GitHub REST API, and

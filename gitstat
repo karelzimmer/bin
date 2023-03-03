@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# gitstat: git status van alle lokale repo's.
+# gitstat: git status of all local repos
 
 repo_list=$(
     find    "$HOME"         \
