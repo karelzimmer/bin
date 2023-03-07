@@ -1,6 +1,8 @@
 #!/bin/bash
+set -o errexit
+set -o nounset
 
-# gitpull: git pull of all <user> public repos
+# gitfetch: git fetch of all <user> public repos
 
 user=karelzimmer
 # Get all public repositories for <user> with curl via GitHub REST API, and
@@ -15,7 +17,9 @@ for repo in $repo_list; do
         continue
     fi
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    cd "$HOME/$repo" || exit 1
-    git pull
-    printf '\n'
+    if [[ -d "$HOME/$repo" ]]; then
+        cd "$HOME/$repo"
+        git fetch
+        printf '\n'
+    fi
 done

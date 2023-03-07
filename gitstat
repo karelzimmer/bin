@@ -1,6 +1,4 @@
 #!/bin/bash
-set -o errexit
-set -o nounset
 
 # gitstat: git status of all local repos
 
@@ -17,13 +15,6 @@ repo_list=$(
 for repo in $repo_list; do
     printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
     cd "$HOME/$repo" || exit 1
-    # Remove empty and known lines from output.
-    git status                                                      |
-        sed '/On branch main/d'                                     |
-        sed '/On branch master/d'                                   |
-        sed "/Your branch is up to date with 'origin\/main'./d"     |
-        sed "/Your branch is up to date with 'origin\/master'./d"   |
-        sed '/^$/d'                                                 |
-        sed '/nothing to commit, working tree clean/d'              |
-        sed '/nothing to commit, working directory clean/d'
+    git status
+    printf '\n'
 done
