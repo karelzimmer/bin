@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# gitfetch: git fetch of all <user> public repos
+# gitfetch: git fetch of all public remote repos of <user>
 
 user=karelzimmer
 # Get all public repositories for <user> with curl via GitHub REST API, and
@@ -11,15 +11,14 @@ repo_list=$(
     curl --silent "https://api.github.com/users/$user/repos" | jq '.[] |
     {name: .name}' | jq --raw-output .name
     )
+newline=''
 for repo in $repo_list; do
     # Skip special repository.
     if [[ $repo = "$user" ]]; then
         continue
     fi
-    printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
-    if [[ -d "$HOME/$repo" ]]; then
-        cd "$HOME/$repo"
-        git fetch
-        printf '\n'
-    fi
+    printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
+    newline='\n'
+    cd "$HOME/$repo"
+    git fetch
 done

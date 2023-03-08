@@ -12,9 +12,10 @@ repo_list=$(
             --fields=4      |
     sort
     )
+newline=''
 for repo in $repo_list; do
-    printf "$(tput bold)%s$(tput sgr0)\n" "$repo"
+    printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
+    newline='\n'
     cd "$HOME/$repo" || exit 1
     git branch
-    printf '\n'
 done
