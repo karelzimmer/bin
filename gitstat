@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# gitstat: git status of all local repos
+# gitstat: git status of all local branches
 
 repo_list=$(
     find    "$HOME"         \

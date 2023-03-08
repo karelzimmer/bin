@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# gitbranch: show git branches of all local repos
+# gitbranch: show all local git branches
 
 repo_list=$(
     find    "$HOME"         \
