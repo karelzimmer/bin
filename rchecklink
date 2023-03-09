@@ -58,4 +58,5 @@ diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
 printf '%s\n' "
 Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
 Controleer de geldigheid van links in linux.html:"
-checklink --summary https://karelzimmer.nl/html/linux.html 2> /dev/null
+checklink --summary https://karelzimmer.nl/html/nl/linux.html 2> /dev/null
+checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
