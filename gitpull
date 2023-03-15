@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# gitpull: git pull of all public remote repos of <user>
+# gitpull: git pull (or git clone) of all public remote repos of <user>
 
 user=karelzimmer
 # Get all public repositories for <user> with curl via GitHub REST API, and
@@ -17,6 +17,10 @@ for repo in $repo_list; do
     fi
     printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
     newline='\n'
-    cd "$HOME/$repo" || exit 1
-    git pull
+    if [[ -d "$HOME/$repo" ]]; then
+        cd "$HOME/$repo" || exit 1
+        git pull
+    else
+        git clone "https://github.com/$user/$repo.git" "$HOME/$repo"
+    fi
 done
