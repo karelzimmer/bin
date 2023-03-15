@@ -19,8 +19,8 @@ for repo in $repo_list; do
     cd "$HOME/$repo" || exit 1
     # Remove empty and known lines from output.
     git status                      |
-        sed '/On branch /d'         |
+        sed '/On branch/d'          |
         sed "/Your branch is up/d"  |
         sed '/^$/d'                 |
-        sed '/nothing to commit, working /d'
+        sed '/nothing to commit, working/d'
 done
