@@ -8,8 +8,8 @@ set -o nounset
 # d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
 # Dit Bash script doet het omgekeerde: worden alle bestanden gebruikt?
 
-dir1=/home/karel/kz-uploads/app/data
-dir2=/home/karel/kz-uploads/dist/data
+dir1=/home/karel/kz-uploads/app/assets
+dir2=/home/karel/kz-uploads/dist/assets
 html=/home/karel/kz-uploads/dist/html
 
 declare -i todo=0
@@ -26,7 +26,11 @@ while read -r file; do
                 ((++skip))
                 continue
                 ;;
-            *home/LF*)
+            *icons/LF*)
+                ((++skip))
+                continue
+                ;;
+            *assets/citrix*)
                 ((++skip))
                 continue
                 ;;
@@ -52,9 +56,13 @@ gebruik hiervoor:
 - locate <file>
 - rm <file>
 
-Verschillen tussen app/ en dist/ (linux en kz is oké):"
-diff --recursive /home/karel/kz-uploads/app/ /home/karel/kz-uploads/dist/ ||
-    true
+Verschillen tussen app/ en dist/:"
+diff    --recursive                     \
+        /home/karel/kz-uploads/app/     \
+        /home/karel/kz-uploads/dist/    \
+        --exclude='kz'                  \
+        --exclude='kz-docs'             \
+        --exclude='kz-scripts'          || true
 printf '%s\n' "
 Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
 Controleer de geldigheid van links in linux.html:"
