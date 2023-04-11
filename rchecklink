@@ -17,7 +17,6 @@ declare -i skip=0
 declare -i fine=0
 declare -i total=0
 
-printf '%s\n' 'Bestanden niet in gebruik:'
 while read -r file; do
     ((++total))
     if ! grep --recursive --quiet "$(basename "$file")" $html; then
@@ -41,7 +40,8 @@ while read -r file; do
         ((++fine))
     fi
 done < <(find $dir1 $dir2 -type f -print | sort)
-printf '%s\n' "
+if [[ $todo -gt 0 ]]; then
+    printf '%s\n' "
 $total bestanden gevonden, $todo niet in gebruik, $fine in gebruik, \
 $skip overgeslagen (computer/gebruiker-specifieke bestanden)
 
@@ -54,20 +54,19 @@ of deze bestanden verwijderen uit:
 gebruik hiervoor:
 - sudo updatedb
 - locate <file>
-- rm <file>
+- rm <file>"
+fi
 
-Verschillen tussen app/ en dist/:"
+# Verschillen tussen app/ en dist/.
 diff    --recursive                     \
         /home/karel/kz-uploads/app/     \
         /home/karel/kz-uploads/dist/    \
         --exclude='kz'                  \
         --exclude='kz-docs'             \
         --exclude='kz-scripts'          || true
-printf '%s\n' "
-Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
-Controleer de geldigheid van links in linux.html:"
-if ! command -v checklink 1> /dev/null; then
-    sudo apt-get install w3c-linkchecker
-fi
-checklink --summary https://karelzimmer.nl/html/nl/linux.html 2> /dev/null
-checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
+
+# Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
+# Controleer de geldigheid van links in linux.html:
+# sudo apt-get install w3c-linkchecker
+# checklink --summary https://karelzimmer.nl/html/nl/linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
