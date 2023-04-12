@@ -55,6 +55,7 @@ gebruik hiervoor:
 - sudo updatedb
 - locate <file>
 - rm <file>"
+    exit 1
 fi
 
 # Verschillen tussen app/ en dist/.
