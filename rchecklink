@@ -4,61 +4,38 @@ set -o nounset
 
 # rchecklink: reverse-checklink
 
-# Perl script checklink (W3C® Link Checker) controleert of links geldig zijn,
-# d.i. of iedere link gevolgd kan worden/er een bestand aanwezig is.
-# Dit Bash script doet het omgekeerde: worden alle bestanden gebruikt?
+# Perl script checklink (W3C® Link Checker) checks whether links are valid,
+# i.e. whether each link can be followed/whether a file is present.
+# This Bash script does the opposite: are all files used?
 
 dir1=/home/karel/kz-uploads/app/assets
 dir2=/home/karel/kz-uploads/dist/assets
 html=/home/karel/kz-uploads/dist/html
 
-declare -i todo=0
-declare -i skip=0
-declare -i fine=0
-declare -i total=0
+declare -i check=0
 
 while read -r file; do
-    ((++total))
     if ! grep --recursive --quiet "$(basename "$file")" $html; then
         case $file in
             *-pc0*|*-pc-*|*kz-vm-hugowin732*)
-                ((++skip))
                 continue
                 ;;
             *icons/LF*)
-                ((++skip))
                 continue
                 ;;
             *assets/citrix*)
-                ((++skip))
                 continue
                 ;;
         esac
-        ((++todo))
+        ((++check))
         printf '%s\n' "rm $file"
-    else
-        ((++fine))
     fi
 done < <(find $dir1 $dir2 -type f -print | sort)
-if [[ $todo -gt 0 ]]; then
-    printf '%s\n' "
-$total bestanden gevonden, $todo niet in gebruik, $fine in gebruik, \
-$skip overgeslagen (computer/gebruiker-specifieke bestanden)
-
-Neem deze bestanden na onderzoek op in html gevolgd door:
-- kz build
-- kz deploy
-of deze bestanden verwijderen uit:
-- $dir1/
-- $dir2/
-gebruik hiervoor:
-- sudo updatedb
-- locate <file>
-- rm <file>"
+if [[ $check -gt 0 ]]; then
     exit 1
 fi
 
-# Verschillen tussen app/ en dist/.
+# Difference between app/ and dist/.
 diff    --recursive                     \
         /home/karel/kz-uploads/app/     \
         /home/karel/kz-uploads/dist/    \
@@ -66,8 +43,8 @@ diff    --recursive                     \
         --exclude='kz-docs'             \
         --exclude='kz-scripts'          || true
 
-# Perl script checklink (W3C® Link Checker) controleert of links geldig zijn.
-# Controleer de geldigheid van links in linux.html:
+# Perl script checklink (W3C® Link Checker) checks whether links are valid.
+# Check the validity of links in linux.html:
 # sudo apt-get install w3c-linkchecker
 # checklink --summary https://karelzimmer.nl/html/nl/linux.html 2> /dev/null
 # checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
