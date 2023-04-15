@@ -20,5 +20,12 @@ else
     exit 1
 fi
 
-xgettext --language=$language --join-existing --no-location --output=kz.pot "$1"
-msgmerge --update --backup=none --previous --no-location ../share/locale/nl/LC_MESSAGES/kz.po kz.pot
+xgettext    --language=$language    \
+            --join-existing         \
+            --no-location           \
+            --output=kz.pot "$1"
+msgmerge    --update        \
+            --backup=none   \
+            --previous      \
+            --no-location   \
+            ../share/locale/nl/LC_MESSAGES/kz.po kz.pot

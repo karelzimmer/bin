@@ -2,8 +2,8 @@
 set -o errexit
 set -o nounset
 
-# mogen: compile .mo and copy it to the correct location
+# mogen: generate .mo and copy it to the correct location
 
-cd ~/kz-scripts/usr/bin
-msgfmt --output-file=../share/locale/nl/LC_MESSAGES/kz.mo ../share/locale/nl/LC_MESSAGES/kz.po
-sudo cp ../share/locale/nl/LC_MESSAGES/kz.mo /usr/share/locale/nl/LC_MESSAGES/kz.mo
+lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
+sudo cp "$lc_messages"/kz.mo /usr/share/locale/nl/LC_MESSAGES/kz.mo
