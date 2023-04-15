@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# gitpull: git pull (or git clone) of all public remote repos of <user>
+# gitpull: git pull (or git clone) of all public remote repos
 
 user=karelzimmer
 # Get all public repositories for <user> with curl via GitHub REST API, and
