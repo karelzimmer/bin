@@ -2,21 +2,21 @@
 set -o errexit
 set -o nounset
 
-# gitfetch: git fetch of all public remote repos of <user>
+# gitfetch: git fetch of all local branches
 
-user=karelzimmer
-# Get all public repositories for <user> with curl via GitHub REST API, and
-# extract required info with jq.
 repo_list=$(
-    curl --silent "https://api.github.com/users/$user/repos" |
-    jq '.[] | {name: .name}' | jq --raw-output .name
+    find    "$HOME"         \
+            -maxdepth 2     \
+            -name .git      \
+            -type d         \
+            -print          |
+    cut     --delimiter='/' \
+            --fields=4      |
+    sort
     )
 newline=''
 for repo in $repo_list; do
     # Skip special repository.
-    if [[ $repo = "$user" ]]; then
-        continue
-    fi
     printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
     newline='\n'
     cd "$HOME/$repo"
