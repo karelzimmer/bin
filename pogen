@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# pogensh: update .pot and merge with existing .po 
+# pogensh: update .pot and merge with existing .po for Shell and Python scripts
 
 language='Pipo'
 proj_dir='/home/karel/kz-scripts'
