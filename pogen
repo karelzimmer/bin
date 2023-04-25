@@ -2,11 +2,12 @@
 set -o errexit
 set -o nounset
 
-# pogensh: update .pot and merge with existing .po for Shell and Python scripts
+# pogensh: update .pot and merge with existing .po 
 
 language='Pipo'
+proj_dir='/home/karel/kz-scripts'
 
-cd ~/kz-scripts/usr/bin
+cd "proj_dir"
 
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT'
@@ -23,9 +24,10 @@ fi
 xgettext    --language=$language    \
             --join-existing         \
             --no-location           \
-            --output=kz.pot "$1"
-msgmerge    --update        \
-            --backup=none   \
-            --previous      \
-            --no-location   \
-            ../share/locale/nl/LC_MESSAGES/kz.po kz.pot
+            --output=$proj_dir/usr/bin/kz.pot "$1"
+msgmerge    --update                                        \
+            --backup=none                                   \
+            --previous                                      \
+            --no-location                                   \
+            $proj_dir/usr/share/locale/nl/LC_MESSAGES/kz.po \
+            $proj_dir/usr/bin/kz.pot
