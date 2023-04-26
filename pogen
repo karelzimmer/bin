@@ -2,10 +2,40 @@
 set -o errexit
 set -o nounset
 
-# pogensh: update .pot and merge with existing .po for Shell and Python scripts
+# pogen: update .pot and merge with existing .po
 
 language='Pipo'
 proj_dir='/home/karel/kz-scripts'
+
+function policy_file {
+	printf '%s\n' 'Utility xgettext ondersteunt nog geen Policy bestanden.
+
+Voer de volgende 3 wijzigingen handmatig uit.
+
+1. Wijzig .policy bestand:
+        <description>DESC-EN</description>
+        <description xml:lang="nl">DESC-NL</description>
+        <message>MSG-EN</message>
+        <message xml:lang="nl">MSG-NL</message>
+    ==>
+        <description gettext-domain="kz">DESC-EN</description>
+        <message gettext-domain="kz">MSG-EN</message>
+
+2. Voeg toe aan .pot bestand: (controleer aanwezigheid DESC-EN en MSG-EN)
+msgid "DESC-EN"
+msgstr ""
+
+msgid "MSG-EN"
+msgstr ""
+
+3. Voeg toe aan .po bestand: (controleer aanwezigheid DESC-EN en MSG-EN)
+msgid "DESC-EN"
+msgstr "DESC-NL"
+
+msgid "MSG-EN"
+msgstr "MSG-NL"'
+	exit 0
+}
 
 cd "$PWD"
 
@@ -16,17 +46,24 @@ elif grep --quiet '^# shellcheck ' "$1"; then
     language='Shell'
 elif grep --quiet '^import ' "$1"; then
     language='Python'
-elif grep --quiet '[Desktop Entry]' "$1"; then
+elif grep --quiet 'Desktop Entry' "$1"; then
     language='Desktop'
+elif grep --quiet 'policyconfig' "$1"; then
+    language='Policy'
 else
-    echo 'Kan de taal (Shell, Python, of Desktop) niet bepalen.'
+    echo 'Kan de taal (Shell, Python, Desktop, of Policy) niet bepalen.'
     exit 1
+fi
+
+if [[ $language = 'Policy' ]]; then
+	policy_file
 fi
 
 xgettext    --language=$language    \
             --join-existing         \
             --no-location           \
             --output=$proj_dir/usr/bin/kz.pot "$1"
+
 msgmerge    --update                                        \
             --backup=none                                   \
             --previous                                      \
