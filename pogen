@@ -7,7 +7,7 @@ set -o nounset
 language='Pipo'
 proj_dir='/home/karel/kz-scripts'
 
-cd "proj_dir"
+cd "$PWD"
 
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT'
@@ -16,8 +16,10 @@ elif grep --quiet '^# shellcheck ' "$1"; then
     language='Shell'
 elif grep --quiet '^import ' "$1"; then
     language='Python'
+elif grep --quiet '[Desktop Entry]' "$1"; then
+    language='Desktop'
 else
-    echo 'Kan de taal (Shell of Python) niet bepalen.'
+    echo 'Kan de taal (Shell, Python, of Desktop) niet bepalen.'
     exit 1
 fi
 
