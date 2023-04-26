@@ -17,10 +17,5 @@ for repo in $repo_list; do
     printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
     newline='\n'
     cd "$HOME/$repo" || exit 1
-    # Remove empty and known lines from output.
-    git status                      |
-        sed '/On branch/d'          |
-        sed "/Your branch is up/d"  |
-        sed '/^$/d'                 |
-        sed '/nothing to commit, working/d'
+    git status
 done
