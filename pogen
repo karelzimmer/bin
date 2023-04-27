@@ -12,29 +12,28 @@ function policy_file {
 
 Voer de volgende 3 wijzigingen handmatig uit.
 
-1. Wijzig .policy bestand:
+1. Wijzig in .policy bestand:
         <description>DESC-EN</description>
         <description xml:lang="nl">DESC-NL</description>
         <message>MSG-EN</message>
         <message xml:lang="nl">MSG-NL</message>
-    ==>
+   naar:
         <description gettext-domain="kz">DESC-EN</description>
         <message gettext-domain="kz">MSG-EN</message>
 
-2. Voeg toe aan .pot bestand: (controleer aanwezigheid DESC-EN en MSG-EN)
+2. Voeg toe aan .pot bestand als nodig:
 msgid "DESC-EN"
 msgstr ""
 
 msgid "MSG-EN"
 msgstr ""
 
-3. Voeg toe aan .po bestand: (controleer aanwezigheid DESC-EN en MSG-EN)
+3. Voeg toe aan .po bestand als nodig:
 msgid "DESC-EN"
 msgstr "DESC-NL"
 
 msgid "MSG-EN"
 msgstr "MSG-NL"'
-	exit 0
 }
 
 cd "$PWD"
@@ -57,6 +56,7 @@ fi
 
 if [[ $language = 'Policy' ]]; then
 	policy_file
+	exit 0
 fi
 
 xgettext    --language=$language    \
