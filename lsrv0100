@@ -2,10 +2,10 @@
 set -o errexit
 set -o nounset
 
-# lsrv0097: synchronise /home/zimmerce from lsrv0100 to lsrv0097
+# lsrv0100: synchronise /home/zimmerce from lsrv0097 to lsrv0100
 
-source=zimmerce@lsrv0100:/home/zimmerce
-target=zimmerce@lsrv0097:/home/zimmerce
+source=zimmerce@lsrv0097:/home/zimmerce
+target=zimmerce@lsrv0100:/home/zimmerce
 
 rsync   --archive   \
         --verbose   \
