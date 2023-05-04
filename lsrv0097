@@ -4,7 +4,7 @@ set -o nounset
 
 # lsrv0097: synchronise /home/zimmerce from lsrv0100 to lsrv0097
 
-source=zimmerce@lsrv0100:/home/zimmerce
+source=/home/zimmerce
 target=zimmerce@lsrv0097:/home/zimmerce
 
 rsync   --archive   \
