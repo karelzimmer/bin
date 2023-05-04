@@ -3,13 +3,27 @@
 # gitpull: git pull (or git clone) of all public remote repos
 
 user=karelzimmer
-# Get all public repositories for <user> with curl via GitHub REST API, and
-# extract required info with jq.
-repo_list=$(
-    curl --silent "https://api.github.com/users/$user/repos" |
-    jq '.[] | {name: .name}' | jq --raw-output .name
-    )
 newline=''
+
+# Get all public repositories for <user> with curl via GitHub REST API, and
+# extract required info with jq when available.
+if command -v jq &> /dev/null; then
+    repo_list=$(
+        curl --silent "https://api.github.com/users/$user/repos"    |
+        jq '.[] | {name: .name}'                                    |
+        jq --raw-output .name
+        )
+else
+    repo_list=$(
+        curl --silent "https://api.github.com/users/$user/repos"    |
+        grep --regexp='"full_name"'                                 |
+        cut --delimiter=':' --fields=2-                             |
+        sed --expression='s/,//'                                    |
+        sed --expression='s/"//g'                                   |
+        sed --expression='s|karelzimmer/||'
+        )
+fi
+
 for repo in $repo_list; do
     # Skip special repository.
     if [[ $repo = "$user" ]]; then
