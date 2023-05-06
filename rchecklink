@@ -26,6 +26,9 @@ while read -r file; do
             *assets/citrix*)
                 continue
                 ;;
+            *)
+                :
+                ;;
         esac
         ((++check))
         printf '%s\n' "rm $file"
