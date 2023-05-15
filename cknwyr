@@ -4,7 +4,7 @@ set -o nounset
 
 # cknwyr: check for outdated copyright year
 
-last_year=$(date '+%Y' --date='last year')
+last_year=${1:-$(date '+%Y' --date='last year')}
 output=/tmp/cknwyr.log
 
 cd "$HOME"
