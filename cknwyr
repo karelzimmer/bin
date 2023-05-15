@@ -1,0 +1,36 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+
+# cknwyr: check for outdated copyright year
+
+last_year=$(date '+%Y' --date='last year')
+output=/tmp/cknwyr.log
+
+cd "$HOME"
+
+echo "Last year: $last_year" > $output
+echo >> $output
+
+while read -r file; do
+    echo "$file" >> $output
+    grep "$last_year" "$file" &>> $output|| true
+    echo >> $output
+done < <(
+        find ./kz-*                 \
+        -type f                     \
+        -not -path './*/.git*'      \
+        -not -path './*/dist*'      \
+        -not -path '*/__pycache__*' \
+        -not -name kz.mo            \
+        -not -name kz.po            \
+        -not -name kz.pot           \
+        -not -name license          \
+        -not -name LICENSE          \
+        -not -name README           \
+        -not -name README.md        \
+        -print                      |
+        sort
+        )
+
+less $output
