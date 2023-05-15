@@ -9,8 +9,13 @@ output=/tmp/cknwyr.log
 
 cd "$HOME"
 
-echo "Last year: $last_year" > $output
-echo >> $output
+echo "cknwyr: check for copyright year" > $output
+{
+    echo
+    echo "Directory: $HOME"
+    echo "Last year: $last_year"
+    echo 
+} >> $output
 
 while read -r file; do
     case $file in
