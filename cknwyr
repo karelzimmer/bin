@@ -13,9 +13,16 @@ echo "Last year: $last_year" > $output
 echo >> $output
 
 while read -r file; do
-    echo "$file" >> $output
-    grep "$last_year" "$file" &>> $output|| true
-    echo >> $output
+    case $file in
+        *.deb|*.gif|*.ico|*.pdf|*.png|*.svg)
+            continue
+            ;;
+        *)
+            echo "$file" >> $output
+            grep "$last_year" "$file" &>> $output|| true
+            echo >> $output
+            ;;
+    esac
 done < <(
         find ./kz-*                 \
         -type f                     \
