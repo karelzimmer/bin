@@ -5,7 +5,7 @@ set -o nounset
 # ckyear: check for (copyright) year
 
 last_year=${1:-$(date '+%Y' --date='last year')}
-date '+%Y' -d "$last_year"
+date '+%Y' -d "$last_year" 1> /dev/null
 output=/tmp/cknwyr.log
 
 cd "$HOME"
@@ -32,6 +32,7 @@ while read -r file; do
 done < <(
         find ./kz-*                 \
         -type f                     \
+        -not -path './kz-deb/*'     \
         -not -path './*/.git*'      \
         -not -path './*/dist*'      \
         -not -path '*/__pycache__*' \
