@@ -2,14 +2,15 @@
 set -o errexit
 set -o nounset
 
-# cknwyr: check for new (copyright) year
+# ckyear: check for (copyright) year
 
 last_year=${1:-$(date '+%Y' --date='last year')}
+date '+%Y' -d "$last_year"
 output=/tmp/cknwyr.log
 
 cd "$HOME"
 
-echo "cknwyr: check for new (copyright) year" > $output
+echo "ckyear: check for (copyright) year" > $output
 {
     echo
     echo "Directory: $HOME"
