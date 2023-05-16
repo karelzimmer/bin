@@ -20,7 +20,7 @@ echo "ckyear: check for (copyright) year" > $output
 
 while read -r file; do
     case $file in
-        *.deb|*.gif|*.ico|*.pdf|*.png|*.svg)
+        *.deb|*.gif|*.ico|*.pdf|*.png|*.svg|*kz-docs/*.odt)
             continue
             ;;
         *)
