@@ -13,8 +13,8 @@ cd "$HOME"
 echo "ckyear: check for (copyright) year" > $output
 {
     echo
-    echo "Directory: $HOME"
-    echo "Last year: $last_year"
+    echo "Dir.: $HOME"
+    echo "Year: $last_year"
     echo 
 } >> $output
 
