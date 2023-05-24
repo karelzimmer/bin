@@ -4,17 +4,27 @@ set -o nounset
 
 # ckyear: check for (copyright) year
 
+# e.g. when it is the new year 2024:
+# search for ' 2023' will find:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
+# must be changed to:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2023-2024.
+# and:
+# search for '-2023' will find:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
+# must be changed to:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2024.
+
 last_year=${1:-$(date '+%Y' --date='last year')}
-date '+%Y' -d "$last_year" 1> /dev/null
 output=/tmp/cknwyr.log
 
 cd "$HOME"
 
-echo "ckyear: check for (copyright) year" > $output
+echo "ckyear [year]: check for (copyright) year" > $output
 {
     echo
-    echo "Dir.: $HOME"
-    echo "Year: $last_year"
+    echo "Directory: $HOME"
+    echo "Last year: $last_year"
     echo 
 } >> $output
 
@@ -28,7 +38,7 @@ while read -r file; do
             ;;
         *)
             echo "$file" >> $output
-            grep "$last_year" "$file" &>> $output|| true
+            grep --fixed-strings --regexp="$last_year" "$file" &>> $output|| true
             echo >> $output
             ;;
     esac
