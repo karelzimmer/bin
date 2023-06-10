@@ -5,7 +5,7 @@ set -o nounset
 # pogen: update .pot and merge with existing .po
 
 language='Pipo'
-proj_dir='/home/karel/kz-scripts'
+proj_dir="/home/$USER/kz-scripts"
 
 function policy_file {
 	printf '%s\n' 'Utility xgettext ondersteunt nog geen Policy bestanden.
