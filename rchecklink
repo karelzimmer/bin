@@ -8,9 +8,9 @@ set -o nounset
 # i.e. whether each link can be followed/whether a file is present.
 # This Bash script does the opposite: are all files used?
 
-dir1=/home/karel/kz-uploads/app/assets
-dir2=/home/karel/kz-uploads/dist/assets
-html=/home/karel/kz-uploads/dist/html
+dir1=/home/$USER/kz-uploads/app/assets
+dir2=/home/$USER/kz-uploads/dist/assets
+html=/home/$USER/kz-uploads/dist/html
 
 declare -i check=0
 
@@ -40,8 +40,8 @@ fi
 
 # Difference between app/ and dist/.
 diff    --recursive                     \
-        /home/karel/kz-uploads/app/     \
-        /home/karel/kz-uploads/dist/    \
+        "/home/$USER/kz-uploads/app/"   \
+        "/home/$USER/kz-uploads/dist/"  \
         --exclude='kz'                  \
         --exclude='kz-docs'             \
         --exclude='kz-scripts'          || true
@@ -49,5 +49,5 @@ diff    --recursive                     \
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
 # Check the validity of links in linux.html:
 # sudo apt-get install w3c-linkchecker
-# checklink --summary https://karelzimmer.nl/html/nl/linux.html 2> /dev/null
-# checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
+# checklink --summary https://$USERzimmer.nl/html/nl/linux.html 2> /dev/null
+# checklink --summary https://$USERzimmer.nl/html/en/linux.html 2> /dev/null
