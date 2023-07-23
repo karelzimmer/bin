@@ -59,7 +59,7 @@ function check_input {
         esac
     done
 
-    if [[ "$*" ]]; then
+    if [[ -n "$*" ]]; then
         error "$program_name: te veel argumenten."
         printf '%s\n' "$usageline" >&2
         exit 1
@@ -107,8 +107,9 @@ function create_checksum_file {
             --exclude=*512*             \
             --exclude-dir=*             \
             --no-filename               \
-            -- "${files[@]}"            \
-            > "$iso_file.$hashprog"     || grep_rc=$?
+            -- "${files[@]}"            |
+            sort                        |
+            head -1                     > "$iso_file.$hashprog" || grep_rc=$?
     if [[ $grep_rc -ne 0 ]]; then
         printf '%s\n\n' "Geen controlesom gevonden/aangemaakt voor \
 $iso_file." >&2
