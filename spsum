@@ -1,145 +1,51 @@
 #!/bin/bash
 ###############################################################################
-# Controlebestanden opsplitsen.
+# Split checksum files.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# This script creates an .iso.txt with the checksum for an .iso.
+#
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
 ###############################################################################
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='spsum'
-
-options_short=
-options_long=
-usageline="Gebruik: $PROGRAM_NAME"
-
-searchdir=$HOME/Downloads
-checksum=sha256
-hashprog=${checksum}sum
+SEARCHDIR=$HOME/Downloads
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-iso_file=''
-iso_file_found=false
-
-###############################################################################
-# Functions
-###############################################################################
-
-function check_input {
-    local -i    getopt_rc=0
-    local       parsed=''
-
-    parsed=$(
-        getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$PROGRAM_NAME"     \
-                --              "$@"
-        )       || getopt_rc=$?
-    if [[ $getopt_rc -ne 0 ]]; then
-        printf '%s\n' "$usageline" >&2
-        exit 1
-    fi
-    eval set -- "$parsed"
-
-    while true; do
-        case $1 in
-            --)
-                shift
-                break
-                ;;
-            *)
-                shift
-                ;;
-        esac
-    done
-
-    if [[ -n "$*" ]]; then
-        error "$program_name: te veel argumenten."
-        printf '%s\n' "$usageline" >&2
-        exit 1
-    fi
-}
-
-
-function process_input {
-    cd "$searchdir" || exit 1
-
-    for iso_file in *.iso; do
-
-        if ! [[ -f "$iso_file" ]]; then
-            # No regular file.
-            continue
-        elif [[ -f "$iso_file.$hashprog" ]]; then
-            # Checksumfile already exists, otherwise grep would emptied it.
-            continue
-        fi
-
-        iso_file_found=true
-
-        create_checksum_file
-
-    done
-
-    if ! $iso_file_found; then
-        printf '%s\n' "Geen controlebestanden om aan te maken in $searchdir."
-        exit 2
-    fi
-}
-
-
-function create_checksum_file {
-    local -a    files=()
-    local -i    grep_rc=0
-
-    for file in *; do
-        files+=("$file")
-    done
-    grep    --word-regexp               \
-            --regexp=" $iso_file"       \
-            --regexp=' *'"$iso_file"    \
-            --exclude=*.iso             \
-            --exclude=*512*             \
-            --exclude-dir=*             \
-            --no-filename               \
-            -- "${files[@]}"            |
-            sort                        |
-            head -1                     > "$iso_file.$hashprog" || grep_rc=$?
-    if [[ $grep_rc -ne 0 ]]; then
-        printf '%s\n\n' "Geen controlesom gevonden/aangemaakt voor \
-$iso_file." >&2
-    else
-        printf '%s\n\n' "Controlebestand $iso_file.$hashprog aangemaakt."
-    fi
-}
-
-
-function term_script {
-    # ${checksum^^}: All chars in $checksum --> uppercase.
-    rm --force --verbose -- *${checksum^^}*
-    if $iso_file_found; then
-        printf '%s\n' "Om de beeldbestanden (.iso) te controleren voer uit: \
-cd $searchdir; $hashprog --check --ignore-missing *.$hashprog; cd -
-
-Om de controlebestanden (.${hashprog}s) voor Ubuntu opnieuw te downloaden \
-voer uit: kz dliso --checksums"
-    fi
-    exit 0
-}
+iso=''
 
 ###############################################################################
 # Script
 ###############################################################################
 
-function main {
-    check_input "$@"
-    process_input
-    term_script
-}
+cd "$SEARCHDIR" || exit 1
 
-main "$@"
+for iso in *.iso; do
+
+    # shellcheck disable=SC2062
+    grep    --word-regexp           \
+            --regexp=" $iso"        \
+            --regexp=' *'"$iso"     \
+            --exclude=*.iso         \
+            --exclude="$iso".txt    \
+            --exclude-dir=*         \
+            --no-filename           \
+            --max-count=1           \
+            -- *.txt                > "$iso".txt || grep_rc=$?
+    if [[ $grep_rc -ne 0 ]]; then
+        printf '%s\n' "No checksum found for $iso." >&2
+    else
+        printf '%s\n' "Checksum file $iso.txt created."
+    fi
+
+done
+
+printf '\n%s\n%s\n' 'To check the image files (.iso) execute:'  \
+"cd $SEARCHDIR; sha256sum --check *.iso.txt 2>/dev/null; sha512sum --check \
+*.iso.txt 2>/dev/null; cd - 1>/dev/null"
