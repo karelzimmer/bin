@@ -49,3 +49,6 @@ done
 printf '\n%s\n%s\n' 'To check the image files (.iso) execute:'  \
 "cd $SEARCHDIR; sha256sum --check *.iso.txt 2>/dev/null; sha512sum --check \
 *.iso.txt 2>/dev/null; cd - 1>/dev/null"
+
+printf '\n%s\n' 'You probably can delete:'
+ls -1 -- *SUMS*
