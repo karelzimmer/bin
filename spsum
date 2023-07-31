@@ -51,4 +51,4 @@ printf '\n%s\n%s\n' 'To check the image files (.iso) execute:'  \
 *.iso.txt 2>/dev/null; cd - 1>/dev/null"
 
 printf '\n%s\n' 'You probably can delete:'
-ls -1 -- *SUMS*
+ls -1 -- *{sum,SUM}* 2>/dev/null
