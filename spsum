@@ -49,7 +49,7 @@ if [[ -n $(ls ./*.iso &>/dev/null) ]]; then
             "cd $SEARCHDIR; sha256sum --check *.iso.txt 2>/dev/null; \
 sha512sum --check *.iso.txt 2>/dev/null; cd - 1>/dev/null"
 
-    printf '\n%s\n' 'Files that problaly can be deleted:'
+    printf '\n%s\n' 'Files that probably can be deleted:'
     ls -1 -- *{sum,SUM}* 2>/dev/null
 else
     printf '%s\n' 'No image files (.iso) found.'
