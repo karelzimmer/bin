@@ -31,9 +31,9 @@ while read -r file; do
                 ;;
         esac
         ((++check))
-        printf '%s\n' "rm $file"
+        printf '%s\n%s\n' 'Files that problaly can be deleted:' "$file"
     fi
-done < <(find $dir1 $dir2 -type f -print | sort)
+done < <(find "$dir1" "$dir2" -type f -print | sort)
 if [[ $check -gt 0 ]]; then
     exit 1
 fi

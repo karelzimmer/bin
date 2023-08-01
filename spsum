@@ -26,29 +26,31 @@ iso=''
 
 cd "$SEARCHDIR" || exit 1
 
-for iso in *.iso; do
+if [[ -n $(ls ./*.iso &>/dev/null) ]]; then
+    for iso in *.iso; do
+        # shellcheck disable=SC2062
+        grep    --word-regexp           \
+                --regexp=" $iso"        \
+                --regexp=' *'"$iso"     \
+                --exclude=*.iso         \
+                --exclude="$iso".txt    \
+                --exclude-dir=*         \
+                --no-filename           \
+                --max-count=1           \
+                -- *                    > "$iso".txt 2>/dev/null || grep_rc=$?
+        if [[ $grep_rc -ne 0 ]]; then
+            printf '%s\n' "No checksum found for $iso." >&2
+        else
+            printf '%s\n' "Checksum file $iso.txt created."
+        fi
+    done
+    printf  '\n%s\n%s\n' \
+            'To check the image files (.iso) execute:'  \
+            "cd $SEARCHDIR; sha256sum --check *.iso.txt 2>/dev/null; \
+sha512sum --check *.iso.txt 2>/dev/null; cd - 1>/dev/null"
 
-    # shellcheck disable=SC2062
-    grep    --word-regexp           \
-            --regexp=" $iso"        \
-            --regexp=' *'"$iso"     \
-            --exclude=*.iso         \
-            --exclude="$iso".txt    \
-            --exclude-dir=*         \
-            --no-filename           \
-            --max-count=1           \
-            -- *                    > "$iso".txt || grep_rc=$?
-    if [[ $grep_rc -ne 0 ]]; then
-        printf '%s\n' "No checksum found for $iso." >&2
-    else
-        printf '%s\n' "Checksum file $iso.txt created."
-    fi
-
-done
-
-printf '\n%s\n%s\n' 'To check the image files (.iso) execute:'  \
-"cd $SEARCHDIR; sha256sum --check *.iso.txt 2>/dev/null; sha512sum --check \
-*.iso.txt 2>/dev/null; cd - 1>/dev/null"
-
-printf '\n%s\n' 'You probably can delete:'
-ls -1 -- *{sum,SUM}* 2>/dev/null
+    printf '\n%s\n' 'Files that problaly can be deleted:'
+    ls -1 -- *{sum,SUM}* 2>/dev/null
+else
+    printf '%s\n' 'No image files (.iso) found.'
+fi
