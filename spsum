@@ -37,7 +37,7 @@ if [[ -n $(ls ./*.iso &>/dev/null) ]]; then
                 --exclude-dir=*         \
                 --no-filename           \
                 --max-count=1           \
-                -- *                    > "$iso".txt 2>/dev/null || grep_rc=$?
+                -- *                    > "$iso".txt || grep_rc=$?
         if [[ $grep_rc -ne 0 ]]; then
             printf '%s\n' "No checksum found for $iso." >&2
         else
