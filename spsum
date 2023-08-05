@@ -40,6 +40,7 @@ for iso in *.iso; do
             --max-count=1           \
             -- *                    > "$iso".txt || grep_rc=$?
     if [[ $grep_rc -ne 0 ]]; then
+        rm "$iso".txt
         printf '%s\n' "No checksum found for $iso." >&2
     else
         printf '%s\n' "Checksum file $iso.txt created."
