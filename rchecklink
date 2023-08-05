@@ -15,7 +15,7 @@ html=/home/$USER/kz-uploads/dist/html
 declare -i check=0
 
 while read -r file; do
-    if ! grep --recursive --quiet "$(basename "$file")" $html; then
+    if ! grep --recursive --quiet "$(basename "$file")" "$html"; then
         case $file in
             *-pc0*|*-pc-*|*kz-vm-hugowin732.desktop*)
                 continue
