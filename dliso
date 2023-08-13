@@ -109,23 +109,24 @@ $SOURCE_2/xubuntu/releases/$full_vs/release/xubuntu-$full_vs-desktop-amd64.iso"
 
 function download_checksums {
     cd "$TARGET" || exit 1
-    rm --force {u,xu,lu}buntu-*-SHA256SUMS
+    rm --force "$CHECKSUM"-ubuntu "$CHECKSUM"-xubuntu "$CHECKSUM"-lubuntu
 
-    wget    --output-document=uubuntu-$full_vs-desktop-amd64.iso.txt    \
+    wget    --output-document=$CHECKSUM-ubuntu  \
             $SOURCE_1/"$full_vs/$CHECKSUM"
-    wget    --output-document=xubuntu-$full_vs-desktop-amd64.iso.txt    \
+    wget    --output-document=$CHECKSUM-xubuntu \
             $SOURCE_2/xubuntu/releases/"$full_vs/release/$CHECKSUM"
-    wget    --output-document=xubuntu-$full_vs-desktop-amd64.iso.txt    \
+    wget    --output-document=$CHECKSUM-lubuntu \
             $SOURCE_2/lubuntu/releases/"$full_vs/release/$CHECKSUM"
 }
 
 
 function term_script {
-    printf '%s\n' "Om de $CHECKSUM-controlebestanden op te splitsen voer uit: \
-spsum
+    printf '%s\n' "Om de beeldbestanden (.iso) te controleren voer uit: cd \
+$TARGET; $HASHPROG --check $CHECKSUM-*; cd -
 
-Om de beeldbestanden (.iso) te controleren voer uit: cd \
-$TARGET; $HASHPROG --check --ignore-missing *.$CHECKSUM; cd -"
+Om de $CHECKSUM-controlebestanden op te splitsen voer uit: \
+spsum
+"
     exit 0
 }
 
