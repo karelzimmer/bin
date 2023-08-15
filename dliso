@@ -126,7 +126,8 @@ $TARGET; $HASHPROG --check $CHECKSUM-*; cd -
 
 Om de $CHECKSUM-controlebestanden op te splitsen voer uit: \
 spsum
-"
+
+Gereed."
     exit 0
 }
 

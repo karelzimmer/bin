@@ -53,3 +53,5 @@ sha512sum --check *.iso.txt 2 >/dev/null; cd - 1 >/dev/null"
 
 printf '\n%s\n' 'Files that probably can be deleted:'
 ls -1 -- *{sum,SUM}* 2>/dev/null
+
+printf '\n%s' 'Finished.'
