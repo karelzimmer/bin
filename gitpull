@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # gitpull: git pull (or git clone) of all public remote repos
 
