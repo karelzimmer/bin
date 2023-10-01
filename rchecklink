@@ -14,7 +14,6 @@ html=/home/$USER/kz-uploads/dist/html
 
 declare -i check=0
 
-printf '%s\n' 'Files that probably can be deleted:'
 while read -r file; do
     if ! grep --recursive --quiet "$(basename "$file")" "$html"; then
         case $file in
@@ -32,7 +31,10 @@ while read -r file; do
                 ;;
         esac
         ((++check))
-        printf '%s\n' "$file"
+        if [[ check -eq 1 ]]; then
+            printf '%s\n' 'Files that probably can be deleted:'
+        fi
+        printf 'rm %s\n' "$file"
     fi
 done < <(find "$dir1" "$dir2" -type f -print | sort)
 if [[ $check -gt 0 ]]; then
