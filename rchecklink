@@ -14,12 +14,10 @@ html=/home/$USER/kz-uploads/dist/html
 
 declare -i check=0
 
+# Check files which are not used on the html pages.
 while read -r file; do
     if ! grep --recursive --quiet "$(basename "$file")" "$html"; then
         case $file in
-            *-pc0*|*-pc-*|*kz-vm-hugowin732.desktop*)
-                continue
-                ;;
             *icons/LF*)
                 continue
                 ;;
@@ -42,12 +40,13 @@ if [[ $check -gt 0 ]]; then
 fi
 
 # Difference between app/ and dist/.
-diff    --recursive                     \
-        "/home/$USER/kz-uploads/app/"   \
-        "/home/$USER/kz-uploads/dist/"  \
-        --exclude='kz'                  \
-        --exclude='kz-docs'             \
-        --exclude='kz-scripts'          || true
+if ! diff   --recursive                     \
+            "/home/$USER/kz-uploads/app/"   \
+            "/home/$USER/kz-uploads/dist/"  \
+            --exclude='kz'                  \
+            --exclude='kz-docs'; then
+    exit 1
+fi
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
 # Check the validity of links in linux.html:
