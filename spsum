@@ -38,9 +38,9 @@ for iso in *.iso; do
             --exclude-dir=*         \
             --no-filename           \
             --max-count=1           \
-            -- *                    > "$iso".sha256sum || grep_rc=$?
+            -- *                    > "$iso".sha256 || grep_rc=$?
     if [[ $grep_rc -ne 0 ]]; then
-        rm "$iso".sha256sum
+        rm "$iso".sha256
         printf '%s\n' "No checksum found for $iso." >&2
     else
         printf '%s\n' "Checksum file $iso.txt created."
@@ -48,9 +48,9 @@ for iso in *.iso; do
 done
 printf  '\n%s\n%s\n'                                \
         'To check the image files (.iso) execute:'  \
-        "cd $SEARCHDIR; sha256sum --check *.iso.sha256sum; cd -"
+        "cd $SEARCHDIR; sha256sum --check *.iso.sha256; cd -"
 
 printf '\n%s\n' 'Files that probably can be deleted:'
-ls -1 -- *{sums,SUMS}* 2>/dev/null
+ls -1 -- *{sum,SUM}* 2>/dev/null
 
 printf '\n%s' 'Finished.'
