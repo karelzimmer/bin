@@ -21,9 +21,6 @@ while read -r file; do
             *icons/LF*)
                 continue
                 ;;
-            *assets/citrix*)
-                continue
-                ;;
             *)
                 :
                 ;;
