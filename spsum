@@ -2,7 +2,7 @@
 ###############################################################################
 # Split checksum files.
 #
-# This script creates an .iso.txt with the checksum for an .iso.
+# This script creates an .iso.sha256 with the checksum for an .iso.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
@@ -34,7 +34,7 @@ for iso in *.iso; do
             --regexp=" $iso"        \
             --regexp=' *'"$iso"     \
             --exclude=*.iso         \
-            --exclude="$iso".txt    \
+            --exclude="$iso".sha256    \
             --exclude-dir=*         \
             --no-filename           \
             --max-count=1           \
@@ -43,7 +43,7 @@ for iso in *.iso; do
         rm "$iso".sha256
         printf '%s\n' "No checksum found for $iso." >&2
     else
-        printf '%s\n' "Checksum file $iso.txt created."
+        printf '%s\n' "Checksum file $iso.sha256 created."
     fi
 done
 printf  '\n%s\n%s\n'                                \
