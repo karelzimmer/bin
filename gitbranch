@@ -14,7 +14,7 @@ repo_list=$(
     )
 newline=''
 for repo in $repo_list; do
-    printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
+    printf "${newline}Branch %s...\n" "$repo"
     newline='\n'
     cd "$HOME/$repo" || exit 1
     git branch

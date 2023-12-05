@@ -29,7 +29,7 @@ for repo in $repo_list; do
     if [[ $repo = "$user" ]]; then
         continue
     fi
-    printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
+    printf "${newline}Pull %s...\n" "$repo"
     newline='\n'
     if [[ -d "$HOME/$repo" ]]; then
         cd "$HOME/$repo" || exit 1

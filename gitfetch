@@ -17,7 +17,7 @@ repo_list=$(
 newline=''
 for repo in $repo_list; do
     # Skip special repository.
-    printf "${newline}$(tput bold)%s$(tput sgr0)\n" "$repo"
+    printf "${newline}Fetch %s...\n" "$repo"
     newline='\n'
     cd "$HOME/$repo"
     git fetch
