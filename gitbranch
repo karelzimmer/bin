@@ -2,6 +2,9 @@
 
 # gitbranch: show all local git branches
 
+bold='\e[1m'
+normal='\e[0m'
+newline=''
 repo_list=$(
     find    "$HOME"         \
 		   	-maxdepth 2     \
@@ -14,7 +17,7 @@ repo_list=$(
     )
 newline=''
 for repo in $repo_list; do
-    printf "${newline}Branch %s...\n" "$repo"
+    printf "${newline}${bold}Branch %s${normal}\n" "$repo"
     newline='\n'
     cd "$HOME/$repo" || exit 1
     git branch

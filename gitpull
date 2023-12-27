@@ -2,8 +2,10 @@
 
 # gitpull: git pull (or git clone) of all public remote repos
 
-user=karelzimmer
+bold='\e[1m'
+normal='\e[0m'
 newline=''
+user=karelzimmer
 
 # Get all public repositories for <user> with curl via GitHub REST API, and
 # extract required info with jq when available.
@@ -29,7 +31,7 @@ for repo in $repo_list; do
     if [[ $repo = "$user" ]]; then
         continue
     fi
-    printf "${newline}Pull %s...\n" "$repo"
+    printf "${newline}${bold}Pull %s${normal}\n" "$repo"
     newline='\n'
     if [[ -d "$HOME/$repo" ]]; then
         cd "$HOME/$repo" || exit 1
