@@ -4,8 +4,8 @@ set -o nounset
 
 # gitfetch: git fetch of all local branches
 
-bold='\e[1m'
-normal='\e[0m'
+bold='\033[1m'
+normal='\033[0m'
 newline=''
 repo_list=$(
     find    "$HOME"         \

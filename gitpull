@@ -2,8 +2,8 @@
 
 # gitpull: git pull (or git clone) of all public remote repos
 
-bold='\e[1m'
-normal='\e[0m'
+bold='\033[1m'
+normal='\033[0m'
 newline=''
 user=karelzimmer
 

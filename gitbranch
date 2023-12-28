@@ -2,8 +2,8 @@
 
 # gitbranch: show all local git branches
 
-bold='\e[1m'
-normal='\e[0m'
+bold='\033[1m'
+normal='\033[0m'
 newline=''
 repo_list=$(
     find    "$HOME"         \
