@@ -38,7 +38,8 @@ while read -r file; do
             ;;
         *)
             echo "$file" >> $output
-            grep --fixed-strings --regexp="$last_year" "$file" &>> $output|| true
+            grep --fixed-strings --regexp="$last_year" "$file" &>> $output ||
+                true
             echo >> $output
             ;;
     esac
