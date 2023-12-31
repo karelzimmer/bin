@@ -2,31 +2,47 @@
 set -o errexit
 set -o nounset
 
-# ckyear: check for (copyright) year
+# ckyear: check for (copyright) year 
+#         after changing last year in vscode, e.g.
+#         [1] change ' 2023' to '2023-2024' 
+#         [2] change '-2023' to '-2024'
 
-# e.g. when it is the new year 2024:
-# search for ' 2023' will find:
+# *** Suppose it is now the new year 2024 ***
+
+# "ckyear ' 2023'" will find:
 # # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 # must be changed to:
 # # <https://creativecommons.org/publicdomain/zero/1.0>, 2023-2024.
+
 # and:
-# search for '-2023' will find:
+# "ckyear '-2023'" will find:
 # # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 # must be changed to:
 # # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2024.
 
+# and:
+# "ckyear" will just search for last year (2023) and will find:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
+# must be changed to:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2023-2024.
+# and will find:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
+# must be changed to:
+# # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2024.
+
+
 last_year=${1:-$(date '+%Y' --date='last year')}
-output=/tmp/cknwyr.log
+output=/tmp/ckyear.log
 
 cd "$HOME"
 
-echo "ckyear [year]: check for (copyright) year" > $output
 {
+    echo "ckyear [year]: check for (copyright) year"
     echo
     echo "Directory: $HOME"
     echo "Last year: $last_year"
     echo 
-} >> $output
+} > $output
 
 while read -r file; do
     case $file in
@@ -37,10 +53,12 @@ while read -r file; do
             continue
             ;;
         *)
-            echo "$file" >> $output
-            grep --fixed-strings --regexp="$last_year" "$file" &>> $output ||
-                true
-            echo >> $output
+            grep=$(
+                grep --fixed-strings --regexp="$last_year" "$file" || true
+                )
+            if [[ -n $grep ]]; then
+                printf '%s\n%s\n\n' "$file" "$grep" >> $output
+            fi
             ;;
     esac
 done < <(
