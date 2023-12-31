@@ -6,6 +6,7 @@ set -o nounset
 #         after changing last year in vscode, e.g.
 #         [1] change ' 2023' to '2023-2024' 
 #         [2] change '-2023' to '-2024'
+#         N.B. Checklists and website will go automatic (YYYY-2024)
 
 # *** Suppose it is now the new year 2024 ***
 
