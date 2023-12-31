@@ -2,7 +2,7 @@
 set -o errexit
 set -o nounset
 
-# ckyear: check for (copyright) year 
+# ckyear: check for (copyright) (new) year 
 #         after changing last year in vscode, e.g.
 #         [1] change ' 2023' to '2023-2024' 
 #         [2] change '-2023' to '-2024'
