@@ -41,7 +41,7 @@ cd "$HOME"
     echo "ckyear [year]: check for (copyright) year"
     echo
     echo "Directory: $HOME"
-    echo "Last year: $last_year"
+    echo "Last year: '$last_year'"
     echo 
 } > $output
 
