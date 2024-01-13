@@ -19,8 +19,7 @@ HASHPROG=sha256sum
 # ${hashprog,,}: All chars in $checksum --> lowercase (is already the case :-).
 # ${hashprog^^}: All chars in $checksum --> uppercase.
 CHECKSUM=${HASHPROG^^}S
-SOURCE_1=http://releases.ubuntu.com
-SOURCE_2=http://cdimage.ubuntu.com
+SOURCE=http://releases.ubuntu.com
 TARGET=$HOME/Downloads
 
 ###############################################################################
@@ -93,13 +92,10 @@ function process_input {
 
 function download_isos {
     cd "$TARGET" || exit 1
-    rm --force {u,xu,lu}buntu-*.iso*
+    rm --force ubuntu-*.iso*
 
-    URL_LIST="\
-$SOURCE_1/$full_vs/ubuntu-$full_vs-desktop-amd64.iso
-$SOURCE_1/$full_vs/ubuntu-$full_vs-live-server-amd64.iso
-$SOURCE_2/lubuntu/releases/$full_vs/release/lubuntu-$full_vs-desktop-amd64.iso
-$SOURCE_2/xubuntu/releases/$full_vs/release/xubuntu-$full_vs-desktop-amd64.iso"
+    URL_LIST="$SOURCE/$full_vs/ubuntu-$full_vs-desktop-amd64.iso
+$SOURCE/$full_vs/ubuntu-$full_vs-live-server-amd64.iso"
 
     # max-args=1 zorgt ervoor dat per invoerregel 1 opdracht wordt gestart.
     # max-procs=4 zorgt ervoor dat maximaal 4 parallele taken worden gestart.
@@ -109,14 +105,10 @@ $SOURCE_2/xubuntu/releases/$full_vs/release/xubuntu-$full_vs-desktop-amd64.iso"
 
 function download_checksums {
     cd "$TARGET" || exit 1
-    rm --force "$CHECKSUM"-ubuntu "$CHECKSUM"-xubuntu "$CHECKSUM"-lubuntu
+    rm --force "$CHECKSUM"-ubuntu
 
-    wget    --output-document=$CHECKSUM-ubuntu  \
-            $SOURCE_1/"$full_vs/$CHECKSUM"
-    wget    --output-document=$CHECKSUM-xubuntu \
-            $SOURCE_2/xubuntu/releases/"$full_vs/release/$CHECKSUM"
-    wget    --output-document=$CHECKSUM-lubuntu \
-            $SOURCE_2/lubuntu/releases/"$full_vs/release/$CHECKSUM"
+    wget    --output-document="$CHECKSUM"-ubuntu  \
+            $SOURCE/"$full_vs/$CHECKSUM"
 }
 
 
