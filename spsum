@@ -14,42 +14,50 @@
 
 readonly SEARCHDIR=$HOME/Downloads
 
+
 ###############################################################################
 # Variables
 ###############################################################################
 
 declare iso=''
-declare -i grep_rc=0
+declare sha256sum=''
+
 
 ###############################################################################
 # Script
 ###############################################################################
 
+
 cd "$SEARCHDIR" || exit 1
 
 for iso in *.iso; do
-    grep_rc=0
+    if test -e "$iso".sha256; then
+        printf '%s\n' "Checksum file $iso.sha256 already created."
+        continue
+    fi
     # shellcheck disable=SC2062
-    grep    --word-regexp           \
-            --regexp=" $iso"        \
-            --regexp=' *'"$iso"     \
-            --exclude=*.iso         \
-            --exclude="$iso".sha256    \
-            --exclude-dir=*         \
-            --no-filename           \
-            --max-count=1           \
-            -- *                    > "$iso".sha256 || grep_rc=$?
-    if [[ $grep_rc -ne 0 ]]; then
+    sha256sum=$(
+        grep    --word-regexp           \
+                --regexp=" $iso"        \
+                --regexp=' *'"$iso"     \
+                --exclude=*.iso         \
+                --exclude="$iso".sha256 \
+                --exclude-dir=*         \
+                --no-filename           \
+                --max-count=1           \
+                -- *
+        )
+    if [[ -z $sha256sum ]]; then
         printf '%s\n' "No checksum found for $iso." >&2
     else
+        echo "$sha256sum" > "$iso".sha256
         printf '%s\n' "Checksum file $iso.sha256 created."
     fi
 done
-printf  '\n%s\n%s\n'                                \
+printf  '\n%s\n%s\n\n%s\n'                                \
         'To check the image files (.iso) execute:'  \
-        "cd $SEARCHDIR; sha256sum --check *.iso.sha256; cd -"
-
-printf '\n%s\n' 'Files that probably can be deleted:'
+        "cd $SEARCHDIR; sha256sum --check *.iso.sha256; cd -" \
+        'Files that probably can be deleted:'
 ls -1 -- "$SEARCHDIR"/*{sum,SUM}* 2>/dev/null
 
 printf '\n%s\n' 'Finished.'
