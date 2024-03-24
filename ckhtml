@@ -14,8 +14,8 @@ set -o nounset
 
 program_name='ckhtml'
 
-css_dir=$HOME/kz-uploads/dist/css
-html_dir=$HOME/kz-uploads/dist/html
+css_dir=$HOME/kz-upload/dist/css
+html_dir=$HOME/kz-upload/dist/html
 
 home_url=https://karelzimmer.nl
 css_url=$home_url/css
