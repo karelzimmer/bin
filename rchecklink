@@ -8,7 +8,7 @@ set -o nounset
 # i.e. whether each link can be followed/whether a file is present.
 # This Bash script does the opposite: are all files used?
 
-dir1=/home/$USER/kz-uploads/app/assets
+dir1=/home/$USER/kz-uploads/src/assets
 dir2=/home/$USER/kz-uploads/dist/assets
 html=/home/$USER/kz-uploads/dist/html
 
@@ -36,9 +36,9 @@ if [[ $check -gt 0 ]]; then
     exit 1
 fi
 
-# Difference between app/ and dist/.
+# Difference between src/ and dist/.
 if ! diff   --recursive                     \
-            "/home/$USER/kz-uploads/app/"   \
+            "/home/$USER/kz-uploads/src/"   \
             "/home/$USER/kz-uploads/dist/"  \
             --exclude='kz'                  \
             --exclude='kz-docs'; then
