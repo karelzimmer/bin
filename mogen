@@ -6,5 +6,4 @@ set -o nounset
 
 lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
 msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
-sudo --non-interactive true || true
 sudo cp "$lc_messages"/kz.mo /usr/share/locale/nl/LC_MESSAGES/kz.mo
