@@ -1,8 +1,12 @@
 #!/usr/bin/bash
+###############################################################################
+# pogen: update .pot and merge with existing .po
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
 set -o errexit
 set -o nounset
-
-# pogen: update .pot and merge with existing .po
 
 language='Pipo'
 proj_dir="/home/$USER/kz-scripts"

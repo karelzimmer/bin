@@ -1,6 +1,10 @@
 #!/usr/bin/bash
-
+###############################################################################
 # gitbranch: show all local git branches
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
 
 bold='\033[1m'
 normal='\033[0m'

@@ -1,9 +1,13 @@
 #!/usr/bin/bash 
-
+###############################################################################
 # NOVI: Datastructuren en Algoritmen: Dynamic Programming en Recursion
 # Machtsverheffen, bereken 5^4 zonder machtsverheffen te gebruiken.
-
+#
 # Dit is geen recursie, maar iteratie :-( !
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
 
 grondtal=5
 exponent=4

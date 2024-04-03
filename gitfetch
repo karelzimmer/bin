@@ -1,8 +1,13 @@
 #!/usr/bin/bash
+###############################################################################
+# gitfetch: git fetch of all local branches
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+
 set -o errexit
 set -o nounset
-
-# gitfetch: git fetch of all local branches
 
 bold='\033[1m'
 normal='\033[0m'

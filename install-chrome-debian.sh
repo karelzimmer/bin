@@ -1,6 +1,13 @@
 #!/usr/bin/bash
-
+###############################################################################
+# Installeer Google Chrome op Debian.
+#
 # Zie ook ~/ansible/install-chrome-debian.yml
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+
 
 # FOUT (key in /etc/apt/trusted.gpg)
 echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list

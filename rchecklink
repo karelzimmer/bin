@@ -1,12 +1,17 @@
 #!/usr/bin/bash
-set -o errexit
-set -o nounset
-
+###############################################################################
 # rchecklink: reverse checklink
-
+#
 # Perl script checklink (W3C® Link Checker) checks whether links are valid,
 # i.e. whether each link can be followed/whether a file is present.
 # This Bash script does the opposite: are all files used?
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+set -o errexit
+set -o nounset
+
 
 dir1=/home/$USER/kz-upload/src/assets
 dir2=/home/$USER/kz-upload/dist/assets

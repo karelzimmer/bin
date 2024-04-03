@@ -1,8 +1,12 @@
 #!/usr/bin/bash
+###############################################################################
+# ipad: scan netwerk voor ip-adressen
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
 set -o errexit
 set -o nounset
-
-# ipad: scan netwerk voor ip-adressen
 
 printf '%s\n' 'Uitvoeren ip...'
 ip a

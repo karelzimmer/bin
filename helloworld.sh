@@ -2,7 +2,8 @@
 ###############################################################################
 # Oefening voor gettext, vertaling naar NL. 
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
 export TEXTDOMAIN=helloworld

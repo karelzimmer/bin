@@ -1,12 +1,16 @@
 #!/usr/bin/bash
-set -o errexit
-set -o nounset
-
+###############################################################################
 # ckyear: check for (copyright) (new) year 
 #         after changing last year in vscode, e.g.
 #         [1] change ' 2023' to '2023-2024' 
 #         [2] change '-2023' to '-2024'
 #         N.B. Checklists and website will go automatic (YYYY-2024)
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+set -o errexit
+set -o nounset
 
 # *** Suppose it is now the new year 2024 ***
 

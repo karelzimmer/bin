@@ -1,8 +1,12 @@
 #!/usr/bin/bash
+###############################################################################
+# mogen: generate .mo and copy it to the correct location
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
 set -o errexit
 set -o nounset
-
-# mogen: generate .mo and copy it to the correct location
 
 lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
 msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
