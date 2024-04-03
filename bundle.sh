@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# #############################################################################
 # Script voor het bundelen van bestanden tot een shell-archief.  
 #
 # Gebruik:   ./bundle.sh <bestand>... > BESTAND                             

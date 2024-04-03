@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ###############################################################################
-# rchecklink: reverse checklink
+# Reverse checklink
 #
 # Perl script checklink (W3C® Link Checker) checks whether links are valid,
 # i.e. whether each link can be followed/whether a file is present.
