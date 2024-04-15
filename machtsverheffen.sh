@@ -1,8 +1,8 @@
 #!/usr/bin/bash 
 ###############################################################################
-# NOVI: Datastructuren en Algoritmen: Dynamic Programming en Recursion
-# Machtsverheffen, bereken 5^4 zonder machtsverheffen te gebruiken.
+# SPDX-FileComment: Machtsverheffen, bereken 5^4 zonder machtsverheffen
 #
+# NOVI: Datastructuren en Algoritmen: Dynamic Programming en Recursion
 # Dit is geen recursie, maar iteratie :-( !
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ###############################################################################
-# Git status of all local branches
+# SPDX-FileComment: Git status of all local branches
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Webbestanden valideren.
+# SPDX-FileComment: Webbestanden valideren
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

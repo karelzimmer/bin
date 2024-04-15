@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ###############################################################################
-# Installeer Google Chrome op Debian.
+# SPDX-FileComment: Installeer Google Chrome op Debian
 #
 # Zie ook ~/ansible/install-chrome-debian.yml
 #

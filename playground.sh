@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ###############################################################################
-# Maak 100 subdirs aan met ieder 26 lege bestanden
+# SPDX-FileComment: Maak 100 subdirs aan met ieder 26 lege bestanden
 #
 # Ref. The Linux Command Line, William E. Scchotts, Jr., p.226 e.v.
 #

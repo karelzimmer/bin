@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ###############################################################################
-# Show all local git branches
+# SPDX-FileComment: Show all local git branches
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

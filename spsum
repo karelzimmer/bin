@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 ###############################################################################
-# Split checksum files.
+# SPDX-FileComment: Split checksum files.
 #
 # This script creates an .iso.sha256 with the checksum for an .iso.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
 ###############################################################################
