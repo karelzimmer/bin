@@ -13,9 +13,9 @@ set -o errexit
 set -o nounset
 
 
-dir1=/home/$USER/kz-upload/src/assets
-dir2=/home/$USER/kz-upload/dist/assets
-html=/home/$USER/kz-upload/dist/html
+dir1=/$HOME/kz-upload/src/assets
+dir2=/$HOME/kz-upload/dist/assets
+html=/$HOME/kz-upload/dist/html
 
 declare -i check=0
 
@@ -43,8 +43,8 @@ fi
 
 # Difference between src/ and dist/.
 if ! diff   --recursive                     \
-            "/home/$USER/kz-upload/src/"   \
-            "/home/$USER/kz-upload/dist/"  \
+            "/$HOME/kz-upload/src/"   \
+            "/$HOME/kz-upload/dist/"  \
             --exclude='kz'                  \
             --exclude='kz-docs'; then
     exit 1
@@ -53,5 +53,14 @@ fi
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
 # Check the validity of links in linux.html:
 # sudo apt-get install w3c-linkchecker
-# checklink --summary https://$USERzimmer.nl/html/nl/linux.html 2> /dev/null
-# checklink --summary https://$USERzimmer.nl/html/en/linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/nl/start.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/nl/linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/nl/waarom-linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/nl/contact.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/nl/zoeken.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/home.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/why-linux.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/contact.html 2> /dev/null
+# checklink --summary https://karelzimmer.nl/html/en/search.html 2> /dev/null
