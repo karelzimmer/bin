@@ -5,23 +5,29 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+set -o errexit
+set -o nounset
 
-bold='\033[1m'
-normal='\033[0m'
-newline=''
-user=karelzimmer
+readonly NORMAL='\033[0m'
+readonly GREEN='\033[1;32m'
+readonly PROGRAM_NAME='gitpull'
+readonly BOLD='\033[1m'
+readonly USER=karelzimmer
 
-# Get all public repositories for <user> with curl via GitHub REST API, and
+declare repo=''
+declare repo_list=''
+
+# Get all public repositories for USER with curl via GitHub REST API, and
 # extract required info with jq when available.
 if command -v jq &> /dev/null; then
     repo_list=$(
-        curl --silent "https://api.github.com/users/$user/repos"    |
+        curl --silent "https://api.github.com/users/$USER/repos"    |
         jq '.[] | {name: .name}'                                    |
         jq --raw-output .name
         )
 else
     repo_list=$(
-        curl --silent "https://api.github.com/users/$user/repos"    |
+        curl --silent "https://api.github.com/users/$USER/repos"    |
         grep --regexp='"full_name"'                                 |
         cut --delimiter=':' --fields=2-                             |
         sed --expression='s/,//'                                    |
@@ -32,15 +38,16 @@ fi
 
 for repo in $repo_list; do
     # Skip special repository.
-    if [[ $repo = "$user" ]]; then
+    if [[ $repo = "$USER" ]]; then
         continue
     fi
-    printf "${newline}${bold}Pull %s${normal}\n" "$repo"
-    newline='\n'
+    printf "${BOLD}Pull %s$NORMAL\n" "$repo"
     if [[ -d "$HOME/$repo" ]]; then
         cd "$HOME/$repo" || exit 1
         git pull
     else
-        git clone "https://github.com/$user/$repo.git" "$HOME/$repo"
+        git clone "https://github.com/$USER/$repo.git" "$HOME/$repo"
     fi
 done
+
+printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext --domain=kz 'finished')"

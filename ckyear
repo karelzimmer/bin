@@ -35,7 +35,7 @@ set -o nounset
 last_year=${1:-$(date '+%Y' --date='last year')}
 output=/tmp/ckyear.log
 
-cd "$HOME"
+cd "$HOME" || exit 1
 
 {
     echo "ckyear [year]: check for (copyright) year"

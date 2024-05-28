@@ -40,7 +40,7 @@ msgid "MSG-EN"
 msgstr "MSG-NL"'
 }
 
-cd "$PWD"
+cd "$PWD" || exit 1
 
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT'

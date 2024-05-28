@@ -12,16 +12,18 @@
 set -o errexit
 set -o nounset
 
-
-dir1=/$HOME/kz-upload/src/assets
-dir2=/$HOME/kz-upload/dist/assets
-html=/$HOME/kz-upload/dist/html
+readonly NORMAL='\033[0m'
+readonly GREEN='\033[1;32m'
+readonly PROGRAM_NAME='rchecklink'
+readonly DIR1=/$HOME/kz-upload/src/assets
+readonly DIR2=/$HOME/kz-upload/dist/assets
+readonly HTML=/$HOME/kz-upload/dist/html
 
 declare -i check=0
 
 # Check files which are not used on the html pages.
 while read -r file; do
-    if ! grep --recursive --quiet "$(basename "$file")" "$html"; then
+    if ! grep --recursive --quiet "$(basename "$file")" "$HTML"; then
         case $file in
             *icons/LF*)
                 continue
@@ -36,7 +38,7 @@ while read -r file; do
         fi
         printf 'rm %s\n' "$file"
     fi
-done < <(find "$dir1" "$dir2" -type f -print | sort)
+done < <(find "$DIR1" "$DIR2" -type f -print | sort)
 if [[ $check -gt 0 ]]; then
     exit 1
 fi
@@ -49,6 +51,7 @@ if ! diff   --recursive                     \
             --exclude='kz-docs'; then
     exit 1
 fi
+printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext --domain=kz 'finished')"
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
 # Check the validity of links in linux.html:

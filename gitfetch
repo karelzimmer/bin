@@ -5,13 +5,17 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-
 set -o errexit
 set -o nounset
 
-bold='\033[1m'
-normal='\033[0m'
-newline=''
+readonly NORMAL='\033[0m'
+readonly GREEN='\033[1;32m'
+readonly PROGRAM_NAME='gitfetch'
+readonly BOLD='\033[1m'
+
+declare repo=''
+declare repo_list=''
+
 repo_list=$(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -22,10 +26,11 @@ repo_list=$(
             --fields=4      |
     sort
     )
-newline=''
+
 for repo in $repo_list; do
-    printf "${newline}${bold}Fetch %s${normal}\n" "$repo"
-    newline='\n'
-    cd "$HOME/$repo"
+    printf "${BOLD}Fetch %s$NORMAL\n" "$repo"
+    cd "$HOME/$repo" || exit 1
     git fetch
 done
+
+printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext --domain=kz 'finished')"

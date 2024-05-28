@@ -5,10 +5,17 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+set -o errexit
+set -o nounset
 
-bold='\033[1m'
-normal='\033[0m'
-newline=''
+readonly NORMAL='\033[0m'
+readonly GREEN='\033[1;32m'
+readonly PROGRAM_NAME='gitbranch'
+readonly BOLD='\033[1m'
+
+declare repo=''
+declare repo_list=''
+
 repo_list=$(
     find    "$HOME"         \
 		   	-maxdepth 2     \
@@ -19,10 +26,11 @@ repo_list=$(
             --fields=4      |
     sort
     )
-newline=''
+
 for repo in $repo_list; do
-    printf "${newline}${bold}Branch %s${normal}\n" "$repo"
-    newline='\n'
+    printf "${BOLD}Branch %s$NORMAL\n" "$repo"
     cd "$HOME/$repo" || exit 1
     git branch
 done
+
+printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext --domain=kz 'finished')"
