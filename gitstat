@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# shellcheck source=bin_common.sh
 ###############################################################################
 # SPDX-FileComment: Git status of all local branches
 #
