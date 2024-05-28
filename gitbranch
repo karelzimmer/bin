@@ -29,4 +29,4 @@ for repo in $repo_list; do
     git branch
 done
 
-printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext --domain=kz 'finished')"
+printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"

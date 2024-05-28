@@ -7,6 +7,10 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+source /usr/bin/gettext.sh
+
 set -o errexit
 set -o nounset
 
