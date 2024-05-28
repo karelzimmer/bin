@@ -13,9 +13,9 @@
 source "$(dirname "$0")"/bin_common.sh
 
 readonly PROGRAM_NAME='rchecklink'
-readonly DIR1=/$HOME/kz-upload/src/assets
-readonly DIR2=/$HOME/kz-upload/dist/assets
-readonly HTML=/$HOME/kz-upload/dist/html
+readonly DIR1=/$HOME/kz-uploads/src/assets
+readonly DIR2=/$HOME/kz-uploads/dist/assets
+readonly HTML=/$HOME/kz-uploads/dist/html
 
 declare -i check=0
 
@@ -43,8 +43,8 @@ fi
 
 # Difference between src/ and dist/.
 if ! diff   --recursive                     \
-            "/$HOME/kz-upload/src/"   \
-            "/$HOME/kz-upload/dist/"  \
+            "/$HOME/kz-uploads/src/"   \
+            "/$HOME/kz-uploads/dist/"  \
             --exclude='kz'                  \
             --exclude='kz-docs'; then
     exit 1

@@ -50,7 +50,7 @@ while read -r file; do
         *.deb|*.gif|*.ico|*.pdf|*.png|*.svg)
             continue
             ;;
-        *kz-docs/*.odt|*kz-uploads/robots.txt)
+        *kz-docs/*.odt|*kz-uploadss/robots.txt)
             continue
             ;;
         *)
