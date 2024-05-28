@@ -5,13 +5,9 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-set -o errexit
-set -o nounset
+source "$(dirname "$0")"/bin_common.sh
 
-readonly NORMAL='\033[0m'
-readonly GREEN='\033[1;32m'
 readonly PROGRAM_NAME='gitstat'
-readonly BOLD='\033[1m'
 
 declare repo=''
 declare repo_list=''
