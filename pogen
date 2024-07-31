@@ -11,18 +11,18 @@ set -o nounset
 language='Pipo'
 proj_dir=/home/$USER/kz-scripts
 
+if [[ -z "$*" ]]; then
+    echo 'Gebruik: pogen SCRIPT...'
+    exit 1
+fi
+
 function policy_file {
-	printf '\n%s\n' "### $script ###"
-	printf '%s\n' 'Utility xgettext ondersteunt nog geen Policy bestanden.
+	printf '%s\n' "### $script ###"
+	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Policy bestanden.
 
-Voer de volgende 3 wijzigingen handmatig uit.
+Voer de volgende stappen handmatig uit.
 
-1. Wijzig in .policy bestand:
-        <description>DESC-EN</description>
-        <description xml:lang="nl">DESC-NL</description>
-        <message>MSG-EN</message>
-        <message xml:lang="nl">MSG-NL</message>
-   naar:
+1. Wijzig .policy bestand:
         <description gettext-domain="kz">DESC-EN</description>
         <message gettext-domain="kz">MSG-EN</message>
 
@@ -38,13 +38,37 @@ msgid "DESC-EN"
 msgstr "DESC-NL"
 
 msgid "MSG-EN"
-msgstr "MSG-NL"'
+msgstr "MSG-NL"
+
+4. Voer mogen uit.
+
+5. Test de vertaling.'
 }
 
-if [[ -z "$*" ]]; then
-    echo 'Gebruik: pogen SCRIPT'
-    exit 1
-fi
+function desktop_file {
+	printf '%s\n' "### $script ###"
+	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Desktop bestanden.
+
+Voer de volgende stappen handmatig uit.
+
+1. Wijzig .desktop bestand:
+Comment=DESC-EN
+Categories=...;X-GNOME-Utilities;
+X-GNOME-Gettext-Domain=kz
+X-Ubuntu-Gettext-Domain=kz
+
+2. Voeg toe aan .pot bestand als nodig:
+msgid "DESC-EN"
+msgstr ""
+
+3. Voeg toe aan .po bestand als nodig:
+msgid "DESC-EN"
+msgstr "DESC-NL"
+
+4. Voer mogen uit.
+
+5. Test de vertaling.'
+}
 
 cd "$PWD" || exit 1
 
@@ -70,6 +94,9 @@ for script in "$@"; do
     if [[ $language = 'Policy' ]]; then
         policy_file
         continue
+    elif  [[ $language = 'Desktop' ]]; then
+        desktop_file
+        continue
     fi
 
     printf '%s' "$script"
@@ -85,5 +112,4 @@ for script in "$@"; do
                 --no-location                                       \
                 "$proj_dir"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
                 "$proj_dir"/usr/bin/kz.pot
-    shift
 done
