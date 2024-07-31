@@ -9,7 +9,7 @@ set -o errexit
 set -o nounset
 
 language='Pipo'
-proj_dir="/home/$USER/kz-scripts"
+proj_dir=/home/$USER/kz-scripts
 
 function policy_file {
 	printf '%s\n' 'Utility xgettext ondersteunt nog geen Policy bestanden.
@@ -40,37 +40,43 @@ msgid "MSG-EN"
 msgstr "MSG-NL"'
 }
 
-cd "$PWD" || exit 1
-
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT'
     exit 1
-elif grep --quiet '^# shellcheck ' "$1"; then
-    language='Shell'
-elif grep --quiet '^import ' "$1"; then
-    language='Python'
-elif grep --quiet 'Desktop Entry' "$1"; then
-    language='Desktop'
-elif grep --quiet 'policyconfig' "$1"; then
-    language='Policy'
-else
-    echo 'Kan de taal (Shell, Python, Desktop, of Policy) niet bepalen.'
-    exit 1
 fi
 
-if [[ $language = 'Policy' ]]; then
-	policy_file
-	exit 0
-fi
+cd "$PWD" || exit 1
 
-xgettext    --language=$language    \
-            --join-existing         \
-            --no-location           \
-            --output=$proj_dir/usr/bin/kz.pot "$1"
+for script in "$@"; do
+    if grep --quiet '^# shellcheck ' "$script"; then
+        language='Shell'
+    elif grep --quiet '^import ' "$script"; then
+        language='Python'
+    elif grep --quiet 'Desktop Entry' "$script"; then
+        language='Desktop'
+    elif grep --quiet 'policyconfig' "$script"; then
+        language='Policy'
+    else
+        echo 'Kan de taal (Shell, Python, Desktop, of Policy) niet bepalen.'
+        exit 1
+    fi
 
-msgmerge    --update                                        \
-            --backup=none                                   \
-            --previous                                      \
-            --no-location                                   \
-            $proj_dir/usr/share/locale/nl/LC_MESSAGES/kz.po \
-            $proj_dir/usr/bin/kz.pot
+    if [[ $language = 'Policy' ]]; then
+        policy_file
+    fi
+
+    printf '%s' "$script"
+
+    xgettext    --language=$language    \
+                --join-existing         \
+                --no-location           \
+                --output="$proj_dir"/usr/bin/kz.pot "$script"
+
+    msgmerge    --update                                            \
+                --backup=none                                       \
+                --previous                                          \
+                --no-location                                       \
+                "$proj_dir"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
+                "$proj_dir"/usr/bin/kz.pot
+    shift
+done
