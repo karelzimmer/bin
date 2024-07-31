@@ -87,7 +87,8 @@ for script in "$@"; do
     elif grep --quiet 'policyconfig' "$script"; then
         language='Policy'
     else
-        echo 'Kan de taal (Shell, Python, Desktop, of Policy) niet bepalen.'
+        echo "$script: kan de taal (Shell, Python, Desktop, of Policy) niet be\
+palen"
         continue
     fi
 
