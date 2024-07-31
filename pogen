@@ -12,6 +12,7 @@ language='Pipo'
 proj_dir=/home/$USER/kz-scripts
 
 function policy_file {
+	printf '\n%s\n' "### $script ###"
 	printf '%s\n' 'Utility xgettext ondersteunt nog geen Policy bestanden.
 
 Voer de volgende 3 wijzigingen handmatig uit.
@@ -48,6 +49,11 @@ fi
 cd "$PWD" || exit 1
 
 for script in "$@"; do
+    if ! [[ -f $script ]]; then
+        echo "$script bestaat niet."
+        continue
+    fi
+
     if grep --quiet '^# shellcheck ' "$script"; then
         language='Shell'
     elif grep --quiet '^import ' "$script"; then
@@ -58,11 +64,12 @@ for script in "$@"; do
         language='Policy'
     else
         echo 'Kan de taal (Shell, Python, Desktop, of Policy) niet bepalen.'
-        exit 1
+        continue
     fi
 
     if [[ $language = 'Policy' ]]; then
         policy_file
+        continue
     fi
 
     printf '%s' "$script"
