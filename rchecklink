@@ -42,10 +42,10 @@ if [[ $check -gt 0 ]]; then
 fi
 
 # Difference between src/ and dist/.
-if ! diff   --recursive                     \
-            "/$HOME/kz-uploads/src/"   \
-            "/$HOME/kz-uploads/dist/"  \
-            --exclude='kz'                  \
+if ! diff   --recursive                 \
+            "/$HOME/kz-uploads/src/"    \
+            "/$HOME/kz-uploads/dist/"   \
+            --exclude='kz-deb'          \
             --exclude='kz-docs'; then
     exit 1
 fi
