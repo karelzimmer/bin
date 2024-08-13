@@ -8,8 +8,8 @@
 set -o errexit
 set -o nounset
 
-language='Pipo'
-proj_dir=/home/$USER/kz-scripts
+LANGUAGE='Pipo'
+PROJ_DIR=/home/$USER/kz-scripts
 
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT...'
@@ -17,13 +17,13 @@ if [[ -z "$*" ]]; then
 fi
 
 function policy_file {
-	printf '%s\n' "### $script ###"
+	printf '%s\n' "### $SCRIPT ###"
 	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Policy bestanden.
 
 Voer de volgende stappen handmatig uit.
 
 1. Wijzig .policy bestand:
-        <description gettext-domain="kz">DESC-EN</description>
+        <deSCRIPTion gettext-domain="kz">DESC-EN</deSCRIPTion>
         <message gettext-domain="kz">MSG-EN</message>
 
 2. Voeg toe aan .pot bestand als nodig:
@@ -46,7 +46,9 @@ msgstr "MSG-NL"
 }
 
 function desktop_file {
-	printf '%s\n' "### $script ###"
+    local SCRIPT=''
+
+	printf '%s\n' "### $SCRIPT ###"
 	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Desktop bestanden.
 
 Voer de volgende stappen handmatig uit.
@@ -72,45 +74,45 @@ msgstr "DESC-NL"
 
 cd "$PWD" || exit 1
 
-for script in "$@"; do
-    if ! [[ -f $script ]]; then
-        echo "$script bestaat niet."
+for SCRIPT in "$@"; do
+    if ! [[ -f $SCRIPT ]]; then
+        echo "$SCRIPT bestaat niet."
         continue
     fi
 
-    if grep --quiet '^# shellcheck ' "$script"; then
-        language='Shell'
-    elif grep --quiet '^import ' "$script"; then
-        language='Python'
-    elif grep --quiet 'Desktop Entry' "$script"; then
-        language='Desktop'
-    elif grep --quiet 'policyconfig' "$script"; then
-        language='Policy'
+    if grep --quiet '^# shellcheck ' "$SCRIPT"; then
+        LANGUAGE='Shell'
+    elif grep --quiet '^import ' "$SCRIPT"; then
+        LANGUAGE='Python'
+    elif grep --quiet 'Desktop Entry' "$SCRIPT"; then
+        LANGUAGE='Desktop'
+    elif grep --quiet 'policyconfig' "$SCRIPT"; then
+        LANGUAGE='Policy'
     else
-        echo "$script: kan de taal (Shell, Python, Desktop, of Policy) niet be\
+        echo "$SCRIPT: kan de taal (Shell, Python, Desktop, of Policy) niet be\
 palen"
         continue
     fi
 
-    if [[ $language = 'Policy' ]]; then
+    if [[ $LANGUAGE = 'Policy' ]]; then
         policy_file
         continue
-    elif  [[ $language = 'Desktop' ]]; then
+    elif  [[ $LANGUAGE = 'Desktop' ]]; then
         desktop_file
         continue
     fi
 
-    printf '%s' "$script"
+    printf '%s' "$SCRIPT"
 
-    xgettext    --language=$language    \
+    xgettext    --language=$LANGUAGE    \
                 --join-existing         \
                 --no-location           \
-                --output="$proj_dir"/usr/bin/kz.pot "$script"
+                --output="$PROJ_DIR"/usr/bin/kz.pot "$SCRIPT"
 
     msgmerge    --update                                            \
                 --backup=none                                       \
                 --previous                                          \
                 --no-location                                       \
-                "$proj_dir"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
-                "$proj_dir"/usr/bin/kz.pot
+                "$PROJ_DIR"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
+                "$PROJ_DIR"/usr/bin/kz.pot
 done

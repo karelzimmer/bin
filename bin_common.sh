@@ -14,6 +14,6 @@ source /usr/bin/gettext.sh
 set -o errexit
 set -o nounset
 
-readonly NORMAL='\033[0m'
-readonly GREEN='\033[1;32m'
-readonly BOLD='\033[1m'
+declare NORMAL='\033[0m'
+declare GREEN='\033[1;32m'
+declare BOLD='\033[1m'

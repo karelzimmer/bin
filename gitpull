@@ -1,30 +1,30 @@
 #!/usr/bin/bash
 # shellcheck source=bin_common.sh
 ###############################################################################
-# SPDX-FileComment: Git pull (or git clone) of all public remote repos
+# SPDX-FileComment: Git pull (or git clone) of all public remote REPOs
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 source "$(dirname "$0")"/bin_common.sh
 
-readonly PROGRAM_NAME='gitpull'
-readonly USER=karelzimmer
+declare PROGRAM_NAME='gitpull'
+declare USER=karelzimmer
 
-declare repo=''
-declare repo_list=''
+declare REPO=''
+declare REPO_LIST=''
 
-# Get all public repositories for USER with curl via GitHub REST API, and
+# Get all public REPOsitories for USER with curl via GitHub REST API, and
 # extract required info with jq when available.
 if command -v jq &> /dev/null; then
-    repo_list=$(
-        curl --silent "https://api.github.com/users/$USER/repos"    |
+    REPO_LIST=$(
+        curl --silent "https://api.github.com/users/$USER/REPOs"    |
         jq '.[] | {name: .name}'                                    |
         jq --raw-output .name
         )
 else
-    repo_list=$(
-        curl --silent "https://api.github.com/users/$USER/repos"    |
+    REPO_LIST=$(
+        curl --silent "https://api.github.com/users/$USER/REPOs"    |
         grep --regexp='"full_name"'                                 |
         cut --delimiter=':' --fields=2-                             |
         sed --expression='s/,//'                                    |
@@ -33,17 +33,17 @@ else
         )
 fi
 
-for repo in $repo_list; do
-    # Skip special repository.
-    if [[ $repo = "$USER" ]]; then
+for REPO in $REPO_LIST; do
+    # Skip special REPOsitory.
+    if [[ $REPO = "$USER" ]]; then
         continue
     fi
-    printf "${BOLD}Pull %s$NORMAL\n" "$repo"
-    if [[ -d "$HOME/$repo" ]]; then
-        cd "$HOME/$repo" || exit 1
+    printf "${BOLD}Pull %s$NORMAL\n" "$REPO"
+    if [[ -d "$HOME/$REPO" ]]; then
+        cd "$HOME/$REPO" || exit 1
         git pull
     else
-        git clone "https://github.com/$USER/$repo.git" "$HOME/$repo"
+        git clone "https://github.com/$USER/$REPO.git" "$HOME/$REPO"
     fi
 done
 

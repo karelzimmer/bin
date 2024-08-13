@@ -8,12 +8,12 @@
 ###############################################################################
 source "$(dirname "$0")"/bin_common.sh
 
-readonly PROGRAM_NAME='gitfetch'
+declare PROGRAM_NAME='gitfetch'
 
-declare repo=''
-declare repo_list=''
+declare REPO=''
+declare REPO_LIST=''
 
-repo_list=$(
+REPO_LIST=$(
     find    "$HOME"         \
             -maxdepth 2     \
             -name .git      \
@@ -24,9 +24,9 @@ repo_list=$(
     sort
     )
 
-for repo in $repo_list; do
-    printf "${BOLD}Fetch %s$NORMAL\n" "$repo"
-    cd "$HOME/$repo" || exit 1
+for REPO in $REPO_LIST; do
+    printf "${BOLD}Fetch %s$NORMAL\n" "$REPO"
+    cd "$HOME/$REPO" || exit 1
     git fetch
 done
 

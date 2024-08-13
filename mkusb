@@ -33,21 +33,21 @@ REWRITE_LINE=$(tput cuu1;tput el)
 ###############################################################################
 
 function check_input {
-    local -i    getopt_rc=0
-    local       parsed=''
+    local -i    GETOPT_RC=0
+    local       PARSED=''
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$PROGRAM_NAME"     \
                 --              "$@"
-        )       || getopt_rc=$?
-    if [[ $getopt_rc -ne 0 ]]; then
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne 0 ]]; then
         printf '%s\n' "$USAGELINE" >&2
         exit 1
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     while true; do
         case $1 in
@@ -114,40 +114,40 @@ Gebruik optie --target om een ander device op te geven."
 
 
 function process_input {
-    local -i    isosize=0
-    local       usbname=''
-    local       file=''
+    local -i    ISOZISE=0
+    local       USBNAME=''
+    local       FILE=''
 
     NO_FILES_FOUND=true
 
-    for file in "$SOURCE"/*.iso; do
+    for FILE in "$SOURCE"/*.iso; do
 
-        if ! [[ -f "$file" ]]; then
+        if ! [[ -f "$FILE" ]]; then
             continue
         fi
 
         NO_FILES_FOUND=false
-        usbname=$(basename "$file" .iso | tr '-' ' ')
+        USBNAME=$(basename "$FILE" .iso | tr '-' ' ')
 
     printf '%s\n' "$(tput bold)
-$usbname$(tput sgr0)"
+$USBNAME$(tput sgr0)"
 
         while true; do
             read -rp 'maken/Overslaan/stoppen? [m/O/s]: '
             case $REPLY in
                 m*|M*)
-                    isosize=$(
+                    ISOZISE=$(
                         du  --apparent-size \
                             --block-size=1  \
-                            "$file"         |
+                            "$FILE"         |
                         cut --fields=1
                         )
-                    create_usb_stick "$file"
+                    create_usb_stick "$FILE"
                     while true; do
-                        read -rp "Nog een USB-stick '$usbname' maken? [j/N]: "
+                        read -rp "Nog een USB-stick '$USBNAME' maken? [j/N]: "
                         case $REPLY in
                             j*|J*)
-                                create_usb_stick "$file"
+                                create_usb_stick "$FILE"
                                 continue
                                 ;;
                             n*|N*|'')
@@ -188,21 +188,21 @@ $usbname$(tput sgr0)"
 function create_usb_stick {
     local dd_from=${1:-dd_from?}
 
-    read -rp "Plaats USB-stick '$usbname', gevolgd door Enter [Enter]: "
+    read -rp "Plaats USB-stick '$USBNAME', gevolgd door Enter [Enter]: "
     if [[ -e $DEVICE ]]; then
-        printf '%s\n' "USB-stick $usbname wordt gemaakt..."
+        printf '%s\n' "USB-stick $USBNAME wordt gemaakt..."
 
         dd  if="$dd_from"       \
             status=none         |
-        pv  --size="$isosize"   |
+        pv  --size="$ISOZISE"   |
         dd  of=$DEVICE          \
             bs=4M               \
             status=none
 
-        printf '%s\n' "Gegevens schrijven naar $usbname (kan even duren)..."
+        printf '%s\n' "Gegevens schrijven naar $USBNAME (kan even duren)..."
         sync
 
-        printf '%s\n' "USB-stick '$usbname' is gemaakt."
+        printf '%s\n' "USB-stick '$USBNAME' is gemaakt."
 
         printf '%s\n' "Ter controle is er een Kernel-based Virtuele Machine (KVM) \
 gestart."
@@ -213,13 +213,13 @@ gestart."
         fi
 
         if ! umount "$DEVICE" 2> /dev/null; then
-            read -rp "Ontkoppel de USB-stick '$usbname', gevolgd door Enter \
+            read -rp "Ontkoppel de USB-stick '$USBNAME', gevolgd door Enter \
 [Enter]: "
         fi
-        read -rp "Verwijder de USB-stick '$usbname', gevolgd door Enter \
+        read -rp "Verwijder de USB-stick '$USBNAME', gevolgd door Enter \
 [Enter]: "
     else
-        printf '%s\n' "USB-stick '$usbname' is niet aanwezig op $DEVICE."
+        printf '%s\n' "USB-stick '$USBNAME' is niet aanwezig op $DEVICE."
         exit 1
     fi
 }

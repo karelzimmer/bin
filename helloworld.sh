@@ -13,9 +13,9 @@ export TEXTDOMAINDIR=/home/karel/scripts
 source /usr/bin/gettext.sh
 
 # shellcheck disable=SC2034
-program_name=helloworld.sh
+PROGRAM_NAME=helloworld.sh
 
-printf '%s\n' "$(eval_gettext "Program name: \$program_name")"
+printf '%s\n' "$(eval_gettext "Program name: \$PROGRAM_NAME")"
 printf '\n'
 
 printf '%s\n' "$(gettext 'Hello world!')"
