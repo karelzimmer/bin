@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck source=common.sh
 ###############################################################################
-# SPDX-FileComment: Git pull (or git clone) of all public remote REPOs
+# SPDX-FileComment: Git pull (or git clone) of all public remote repos
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -14,17 +14,17 @@ declare USER=karelzimmer
 declare REPO=''
 declare REPO_LIST=''
 
-# Get all public REPOsitories for USER with curl via GitHub REST API, and
+# Get all public repositories for USER with curl via GitHub REST API, and
 # extract required info with jq when available.
 if command -v jq &> /dev/null; then
     REPO_LIST=$(
-        curl --silent "https://api.github.com/users/$USER/REPOs"    |
+        curl --silent "https://api.github.com/users/$USER/repos"    |
         jq '.[] | {name: .name}'                                    |
         jq --raw-output .name
         )
 else
     REPO_LIST=$(
-        curl --silent "https://api.github.com/users/$USER/REPOs"    |
+        curl --silent "https://api.github.com/users/$USER/repos"    |
         grep --regexp='"full_name"'                                 |
         cut --delimiter=':' --fields=2-                             |
         sed --expression='s/,//'                                    |
@@ -34,7 +34,7 @@ else
 fi
 
 for REPO in $REPO_LIST; do
-    # Skip special REPOsitory.
+    # Skip special repository.
     if [[ $REPO = "$USER" ]]; then
         continue
     fi
