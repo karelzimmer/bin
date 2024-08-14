@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=bin_common.sh
+# shellcheck source=common.sh
 ###############################################################################
 # SPDX-FileComment: Reverse checklink
 #
@@ -10,7 +10,7 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-source "$(dirname "$0")"/bin_common.sh
+source "$(dirname "$0")"/common.sh
 
 declare PROGRAM_NAME='rchecklink'
 declare DIR1=/$HOME/kz-uploads/src/assets
