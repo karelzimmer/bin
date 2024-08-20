@@ -30,4 +30,4 @@ for REPO in $REPO_LIST; do
     git branch
 done
 
-printf "$GREEN%b$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
+printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
