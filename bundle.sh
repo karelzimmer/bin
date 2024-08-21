@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ###############################################################################
 # SPDX-FileComment: Bundelen van bestanden tot een shell-archief  
 #

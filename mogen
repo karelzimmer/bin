@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ###############################################################################
 # SPDX-FileComment: Generate .mo and copy it to the correct location
 #

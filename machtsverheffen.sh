@@ -1,4 +1,4 @@
-#!/usr/bin/bash 
+#!/usr/bin/env bash 
 ###############################################################################
 # SPDX-FileComment: Machtsverheffen, bereken 5^4 zonder machtsverheffen
 #

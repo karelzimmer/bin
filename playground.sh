@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ###############################################################################
 # SPDX-FileComment: Maak 100 subdirs aan met ieder 26 lege bestanden
 #

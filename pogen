@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ###############################################################################
 # SPDX-FileComment: Update .pot and merge with existing .po
 #

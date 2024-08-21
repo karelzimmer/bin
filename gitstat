@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # shellcheck source=common.sh
 ###############################################################################
 # SPDX-FileComment: Git status of all local branches
