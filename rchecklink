@@ -13,9 +13,9 @@
 source "$(dirname "$0")"/common.sh
 
 declare PROGRAM_NAME='rchecklink'
-declare DIR1=/$HOME/kz-uploads/src/assets
-declare DIR2=/$HOME/kz-uploads/dist/assets
-declare HTML=/$HOME/kz-uploads/dist/html
+declare DIR1=$HOME/kz-uploads/src/assets
+declare DIR2=$HOME/kz-uploads/dist/assets
+declare HTML=$HOME/kz-uploads/dist/html
 
 declare -i check=0
 
@@ -43,8 +43,8 @@ fi
 
 # Difference between src/ and dist/.
 if ! diff   --recursive                 \
-            "/$HOME/kz-uploads/src/"    \
-            "/$HOME/kz-uploads/dist/"   \
+            "$HOME/kz-uploads/src/"     \
+            "$HOME/kz-uploads/dist/"    \
             --exclude='kz-deb'          \
             --exclude='kz-docs'; then
     exit 1
