@@ -75,8 +75,11 @@ msgstr "DESC-NL"
 cd "$PWD" || exit 1
 
 for SCRIPT in "$@"; do
-    if ! [[ -f $SCRIPT ]]; then
-        echo "$SCRIPT bestaat niet."
+    if [[ -d $SCRIPT ]]; then
+        echo "$SCRIPT: skip: is een map"
+        continue
+    elif ! [[ -f $SCRIPT ]]; then
+        echo "$SCRIPT: skip: is geen bestand"
         continue
     fi
 
@@ -89,8 +92,8 @@ for SCRIPT in "$@"; do
     elif grep --quiet 'policyconfig' "$SCRIPT"; then
         LANGUAGE='Policy'
     else
-        echo "$SCRIPT: kan de taal (Shell, Python, Desktop, of Policy) niet be\
-palen"
+        echo "$SCRIPT: skip: kan de taal (Shell, Python, Desktop, of Policy) \
+niet bepalen"
         continue
     fi
 
