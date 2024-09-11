@@ -9,14 +9,14 @@
 source "$(dirname "$0")"/common.sh
 
 declare PROGRAM_NAME='gitpull'
-declare USER=karelzimmer
+declare USER='karelzimmer'
 
 declare REPO=''
 declare REPO_LIST=''
 
 # Get all public repositories for USER with curl via GitHub REST API, and
 # extract required info with jq when available.
-if command -v jq &> /dev/null; then
+if [[ -n $(type -t jq) ]]; then
     REPO_LIST=$(
         curl --silent "https://api.github.com/users/$USER/repos"    |
         jq '.[] | {name: .name}'                                    |
