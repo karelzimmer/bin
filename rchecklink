@@ -32,7 +32,8 @@ while read -r file; do
         esac
         ((++check))
         if [[ check -eq 1 ]]; then
-            printf '%s\n' 'Files that probably can be deleted:'
+            printf '%s\n' "Files not used in html, that probably can be \
+deleted:"
         fi
         printf 'rm %s\n' "$file"
     fi
@@ -46,6 +47,7 @@ if ! diff   --recursive                 \
             "$HOME/kz-uploads/src/"     \
             "$HOME/kz-uploads/dist/"    \
             --exclude='kz-deb'          \
+            --exclude='kz-rpm'          \
             --exclude='kz-docs'; then
     exit 1
 fi
