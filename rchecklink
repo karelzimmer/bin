@@ -46,9 +46,8 @@ fi
 if ! diff   --recursive                 \
             "$HOME/kz-uploads/src/"     \
             "$HOME/kz-uploads/dist/"    \
-            --exclude='kz-deb'          \
-            --exclude='kz-rpm'          \
-            --exclude='kz-docs'; then
+            --exclude='documents'       \
+            --exclude='packages'; then
     exit 1
 fi
 printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
