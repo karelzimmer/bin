@@ -15,5 +15,6 @@ set -o errexit
 set -o nounset
 
 declare NORMAL='\033[0m'
+declare RED='\033[1;31m'
 declare GREEN='\033[1;32m'
 declare BOLD='\033[1m'

@@ -32,24 +32,19 @@ while read -r file; do
         esac
         ((++check))
         if [[ check -eq 1 ]]; then
-            printf '%s\n' "Files not used in html, that probably can be \
-deleted:"
+            printf "$RED%s:\n" "Files not used in html, that probably \
+can be deleted:"
         fi
         printf 'rm %s\n' "$file"
     fi
 done < <(find "$DIR1" "$DIR2" -type f -print | sort)
-if [[ $check -gt 0 ]]; then
-    exit 1
-fi
 
 # Difference between src/ and dist/.
-if ! diff   --recursive                 \
+diff   --recursive                 \
             "$HOME/kz-uploads/src/"     \
             "$HOME/kz-uploads/dist/"    \
             --exclude='documents'       \
-            --exclude='packages'; then
-    exit 1
-fi
+            --exclude='packages'
 printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
