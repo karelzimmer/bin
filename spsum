@@ -44,7 +44,6 @@ for iso in *.iso; do
                 --exclude="$iso".sha256 \
                 --exclude-dir=*         \
                 --no-filename           \
-                --max-count=1           \
                 -- *
         )
     if [[ -z $sha256sum ]]; then
