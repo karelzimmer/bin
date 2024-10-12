@@ -27,7 +27,7 @@ while read -r file; do
                 # Base files for website.
                 continue
                 ;;
-            *bin/kz_common.sh )
+            *kz_common.sh )
                 # Script kz-get needs this file.
                 continue
                 ;;
