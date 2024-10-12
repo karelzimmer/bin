@@ -23,7 +23,12 @@ declare -i check=0
 while read -r file; do
     if ! grep --recursive --quiet "$(basename "$file")" "$HTML"; then
         case $file in
-            *icons/LF* | *bin/kz_common.sh )
+            *icons/LF* )
+                # Base files for website.
+                continue
+                ;;
+            *bin/kz_common.sh )
+                # Script kz-get needs this file.
                 continue
                 ;;
             *)
