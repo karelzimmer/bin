@@ -23,7 +23,7 @@ declare -i check=0
 while read -r file; do
     if ! grep --recursive --quiet "$(basename "$file")" "$HTML"; then
         case $file in
-            *icons/LF*)
+            *icons/LF* | *bin/kz_common.sh )
                 continue
                 ;;
             *)
@@ -40,11 +40,11 @@ can be deleted:"
 done < <(find "$DIR1" "$DIR2" -type f -print | sort)
 
 # Difference between src/ and dist/.
-diff   --recursive                 \
-            "$HOME/kz-uploads/src/"     \
-            "$HOME/kz-uploads/dist/"    \
-            --exclude='documents'       \
-            --exclude='packages'
+diff    --recursive                 \
+        "$HOME/kz-uploads/src/"     \
+        "$HOME/kz-uploads/dist/"    \
+        --exclude='documents'       \
+        --exclude='packages'
 printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
