@@ -49,7 +49,8 @@ diff    --recursive                 \
         "$HOME/kz-uploads/src/"     \
         "$HOME/kz-uploads/dist/"    \
         --exclude='documents'       \
-        --exclude='packages'
+        --exclude='packages'        \
+        --exclude='scripts'
 printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
