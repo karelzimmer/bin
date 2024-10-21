@@ -30,4 +30,4 @@ for REPO in $REPO_LIST; do
     git fetch
 done
 
-printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
+exit 0

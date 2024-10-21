@@ -51,7 +51,8 @@ diff    --recursive                 \
         --exclude='documents'       \
         --exclude='packages'        \
         --exclude='scripts'
-printf "$GREEN%s$NORMAL\n" "$PROGRAM_NAME $(gettext 'finished')"
+
+exit 0
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.
 # Check the validity of links in linux.html:
