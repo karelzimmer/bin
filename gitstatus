@@ -8,7 +8,7 @@
 ###############################################################################
 source "$(dirname "$0")"/common.sh
 
-declare PROGRAM_NAME='gitstat'
+declare PROGRAM_NAME='gitstatus'
 
 declare REPO=''
 declare REPO_LIST=''
