@@ -38,8 +38,8 @@ for iso in *.iso; do
     # shellcheck disable=SC2062
     sha256sum=$(
         grep    --word-regexp           \
-                --regexp=" $iso"        \
-                --regexp=' *'"$iso"     \
+                --regexp=" $iso$"        \
+                --regexp=' *'"$iso$"     \
                 --exclude=*.iso         \
                 --exclude="$iso".sha256 \
                 --exclude-dir=*         \
