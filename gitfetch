@@ -27,7 +27,7 @@ REPO_LIST=$(
 for REPO in $REPO_LIST; do
     printf "${BOLD}Fetch %s$NORMAL\n" "$REPO"
     cd "$HOME/$REPO" || exit 1
-    git fetch
+    git fetch --all
 done
 
 exit 0
