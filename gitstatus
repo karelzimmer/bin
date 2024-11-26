@@ -8,25 +8,22 @@
 ###############################################################################
 source "$(dirname "$0")"/common.sh
 
-declare PROGRAM_NAME='gitstatus'
-
 declare REPO=''
 declare REPO_LIST=''
 
 REPO_LIST=$(
-    find    "$HOME"         \
-            -maxdepth 2     \
-            -name .git      \
-            -type d         \
-            -print          |
-    cut     --delimiter='/' \
-            --fields=4      |
-    sort
+    find    "$HOME"     \
+            -maxdepth 2 \
+            -name .git  \
+            -type d     \
+            -print      |
+    sort                |
+    sed     --expression='s|/.git||'
     )
 
 for REPO in $REPO_LIST; do
     printf "${BOLD}Status %s$NORMAL\n" "$REPO"
-    cd "$HOME/$REPO" || exit 1
+    cd "$REPO" || exit 1
     git status
 done
 
