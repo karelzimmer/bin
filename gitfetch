@@ -24,7 +24,7 @@ REPO_LIST=$(
 for REPO in $REPO_LIST; do
     printf "${BOLD}Fetch %s$NORMAL\n" "$REPO"
     cd "$REPO" || exit 1
-    git fetch --all
+    git fetch --all --prune
 done
 
 exit 0
