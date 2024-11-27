@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# shellcheck source=common.sh
+###############################################################################
+# SPDX-FileComment: Git clone of all public remote repos
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+source "$(dirname "$0")"/common.sh
+
+declare USER_NAME='karelzimmer'
+
+declare REPO=''
+declare REPO_LIST=''
+
+# Get all public repositories for USER_NAME with curl via GitHub REST API, and
+# extract required info with jq when available.
+if [[ -n $(type -t jq) ]]; then
+    REPO_LIST=$(
+        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
+        jq '.[] | {name: .name}'                                        |
+        jq --raw-output .name
+        )
+else
+    REPO_LIST=$(
+        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
+        grep --regexp='"full_name"'                                     |
+        cut --delimiter=':' --fields=2-                                 |
+        sed --expression='s/,//'                                        |
+        sed --expression='s/"//g'                                       |
+        sed --expression='s|karelzimmer/||'
+        )
+fi
+
+for REPO in $REPO_LIST; do
+    # Skip special repository.
+    if [[ $REPO = "$USER_NAME" ]]; then
+        continue
+    fi
+    printf "${BOLD}Pull %s$NORMAL\n" "$HOME/$REPO"
+    git clone "https://github.com/$USER_NAME/$REPO.git" "$HOME/$REPO" || true
+done
+
+exit 0
