@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=common.sh
 ###############################################################################
-# SPDX-FileComment: Show all local git branches
+# SPDX-FileComment: Show all local git branches in the home directory
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
