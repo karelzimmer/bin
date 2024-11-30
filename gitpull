@@ -22,7 +22,7 @@ REPO_LIST=$(
     )
 
 for REPO in $REPO_LIST; do
-    printf "${BOLD}Pull %s$NORMAL\n" "$REPO"
+    printf "\n${BOLD}Pull %s$NORMAL\n" "$REPO"
     cd "$REPO" || exit 1
     git pull --all --verbose
 done

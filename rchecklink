@@ -12,7 +12,6 @@
 ###############################################################################
 source "$(dirname "$0")"/common.sh
 
-declare PROGRAM_NAME='rchecklink'
 declare DIR1=$HOME/kz-uploads/src/assets
 declare DIR2=$HOME/kz-uploads/dist/assets
 declare HTML=$HOME/kz-uploads/dist/html

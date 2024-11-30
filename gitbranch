@@ -22,7 +22,7 @@ REPO_LIST=$(
     )
 
 for REPO in $REPO_LIST; do
-    printf "${BOLD}Branch %s$NORMAL\n" "$REPO"
+    printf "\n${BOLD}Branch %s$NORMAL\n" "$REPO"
     cd "$REPO" || exit 1
     git branch --all --verbose
 done
