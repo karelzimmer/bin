@@ -24,7 +24,7 @@ REPO_LIST=$(
 for REPO in $REPO_LIST; do
     printf "${BOLD}Status %s$NORMAL\n" "$REPO"
     cd "$REPO" || exit 1
-    git status
+    git status --verbose
 done
 
 exit 0
