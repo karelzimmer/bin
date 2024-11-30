@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# shellcheck source=common.sh
+###############################################################################
+# SPDX-FileComment: Git init
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+read -rp 'Git user.name [e.g. Karel Zimmer]: '
+git config --global user.name "$REPLY"
+
+read -rp 'Git user.email [e.g. karel.zimmer@gmail.com]: '
+git config --global user.email "$REPLY"
+
+git config --global pull.ff only
+git config --global credential.helper store
+git config --global alias.logg 'log --decorate --graph --oneline --all'
+git config --list
