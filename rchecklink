@@ -38,8 +38,8 @@ while read -r file; do
         esac
         ((++check))
         if [[ check -eq 1 ]]; then
-            printf "$RED%s:\n" "Files not used in html, that probably \
-can be deleted:"
+            printf  "${RED}%s${NORMAL}\n" \
+                    "Files not used in html, that probably can be deleted:"
         fi
         printf 'rm %s\n' "$file"
     fi
