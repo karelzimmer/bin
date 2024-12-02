@@ -29,4 +29,5 @@ for REPO in $REPO_LIST; do
     git branch --all --verbose
 done
 
+printf '%s\n' "$(gettext 'Complete!')"
 exit 0

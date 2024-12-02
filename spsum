@@ -46,4 +46,5 @@ printf  '\n%s\n%s\n\n%s\n'                                      \
         'Files that probably can be deleted:'
 ls -1 -- "$SEARCHDIR"/*{sum,SUM,256.}* 2>/dev/null
 
+printf '%s\n' "$(gettext 'Complete!')"
 exit 0

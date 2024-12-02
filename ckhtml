@@ -101,6 +101,9 @@ function validate_html {
 
 function term_script {
     printf '%s\n' 'Controleer de tabbladen in Google Chrome.'
+    printf '%s\n' "$(gettext 'Complete!')"
+    infomsg "$TEXT"
+
     exit 0
 }
 

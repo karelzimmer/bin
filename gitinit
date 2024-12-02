@@ -19,6 +19,8 @@ git config --global user.email "$REPLY"
 git config --global pull.ff only
 git config --global credential.helper store
 git config --global alias.logg 'log --decorate --graph --oneline --all'
+
 git config --list
 
+printf '%s\n' "$(gettext 'Complete!')"
 exit 0

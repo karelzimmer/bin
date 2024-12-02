@@ -123,4 +123,5 @@ niet bepalen"
                 "$PROJ_DIR"/usr/bin/kz.pot
 done
 
+printf '%s\n' "$(gettext 'Complete!')"
 exit 0

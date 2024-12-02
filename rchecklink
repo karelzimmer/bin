@@ -53,6 +53,8 @@ diff    --recursive                 \
         --exclude='packages'        \
         --exclude='scripts'
 
+printf '%s\n' "$(gettext 'Complete!')"
+
 exit 0
 
 # Perl script checklink (W3C® Link Checker) checks whether links are valid.

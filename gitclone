@@ -43,4 +43,5 @@ for REPO in $REPO_LIST; do
     git clone "https://github.com/$USER_NAME/$REPO.git" "$HOME/$REPO" || true
 done
 
+printf '%s\n' "$(gettext 'Complete!')"
 exit 0
