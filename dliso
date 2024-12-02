@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck source=common.sh
 ###############################################################################
 # SPDX-FileComment: Beeldbestanden downloaden
 #
@@ -7,28 +8,29 @@
 ###############################################################################
 
 ###############################################################################
+# Imports
+###############################################################################
+
+source common.sh
+
+
+###############################################################################
 # Constants
 ###############################################################################
 
-PROGRAM_NAME='dliso'
+readonly PROGRAM_NAME='dliso'
 
-OPTIONS_SHORT=c
-OPTIONS_LONG=checksums
-USAGELINE="Gebruik: $PROGRAM_NAME [-c|--checksums]"
+readonly OPTIONS_SHORT=c
+readonly OPTIONS_LONG=checksums
+readonly USAGELINE="Gebruik: $PROGRAM_NAME [-c|--checksums]"
 
-HASHPROG=sha256sum
+readonly HASHPROG=sha256sum
 # ${hashprog,,}: All chars in $checksum --> lowercase (is already the case :-).
 # ${hashprog^^}: All chars in $checksum --> uppercase.
-CHECKSUM=${HASHPROG^^}S
-SOURCE=http://releases.ubuntu.com
-TARGET=$HOME/Downloads
+readonly CHECKSUM=${HASHPROG^^}S
+readonly SOURCE=http://releases.ubuntu.com
+readonly TARGET=$HOME/Downloads
 
-###############################################################################
-# Gobal variables
-###############################################################################
-
-full_vs=$(lsb_release --description --short | cut --delimiter=' ' --fields=2)
-option_checksums=false
 
 ###############################################################################
 # Functions
@@ -125,10 +127,19 @@ Gereed."
 }
 
 ###############################################################################
-# Script
+# Main
 ###############################################################################
 
 function main {
+    local full_vs=''
+    local option_checksums=false
+
+    full_vs=$(
+        lsb_release --description --short |
+        cut --delimiter=' ' --fields=2
+        )
+
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

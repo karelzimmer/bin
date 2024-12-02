@@ -6,6 +6,10 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+source common.sh
+
+init_script
+
 read -rp 'Git user.name [e.g. Karel Zimmer]: '
 git config --global user.name "$REPLY"
 
@@ -16,3 +20,5 @@ git config --global pull.ff only
 git config --global credential.helper store
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 git config --list
+
+exit 0

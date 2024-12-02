@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
+# shellcheck source=common.sh
 ###############################################################################
 # SPDX-FileComment: Update .pot and merge with existing .po
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-set -o errexit
-set -o nounset
+source common.sh
 
-LANGUAGE='Pipo'
-PROJ_DIR=/home/$USER/kz-scripts
+init_script
+
+readonly PROJ_DIR=/home/$USER/kz-scripts
+
+declare LANGUAGE='Pipo'
 
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen SCRIPT...'
@@ -119,3 +122,5 @@ niet bepalen"
                 "$PROJ_DIR"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
                 "$PROJ_DIR"/usr/bin/kz.pot
 done
+
+exit 0

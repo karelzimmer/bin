@@ -7,6 +7,11 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+
+
+###############################################################################
+# Imports
+###############################################################################
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
@@ -14,7 +19,22 @@ source /usr/bin/gettext.sh
 set -o errexit
 set -o nounset
 
+
+###############################################################################
+# Constants
+###############################################################################
+
 # List NORMAL last here so that -x doesn't bork the display.
-declare RED='\033[1;31m'
-declare BOLD='\033[1m'
-declare NORMAL='\033[0m'
+readonly RED='\033[1;31m'
+readonly BOLD='\033[1m'
+readonly NORMAL='\033[0m'
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+# This function performs initial actions such as set traps (script-hardening).
+function init_script() {
+    trap 'exit $?' EXIT
+}

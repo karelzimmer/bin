@@ -6,9 +6,11 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-source "$(dirname "$0")"/common.sh
+source common.sh
 
-declare USER_NAME='karelzimmer'
+init_script
+
+readonly USER_NAME='karelzimmer'
 
 declare REPO=''
 declare REPO_LIST=''

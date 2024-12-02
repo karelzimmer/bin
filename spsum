@@ -1,32 +1,19 @@
 #!/usr/bin/env bash
+# shellcheck source=common.sh
 ###############################################################################
 # SPDX-FileComment: Split checksum files.
-#
-# This script creates an .iso.sha256 with the checksum for an .iso.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+source common.sh
 
-###############################################################################
-# Constants
-###############################################################################
+init_script
 
-declare SEARCHDIR=$HOME/Downloads
-
-
-###############################################################################
-# Variables
-###############################################################################
+readonly SEARCHDIR=$HOME/Downloads
 
 declare iso=''
 declare sha256sum=''
-
-
-###############################################################################
-# Script
-###############################################################################
-
 
 cd "$SEARCHDIR" || exit 1
 
@@ -59,4 +46,4 @@ printf  '\n%s\n%s\n\n%s\n'                                      \
         'Files that probably can be deleted:'
 ls -1 -- "$SEARCHDIR"/*{sum,SUM,256.}* 2>/dev/null
 
-printf '\n%s\n' 'Finished.'
+exit 0
