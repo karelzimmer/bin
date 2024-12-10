@@ -16,6 +16,7 @@ git config --global user.name "$REPLY"
 read -rp 'Git user.email [e.g. karel.zimmer@gmail.com]: '
 git config --global user.email "$REPLY"
 
+git config --global core.editor "code --wait"
 git config --global pull.ff only
 git config --global credential.helper store
 git config --global alias.logg 'log --decorate --graph --oneline --all'
