@@ -39,7 +39,7 @@ for REPO in $REPO_LIST; do
     if [[ $REPO = "$USER_NAME" ]]; then
         continue
     fi
-    printf "\n${BOLD}Pull %s$NORMAL\n" "$HOME/$REPO"
+    printf "\n${BOLD}Pull %s...$NORMAL\n" "$HOME/$REPO"
     git clone "https://github.com/$USER_NAME/$REPO.git" "$HOME/$REPO" || true
 done
 
