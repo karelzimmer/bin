@@ -27,6 +27,7 @@ for iso in *.iso; do
         grep    --word-regexp           \
                 --regexp=" $iso$"       \
                 --regexp=' *'"$iso$"    \
+                --regexp='('"$iso"')'   \
                 --exclude=*.iso         \
                 --exclude="$iso".sha256 \
                 --exclude-dir=*         \
