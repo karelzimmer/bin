@@ -32,6 +32,10 @@ while read -r file; do
                 # Script kz-get needs this file.
                 continue
                 ;;
+            *kz-dev*.deb | *kz-dev*.rpm )
+                # Development versions.
+                continue
+                ;;
             *)
                 :
                 ;;
