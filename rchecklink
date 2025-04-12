@@ -28,10 +28,6 @@ while read -r file; do
                 # Base files for website.
                 continue
                 ;;
-            *kz_common.sh )
-                # Script kz-get needs this file.
-                continue
-                ;;
             *kz-dev*.deb | *kz-dev*.rpm )
                 # Development versions.
                 continue
