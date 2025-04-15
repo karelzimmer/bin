@@ -15,7 +15,7 @@ readonly PROJ_DIR=/home/$USER/kz-scripts
 declare LANGUAGE='Pipo'
 
 if [[ -z "$*" ]]; then
-    echo 'Gebruik: pogen SCRIPT...'
+    echo 'Gebruik: pogen <script>...'
     exit 1
 fi
 
