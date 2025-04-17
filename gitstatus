@@ -10,10 +10,10 @@ source common.sh
 
 init_script
 
-declare REPO=''
-declare REPO_LIST=''
+declare repo=''
+declare repos=''
 
-REPO_LIST=$(
+repos=$(
     find    "$HOME"     \
             -maxdepth 2 \
             -name .git  \
@@ -23,9 +23,9 @@ REPO_LIST=$(
     sed     --expression='s|/.git||'
     )
 
-for REPO in $REPO_LIST; do
-    printf "\n${BOLD}Status %s...$NORMAL\n" "$REPO"
-    cd "$REPO" || exit 1
+for repo in $repos; do
+    printf "\n${BOLD}Status %s...$NORMAL\n" "$repo"
+    cd "$repo" || exit 1
     git status --verbose
 done
 

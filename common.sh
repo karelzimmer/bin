@@ -34,7 +34,7 @@ readonly NORMAL='\033[0m'
 # Functions
 ###############################################################################
 
-# This function performs initial actions such as set traps (script-hardening).
+# This function performs initial actions.
 function init_script() {
     trap 'exit $?' EXIT
 }

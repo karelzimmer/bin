@@ -10,7 +10,9 @@ source common.sh
 
 init_script
 
-LC_MESSAGES_DIR=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+readonly LC_MESSAGES_DIR=\
+/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+
 msgfmt --output-file="$LC_MESSAGES_DIR"/kz.mo "$LC_MESSAGES_DIR"/kz.po
 sudo cp "$LC_MESSAGES_DIR"/kz.mo /usr/share/locale/nl/LC_MESSAGES/kz.mo
 

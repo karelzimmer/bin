@@ -12,15 +12,13 @@ init_script
 
 readonly PROJ_DIR=/home/$USER/kz-scripts
 
-declare LANGUAGE='Pipo'
-
 if [[ -z "$*" ]]; then
     echo 'Gebruik: pogen <script>...'
     exit 1
 fi
 
 function policy_file {
-	printf '%s\n' "### $SCRIPT ###"
+	printf '%s\n' "### $script ###"
 	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Policy bestanden.
 
 Voer de volgende stappen handmatig uit.
@@ -49,9 +47,9 @@ msgstr "MSG-NL"
 }
 
 function desktop_file {
-    local SCRIPT=''
+    local script=''
 
-	printf '%s\n' "### $SCRIPT ###"
+	printf '%s\n' "### $script ###"
 	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Desktop bestanden.
 
 Voer de volgende stappen handmatig uit.
@@ -77,43 +75,49 @@ msgstr "DESC-NL"
 
 cd "$PWD" || exit 1
 
-for SCRIPT in "$@"; do
-    if [[ -d $SCRIPT ]]; then
-        echo "$SCRIPT: skip: is een map"
+for script in "$@"; do
+    if [[ -d $script ]]; then
+        echo "$script: skip: is een map"
         continue
-    elif ! [[ -f $SCRIPT ]]; then
-        echo "$SCRIPT: skip: is geen bestand"
+    elif [[ $script =~ .*.gpg ]]; then
+        echo "$script: skip: is GPG versleuteld"
+        continue
+    elif [[ $script =~ .*.pot ]]; then
+        echo "$script: skip: is een GNU gettext message catalogue"
+        continue
+    elif ! [[ -f $script ]]; then
+        echo "$script: skip: is geen bestand"
         continue
     fi
 
-    if grep --quiet '^# shellcheck ' "$SCRIPT"; then
-        LANGUAGE='Shell'
-    elif grep --quiet '^import ' "$SCRIPT"; then
-        LANGUAGE='Python'
-    elif grep --quiet 'Desktop Entry' "$SCRIPT"; then
-        LANGUAGE='Desktop'
-    elif grep --quiet 'policyconfig' "$SCRIPT"; then
-        LANGUAGE='Policy'
+    if grep --quiet '^# shellcheck ' "$script"; then
+        language='Shell'
+    elif grep --quiet '^import ' "$script"; then
+        language='Python'
+    elif grep --quiet 'Desktop Entry' "$script"; then
+        language='Desktop'
+    elif grep --quiet 'policyconfig' "$script"; then
+        language='Policy'
     else
-        echo "$SCRIPT: skip: kan de taal (Shell, Python, Desktop, of Policy) \
+        echo "$script: skip: kan de taal (Shell, Python, Desktop, of Policy) \
 niet bepalen"
         continue
     fi
 
-    if [[ $LANGUAGE = 'Policy' ]]; then
+    if [[ $language = 'Policy' ]]; then
         policy_file
         continue
-    elif  [[ $LANGUAGE = 'Desktop' ]]; then
+    elif  [[ $language = 'Desktop' ]]; then
         desktop_file
         continue
     fi
 
-    printf '%s' "$SCRIPT: "
+    printf '%s' "$script: "
 
-    xgettext    --language=$LANGUAGE    \
+    xgettext    --language=$language    \
                 --join-existing         \
                 --no-location           \
-                --output="$PROJ_DIR"/usr/bin/kz.pot "$SCRIPT"
+                --output="$PROJ_DIR"/usr/bin/kz.pot "$script"
 
     msgmerge    --update                                            \
                 --backup=none                                       \

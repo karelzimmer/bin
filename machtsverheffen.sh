@@ -9,20 +9,20 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-GRONDTAL=5
-EXPONENT=4
-RESULT=1
+grondtal=5
+exponent=4
+result=1
 
 macht () 
 {
-    result=$((result * GRONDTAL))
+    result=$((result * grondtal))
 }
 
-for i in $(seq 1 $EXPONENT); do
+for i in $(seq 1 $exponent); do
 # for (( i=0; i<$EXPONENT; i++ )); do
     echo "5^$i"
     macht
 done 
 
-echo "$RESULT"
+echo "$result"
 exit 0

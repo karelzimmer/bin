@@ -14,9 +14,9 @@ source common.sh
 
 init_script
 
-declare DIR1=$HOME/kz-uploads/src/assets
-declare DIR2=$HOME/kz-uploads/dist/assets
-declare HTML=$HOME/kz-uploads/dist/html
+readonly DIR1=$HOME/kz-uploads/src/assets
+readonly DIR2=$HOME/kz-uploads/dist/assets
+readonly HTML=$HOME/kz-uploads/dist/html
 
 declare -i check=0
 

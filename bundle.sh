@@ -14,19 +14,19 @@
 echo '# Pak dit bestand uit met bash. Voorbeeld: $ bash bestand.shar'
 
 # verwerk
-for FILE; do
+for file; do
 
     # Verwerk alleen reguliere bestanden.
-    if [[ ! -f $FILE ]]; then
+    if [[ ! -f $file ]]; then
         continue
     fi
 
-    FILE_base=$(basename "$FILE")
+    file_base=$(basename "$file")
 
-    echo "cat > $FILE_base << 'Einde van $FILE_base'"
-    cat "$FILE"
-    echo "Einde van $FILE_base"
-    echo "echo $FILE_base uitgepakt 1>&2"
+    echo "cat > $file_base << 'Einde van $file_base'"
+    cat "$file"
+    echo "Einde van $file_base"
+    echo "echo $file_base uitgepakt 1>&2"
 done
 
 # afsl_script
