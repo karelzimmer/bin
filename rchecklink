@@ -24,7 +24,11 @@ declare -i check=0
 while read -r file; do
     if ! grep --recursive --quiet "$(basename "$file")" "$HTML"; then
         case $file in
-            *icons/*keys/LF*/ )
+            *.asc )
+                # GPG keys.
+                continue
+                ;;
+            *icons/LF* )
                 # Base files for website.
                 continue
                 ;;
