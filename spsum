@@ -32,8 +32,8 @@ for iso in *.iso; do
                 --exclude="$iso".sha256 \
                 --exclude-dir=*         \
                 --no-filename           \
-                -- *
-        )
+                -- *                    || true 
+                )
     if [[ -z $sha256sum ]]; then
         printf '%s\n' "No checksum found for $iso." >&2
     else
