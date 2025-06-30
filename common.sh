@@ -16,19 +16,6 @@ export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
-set -o errexit
-set -o nounset
-
-
-###############################################################################
-# Constants
-###############################################################################
-
-# List NORMAL last here so that -x doesn't bork the display.
-readonly RED='\033[1;31m'
-readonly BOLD='\033[1m'
-readonly NORMAL='\033[0m'
-
 
 ###############################################################################
 # Functions
@@ -36,5 +23,13 @@ readonly NORMAL='\033[0m'
 
 # This function performs initial actions.
 function init_script() {
+
+    # Script-hardening.
+    set -o errexit
+    set -o errtrace
+    set -o nounset
+    set -o pipefail
+
+    # Trap exit signal.
     trap 'exit $?' EXIT
 }
