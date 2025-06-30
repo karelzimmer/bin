@@ -26,16 +26,8 @@ readonly PROJ_DIR=/home/$USER/kz-scripts
 
 
 ###############################################################################
-# Main
+# Functions
 ###############################################################################
-
-init_script
-
-
-if [[ -z "$*" ]]; then
-    echo 'Gebruik: pogen <script>...'
-    exit 1
-fi
 
 function policy_file {
 	printf '%s\n' "### $script ###"
@@ -66,6 +58,7 @@ msgstr "MSG-NL"
 5. Test de vertaling.'
 }
 
+
 function desktop_file {
     local script=''
 
@@ -93,9 +86,15 @@ msgstr "DESC-NL"
 5. Test de vertaling.'
 }
 
+###############################################################################
+# Main
+###############################################################################
+
+init_script
+
 cd "$PWD" || exit 1
 
-for script in "$@"; do
+for script in *; do
     if [[ -d $script ]]; then
         echo "$script: skip: is een map"
         continue
@@ -136,13 +135,11 @@ niet bepalen"
 
     xgettext    --language="$language"  \
                 --join-existing         \
-                --no-location           \
                 --output="$PROJ_DIR"/usr/bin/kz.pot "$script"
 
     msgmerge    --update                                            \
                 --backup=none                                       \
                 --previous                                          \
-                --no-location                                       \
                 "$PROJ_DIR"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
                 "$PROJ_DIR"/usr/bin/kz.pot
 done
