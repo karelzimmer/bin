@@ -19,73 +19,14 @@ source common.sh
 ###############################################################################
 
 readonly PROJ_DIR=/home/$USER/kz-scripts
-
+readonly XLAT_DIRS="\
+/home/$USER/kz-scripts/usr/bin \
+/home/$USER/kz-scripts/usr/share/applications
+/home/$USER/kz-scripts/usr/share/polkit-1/actions/"
 
 ###############################################################################
 # Globals
 ###############################################################################
-
-
-###############################################################################
-# Functions
-###############################################################################
-
-function policy_file {
-	printf '%s\n' "### $script ###"
-	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Policy bestanden.
-
-Voer de volgende stappen handmatig uit.
-
-1. Wijzig .policy bestand:
-        <deSCRIPTion gettext-domain="kz">DESC-EN</deSCRIPTion>
-        <message gettext-domain="kz">MSG-EN</message>
-
-2. Voeg toe aan .pot bestand als nodig:
-msgid "DESC-EN"
-msgstr ""
-
-msgid "MSG-EN"
-msgstr ""
-
-3. Voeg toe aan .po bestand als nodig:
-msgid "DESC-EN"
-msgstr "DESC-NL"
-
-msgid "MSG-EN"
-msgstr "MSG-NL"
-
-4. Voer mogen uit.
-
-5. Test de vertaling.'
-}
-
-
-function desktop_file {
-    local script=''
-
-	printf '%s\n' "### $script ###"
-	printf '%s\n' 'Utility xgettext ondersteunt (nog) geen Desktop bestanden.
-
-Voer de volgende stappen handmatig uit.
-
-1. Wijzig .desktop bestand:
-Comment=DESC-EN
-Categories=...;X-GNOME-Utilities;
-X-GNOME-Gettext-Domain=kz
-X-Ubuntu-Gettext-Domain=kz
-
-2. Voeg toe aan .pot bestand als nodig:
-msgid "DESC-EN"
-msgstr ""
-
-3. Voeg toe aan .po bestand als nodig:
-msgid "DESC-EN"
-msgstr "DESC-NL"
-
-4. Voer mogen uit.
-
-5. Test de vertaling.'
-}
 
 
 ###############################################################################
@@ -94,56 +35,55 @@ msgstr "DESC-NL"
 
 init_script
 
-cd "$PWD" || exit 1
+for dir in $XLAT_DIRS; do
 
-for script in *; do
-    if [[ -d $script ]]; then
-        echo "$script: skip: is een map"
-        continue
-    elif [[ $script =~ .*.gpg ]]; then
-        echo "$script: skip: is GPG versleuteld"
-        continue
-    elif [[ $script =~ .*.pot ]]; then
-        echo "$script: skip: is een GNU gettext message catalogue"
-        continue
-    elif ! [[ -f $script ]]; then
-        echo "$script: skip: is geen bestand"
-        continue
-    fi
+    cd "$dir" || exit 1
 
-    if grep --quiet '^# shellcheck ' "$script"; then
-        language='Shell'
-    elif grep --quiet '^import ' "$script"; then
-        language='Python'
-    elif grep --quiet 'Desktop Entry' "$script"; then
-        language='Desktop'
-    elif grep --quiet 'policyconfig' "$script"; then
-        language='Policy'
-    else
-        echo "$script: skip: kan de taal (Shell, Python, Desktop, of Policy) \
-niet bepalen"
-        continue
-    fi
+    for file in *; do
+        dir_file="$dir/$file"
+        if [[ -d $file ]]; then
+            echo "$dir_file: is een map"
+            continue
+        elif [[ $file =~ .*.gpg$ ]]; then
+            echo "$dir_file: is GPG versleuteld"
+            continue
+        elif [[ $file =~ .*.policy$ ]]; then
+            echo "$dir_file: Polkit bestanden nog niet ondersteund"
+            continue
+        elif [[ $file =~ .*.pot$ ]]; then
+            echo "$dir_file: is een GNU gettext message catalogue"
+            continue
+        elif ! [[ -f $file ]]; then
+            echo "$dir_file: is geen bestand"
+            continue
+        fi
 
-    if [[ $language = 'Policy' ]]; then
-        policy_file
-        continue
-    elif  [[ $language = 'Desktop' ]]; then
-        desktop_file
-        continue
-    fi
+        if grep --quiet '^# shellcheck ' "$file"; then
+            language='Shell'
+        elif grep --quiet '^import ' "$file"; then
+            language='Python'
+        elif grep --quiet 'Desktop Entry' "$file"; then
+            language='Desktop'
+        elif grep --quiet 'policyconfig' "$file"; then
+            language='Policy'
+        else
+            echo "$dir_file: kan de taal (Shell, Python, Desktop, of \
+Policy) niet bepalen"
+            continue
+        fi
 
-    printf '%s' "$script: "
+        printf '%s' "$dir_file: "
 
-    xgettext    --language="$language"  \
-                --join-existing         \
-                --output="$PROJ_DIR"/usr/bin/kz.pot "$script"
+        xgettext    --language="$language"  \
+                    --join-existing         \
+                    --output="$PROJ_DIR"/usr/bin/kz.pot "$file"
 
-    msgmerge    --update                                            \
-                --backup=none                                       \
-                --previous                                          \
-                "$PROJ_DIR"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
-                "$PROJ_DIR"/usr/bin/kz.pot
+        msgmerge    --update                                            \
+                    --backup=none                                       \
+                    --previous                                          \
+                    "$PROJ_DIR"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
+                    "$PROJ_DIR"/usr/bin/kz.pot
+    done
 done
 
 printf '%s\n' "$(gettext 'Complete!')"
