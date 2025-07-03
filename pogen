@@ -77,13 +77,13 @@ Policy) niet bepalen"
 
         xgettext    --language="$language"  \
                     --join-existing         \
-                    --output="$SCRIPTS_REPO"/usr/bin/kz.pot "$file"
+                    --output="$SCRIPTS_REPO/usr/bin/kz.pot" "$file"
 
-        msgmerge    --update                                            \
-                    --backup=none                                       \
-                    --previous                                          \
-                    "$SCRIPTS_REPO"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
-                    "$SCRIPTS_REPO"/usr/bin/kz.pot
+        msgmerge    --update                                                \
+                    --backup=none                                           \
+                    --previous                                              \
+                    "$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.po"   \
+                    "$SCRIPTS_REPO/usr/bin/kz.pot"
     done
 done
 
