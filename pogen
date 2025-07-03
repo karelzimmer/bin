@@ -18,11 +18,12 @@ source common.sh
 # Constants
 ###############################################################################
 
-readonly PROJ_DIR=/home/$USER/kz-scripts
-readonly XLAT_DIRS="\
+readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly GETTEXT_DIRS="\
 /home/$USER/kz-scripts/usr/bin \
 /home/$USER/kz-scripts/usr/share/applications
-/home/$USER/kz-scripts/usr/share/polkit-1/actions/"
+/home/$USER/kz-scripts/usr/share/polkit-1/actions
+"
 
 ###############################################################################
 # Globals
@@ -35,7 +36,7 @@ readonly XLAT_DIRS="\
 
 init_script
 
-for dir in $XLAT_DIRS; do
+for dir in $GETTEXT_DIRS; do
 
     cd "$dir" || exit 1
 
@@ -76,13 +77,13 @@ Policy) niet bepalen"
 
         xgettext    --language="$language"  \
                     --join-existing         \
-                    --output="$PROJ_DIR"/usr/bin/kz.pot "$file"
+                    --output="$SCRIPTS_REPO"/usr/bin/kz.pot "$file"
 
         msgmerge    --update                                            \
                     --backup=none                                       \
                     --previous                                          \
-                    "$PROJ_DIR"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
-                    "$PROJ_DIR"/usr/bin/kz.pot
+                    "$SCRIPTS_REPO"/usr/share/locale/nl/LC_MESSAGES/kz.po   \
+                    "$SCRIPTS_REPO"/usr/bin/kz.pot
     done
 done
 
