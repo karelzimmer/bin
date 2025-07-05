@@ -75,9 +75,13 @@ Policy) niet bepalen"
 
         printf '%s' "$dir_file: "
 
-        xgettext    --language="$language"  \
-                    --join-existing         \
-                    --output="$SCRIPTS_REPO/usr/bin/kz.pot" "$file"
+        xgettext    --language="$language"                      \
+                    --join-existing                             \
+                    --package-name='kz'                         \
+                    --package-version='4.2.1'                   \
+                    --msgid-bugs-address='info@karelzimmer.nl'  \
+                    --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
+                    "$file"
 
         msgmerge    --update                                                \
                     --backup=none                                           \
