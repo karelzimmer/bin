@@ -97,6 +97,7 @@ for gettext_dir in $GETTEXT_DIRS; do
 
         xgettext    "$language_specification"                   \
                     --join-existing                             \
+                    --omit-header                               \
                     --package-name='kz'                         \
                     --package-version='4.2.1'                   \
                     --copyright-holder='Karel Zimmer'           \
