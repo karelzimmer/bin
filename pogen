@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=common.sh
 ###############################################################################
-# SPDX-FileComment: Update POT file and merge with existing PO file
+# SPDX-FileComment: Generate gettext POT file and merge with existing PO file
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
