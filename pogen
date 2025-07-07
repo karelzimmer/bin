@@ -48,6 +48,11 @@ declare language_specification=''
 text=$(gettext 'Generate gettext files')...
 printf '%s\n' "$text"
 
+# Generate the following gettext files:
+# 1. The readable Portable Object Template (POT) file from the source code in
+#    repo kz-scripts,
+# 2. the readable Portable Object (PO) file from the POT file, and
+# 3. the binary Machine Object (MO) file from the PO file.
 for gettext_dir in $GETTEXT_DIRS; do
 
     cd "$gettext_dir" || exit 1
