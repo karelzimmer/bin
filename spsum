@@ -45,7 +45,7 @@ printf  '\n%s\n%s\n\n%s\n'                                      \
         'To check the image files (.iso) execute:'              \
         "cd $SEARCHDIR; sha256sum --check *.iso.sha256; cd -"   \
         'Files that probably can be deleted:'
-ls -1 -- "$SEARCHDIR/*{sum,SUM,256.}"* 2>/dev/null
+ls -1 -- "$SEARCHDIR"/*{sum,SUM,256.}* 2>/dev/null
 
 printf '%s\n' "$(gettext 'Complete!')"
 exit 0
