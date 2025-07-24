@@ -14,7 +14,9 @@
 ###############################################################################
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
+if [[ -e /usr/bin/gettext.sh ]]; then
+    source /usr/bin/gettext.sh
+fi
 
 
 ###############################################################################
