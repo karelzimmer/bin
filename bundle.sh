@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Bundelen van bestanden tot een shell-archief  
 #
 # Gebruik:   ./bundle.sh <bestand>... > BESTAND                             
@@ -8,9 +8,9 @@
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 
-# init_script
+# init
 echo '# Pak dit bestand uit met bash. Voorbeeld: $ bash bestand.shar'
 
 # verwerk

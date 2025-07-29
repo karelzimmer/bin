@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
-# shellcheck source=common.sh
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Beeldbestanden downloaden
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 
-###############################################################################
+# #############################################################################
 # Imports
-###############################################################################
+# #############################################################################
 
-source common.sh
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+if [[ -e /usr/bin/gettext.sh ]]; then
+    source /usr/bin/gettext.sh
+fi
 
 
-###############################################################################
+# #############################################################################
 # Constants
-###############################################################################
+# #############################################################################
 
 readonly PROGRAM_NAME='dliso'
 
@@ -32,10 +35,44 @@ readonly SOURCE=http://releases.ubuntu.com
 readonly TARGET=$HOME/Downloads
 
 
-###############################################################################
+# #############################################################################
 # Functions
-###############################################################################
+# #############################################################################
 
+# This function performs initial actions.
+function init() {
+
+    # Script-hardening.
+    set -o errexit
+    set -o errtrace
+    set -o nounset
+    set -o pipefail
+
+    # Trap exit signal.
+    trap 'exit $?' EXIT
+}
+
+
+# This function performs the script actions, such as checking the input.
+function process {
+    check_input "$@"
+
+    read -rp  "Wat is de Ubuntu-versie? [$full_vs]: "
+    if [[ -n $REPLY ]]; then
+        full_vs="$REPLY"
+    fi
+
+    if $option_checksums; then
+        download_checksums
+        printf '%s\n' "Controlebestanden zijn gedownload en staan in $TARGET."
+    else
+        download_isos
+        download_checksums
+    fi
+}
+
+
+# This function checks the input parameters.
 function check_input {
     local -i getopt_rc=0
     local parsed=''
@@ -77,22 +114,7 @@ function check_input {
 }
 
 
-function process_input {
-    read -rp  "Wat is de Ubuntu-versie? [$full_vs]: "
-    if [[ -n $REPLY ]]; then
-        full_vs="$REPLY"
-    fi
-
-    if $option_checksums; then
-        download_checksums
-        printf '%s\n' "Controlebestanden zijn gedownload en staan in $TARGET."
-    else
-        download_isos
-        download_checksums
-    fi
-}
-
-
+# This function downloads the ISO files.
 function download_isos {
     cd "$TARGET" || exit 1
     rm --force ubuntu-*.iso*
@@ -106,6 +128,7 @@ $SOURCE/$full_vs/ubuntu-$full_vs-live-server-amd64.iso"
 }
 
 
+# This function downloads the checksums.
 function download_checksums {
     cd "$TARGET" || exit 1
     rm --force "$CHECKSUM"-ubuntu
@@ -115,7 +138,8 @@ function download_checksums {
 }
 
 
-function term_script {
+# This function controls the termination of the script.
+function term {
     printf '%s\n' "Om de beeldbestanden (.iso) te controleren voer uit: cd \
 $TARGET; $HASHPROG --check $CHECKSUM-*; cd -
 
@@ -127,9 +151,9 @@ spsum
     exit 0
 }
 
-###############################################################################
+# #############################################################################
 # Main
-###############################################################################
+# #############################################################################
 
 function main {
     local full_vs=''
@@ -140,10 +164,9 @@ function main {
         cut --delimiter=' ' --fields=2
         )
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init "$@"
+    process "$@"
+    term
 }
 
 main "$@"
