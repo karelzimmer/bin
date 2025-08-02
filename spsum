@@ -10,14 +10,25 @@
 # Imports
 # #############################################################################
 
-source common.sh
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+if [[ -e /usr/bin/gettext.sh ]]; then
+    source /usr/bin/gettext.sh
+fi
 
 
 # #############################################################################
 # Main
 # #############################################################################
 
-init
+# Script-hardening.
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+# Trap exit signal.
+trap 'exit $?' EXIT
 
 readonly SEARCHDIR=$HOME/Downloads
 
