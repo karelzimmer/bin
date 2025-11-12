@@ -7,22 +7,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-
-# #############################################################################
-# Imports
-# #############################################################################
-
-
-# #############################################################################
-# Constants
-# #############################################################################
-
-
-# #############################################################################
-# Globals
-# #############################################################################
-
-
 # #############################################################################
 # Functions
 # #############################################################################
@@ -46,8 +30,12 @@ function process() {
     local source_files=/tmp/source_files.txt
     local target_files=/tmp/target_files.txt
 
-    if [[ -z "$source" || -z "$target" ]]; then
+    if ! [[ -n "$source" && -n "$target" ]]; then
         echo "Gebruik: $0 <source> <target>"
+        exit 1
+    elif ! [[ -d "$source" && -d "$target" ]]; then
+        [[ -d "$source" ]] || echo "Source '$source' is geen map."
+        [[ -d "$target" ]] || echo "Target '$target' is geen map."
         exit 1
     fi
 
@@ -69,10 +57,9 @@ function process() {
                 tee --append "$source_files_missing"
         fi
     done < "$source_files"
-    echo 'Klaar!' |
-        tee --append "$source_files_missing"
     less "$source_files_missing"
     echo "Output staan in: $source_files_missing"
+    echo 'Klaar!'
 }
 
 

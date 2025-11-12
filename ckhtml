@@ -91,7 +91,7 @@ gestart [Enter]: "
 function validate_css {
     local filename=''
 
-    cd "$CSS_DIR" || exit 1
+    cd "$CSS_DIR"
 
     for filename in *.css; do
         google-chrome "$CSS_VALIDATOR_URL$CSS_URL/$filename"
@@ -103,13 +103,13 @@ function validate_css {
 function validate_html {
     local filename=''
 
-    cd "$HTML_DIR_NL" || exit 1
+    cd "$HTML_DIR_NL"
 
     for filename in *.html; do
         google-chrome "$HTML_VALIDATOR_URL$HTML_URL_NL/$filename"
     done
 
-    cd "$HTML_DIR_EN" || exit 1
+    cd "$HTML_DIR_EN"
 
     for filename in *.html; do
         google-chrome "$HTML_VALIDATOR_URL$HTML_URL_EN/$filename"

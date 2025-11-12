@@ -7,15 +7,6 @@
 # #############################################################################
 
 # #############################################################################
-# Imports
-# #############################################################################
-
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
-
-
-# #############################################################################
 # Main
 # #############################################################################
 
@@ -33,7 +24,7 @@ readonly SEARCHDIR=$HOME/Downloads
 declare iso=''
 declare sha256sum=''
 
-cd "$SEARCHDIR" || exit 1
+cd "$SEARCHDIR"
 
 for iso in *.iso; do
     if test -e "$iso".sha256; then
@@ -65,5 +56,5 @@ printf  '\n%s\n%s\n\n%s\n'                                      \
         'Files that probably can be deleted:'
 ls -1 -- "$SEARCHDIR"/*{sum,SUM,256.}* 2>/dev/null
 
-printf '%s\n' "$(gettext 'Complete!')"
+printf '%s\n' 'Complete!'
 exit 0
