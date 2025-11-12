@@ -51,11 +51,12 @@ function process() {
         exit 1
     fi
 
-    echo "Maak lijst van bestanden in source '$source'..."
+    echo "Maak lijst van bestanden in source '$source'..." |
+        tee "$source_files_missing"
     find "$source" -type f > "$source_files"
-    echo "Maak lijst van bestanden in target '$target'..."
+    echo "Maak lijst van bestanden in target '$target'..." |
+        tee --append "$source_files_missing"
     find "$target" -type f > "$target_files"
-    cat  /dev/null > "$source_files_missing"
 
     echo "Zoek source-bestanden op in target..."
     while read -r source_file; do
@@ -63,11 +64,13 @@ function process() {
         if ! grep --fixed-strings --quiet "$source_filename" "$target_files"
         then
             echo "Bestand niet in target: $source_file" |
-            tee --append "$source_files_missing"
+                tee --append "$source_files_missing"
         fi
     done < "$source_files"
+    echo 'Klaar!' |
+        tee --append "$source_files_missing"
     less "$source_files_missing"
-    echo "Klaar! Output staan in: $source_files_missing"
+    echo "Output staan in: $source_files_missing"
 }
 
 
