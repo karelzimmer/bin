@@ -51,12 +51,14 @@ function process() {
         exit 1
     fi
 
-    echo "Maak lijst van bestanden in source '$source'..." |
-        tee "$source_files_missing"
+    echo "Maak lijst van bestanden in source '$source'..."
     find "$source" -type f > "$source_files"
-    echo "Maak lijst van bestanden in target '$target'..." |
-        tee --append "$source_files_missing"
+    echo "Maak lijst van bestanden in target '$target'..."
     find "$target" -type f > "$target_files"
+
+    echo "Source: $source"  >  "$source_files_missing"
+    echo "Target: $target"  >> "$source_files_missing"
+    echo ''                 >> "$source_files_missing"
 
     echo "Zoek source-bestanden op in target..."
     while read -r source_file; do
