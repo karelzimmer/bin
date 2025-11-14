@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
 # #############################################################################
-# SPDX-FileComment: Rapporteer missende bestanden in target
+# SPDX-FileComment: Rapporteer bestanden wel in source maar niet in target
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
