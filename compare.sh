@@ -26,9 +26,9 @@ function process() {
     local source=${1:-}
     local target=${2:-}
     local source_filename=''
-    local source_files_missing=/tmp/source_files_missing.txt
-    local source_files=/tmp/source_files.txt
-    local target_files=/tmp/target_files.txt
+    local source_files_missing=$HOME/source_files_missing.txt
+    local source_files=$HOME/source_files.txt
+    local target_files=$HOME/target_files.txt
 
     if ! [[ -n "$source" && -n "$target" ]]; then
         echo "Gebruik: $0 <source> <target>"
