@@ -25,8 +25,8 @@ function init() {
 function process() {
     local source=${1:-}
     local target=${2:-}
+    local missing_files=$HOME/missing-files.txt
     local source_filename=''
-    local source_files_missing=$HOME/source-files-missing.txt
     local source_files=$HOME/source-files.txt
     local target_files=$HOME/target-files.txt
 
@@ -44,9 +44,9 @@ function process() {
     echo "Maak lijst van bestanden in target '$target'..."
     find "$target" -type f > "$target_files"
 
-    echo "Source: $source"  >  "$source_files_missing"
-    echo "Target: $target"  >> "$source_files_missing"
-    echo ''                 >> "$source_files_missing"
+    echo "Source: $source"  >  "$missing_files"
+    echo "Target: $target"  >> "$missing_files"
+    echo ''                 >> "$missing_files"
 
     echo "Zoek source-bestanden op in target..."
     while read -r source_file; do
@@ -54,11 +54,11 @@ function process() {
         if ! grep --fixed-strings --quiet "$source_filename" "$target_files"
         then
             echo "Bestand niet in target: $source_file" |
-                tee --append "$source_files_missing"
+                tee --append "$missing_files"
         fi
     done < "$source_files"
-    less "$source_files_missing"
-    echo "Output staan in: $source_files_missing"
+    less "$missing_files"
+    echo "Output staan in: $missing_files"
     echo 'Klaar!'
 }
 
