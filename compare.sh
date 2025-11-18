@@ -50,6 +50,10 @@ function process() {
 
     echo "Zoek source-bestanden op in target..."
     while read -r source_file; do
+        # Sla verborgen bestanden over.
+        if [[ $source_file == */.* ]]; then
+            continue
+        fi
         source_filename=$(basename "$source_file")
         if ! grep --fixed-strings --quiet "$source_filename" "$target_files"
         then
