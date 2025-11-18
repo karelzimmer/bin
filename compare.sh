@@ -48,7 +48,7 @@ function process() {
     echo "Target: $target"  >> "$missing_files"
     echo ''                 >> "$missing_files"
 
-    echo "Zoek source-bestanden op in target..."
+    echo "Zoek bestanden die wel in source maar niet in target staan..."
     while read -r source_file; do
         # Sla verborgen bestanden over.
         if [[ $source_file == */.* ]]; then
