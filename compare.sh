@@ -44,11 +44,15 @@ function process() {
     echo "Maak lijst van bestanden in target '$target'..."
     find "$target" -type f > "$target_files"
 
-    echo "Source: $source"  >  "$missing_files"
-    echo "Target: $target"  >> "$missing_files"
-    echo ''                 >> "$missing_files"
-
-    echo "Zoek bestanden die wel in source maar niet in target staan..."
+    {
+        echo "Source: $source"
+        echo "Target: $target"
+        echo ''
+        echo 'Bestanden die wel in source maar niet in target staan:'
+        echo ''
+    }   > "$missing_files"
+    
+    echo 'Zoek bestanden die wel in source maar niet in target staan...'
     while read -r source_file; do
         # Sla verborgen bestanden over.
         if [[ $source_file == */.* ]]; then
