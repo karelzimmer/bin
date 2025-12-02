@@ -28,7 +28,6 @@ readonly NORMAL='\033[0m'
 # #############################################################################
 
 declare repo=''
-declare repos=''
 
 
 # #############################################################################
@@ -44,22 +43,20 @@ set -o pipefail
 # Trap exit signal.
 trap 'exit $?' EXIT
 
-repos=$(
-    find    "$HOME"     \
-            -maxdepth 2 \
-            -name .git  \
-            -type d     \
-            -print      |
-    sort                |
-    sed     --expression='s|/.git||'
-    )
-
-for repo in $repos; do
+while read -r repo; do
     printf "${BOLD}Pull %s...$NORMAL\n" "$repo"
     cd "$repo"
     git pull --all --verbose
     printf '\n'
-done
+done < <(
+        find    "$HOME"     \
+                -maxdepth 2 \
+                -name .git  \
+                -type d     \
+                -print      |
+        sort                |
+        sed     --expression='s|/.git||'
+        )
 
 printf '%s\n' "$(gettext 'Complete!')"
 exit 0
