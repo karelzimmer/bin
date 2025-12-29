@@ -51,9 +51,9 @@ for iso in *.iso; do
     fi
 done
 printf  '\n%s\n%s\n\n%s\n'                                      \
-        'To check the image files (.iso) execute:'              \
+        'To check the image files execute:'              \
         "cd $SEARCHDIR; sha256sum --check *.iso.sha256; cd -"   \
-        'Files that probably can be deleted:'
+        'To remove the checksum files execute:'
 find "$SEARCHDIR"/*{sum,SUM,256.}* -printf 'rm %p\n' 2>/dev/null
 
 printf '%s\n' 'Complete!'
