@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# #############################################################################
+# SPDX-FileComment: Git merge squash of a local branch
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+
+# #############################################################################
+# Imports
+# #############################################################################
+
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+source /usr/bin/gettext.sh
+
+
+# #############################################################################
+# Constants
+# #############################################################################
+
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+
+# #############################################################################
+# Main
+# #############################################################################
+
+# Script-hardening.
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+# Trap exit signal.
+trap 'exit $?' EXIT
+
+printf '%s\n' "$(gettext 'Git squash merge in 8 steps:')"
+printf '%s\n' ''
+printf '%s\n' '1. git branch'
+printf '%s\n' '2. branch='
+printf '%s\n' ''
+printf '%s\n' "3. git merge --squash \$branch"
+printf '%s\n' "4. git commit --message='"
+printf '%s\n' "5. git branch --delete \$branch"
+printf '%s\n' "6. git push origin --delete \$branch"
+printf '%s\n' '7. git remote prune origin   # remove all stale branches'
+printf '%s\n' "8. git fetch --prune         # remove any no longer existing \
+remote references"
+printf '%s\n' ''
+printf '%s\n' "$(gettext 'Complete!')"
+exit 0
