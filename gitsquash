@@ -38,7 +38,9 @@ set -o pipefail
 # Trap exit signal.
 trap 'exit $?' EXIT
 
-printf '%s\n' "$(gettext 'Git squash merge in 8 steps:')"
+printf '%s\n' "$(gettext '*** git squash merge in 8 steps ***')"
+printf '%s\n' ''
+printf '%s\n' "$(gettext 'The following will be executed:')"
 printf '%s\n' ''
 printf '%s\n' '1. git branch'
 printf '%s\n' '2. branch='
