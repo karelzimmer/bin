@@ -38,19 +38,20 @@ set -o pipefail
 # Trap exit signal.
 trap 'exit $?' EXIT
 
-printf '%s\n' "$(gettext '*** git squash merge in 8 steps ***')"
+printf '%s\n' "$(gettext '*** git squash merge in 9 steps ***')"
 printf '%s\n' ''
 printf '%s\n' "$(gettext 'The following will be executed:')"
 printf '%s\n' ''
 printf '%s\n' '1. git branch'
 printf '%s\n' '2. branch='
 printf '%s\n' ''
-printf '%s\n' "3. git merge --squash \$branch"
-printf '%s\n' "4. git commit --message='"
-printf '%s\n' "5. git branch --delete \$branch"
-printf '%s\n' "6. git push origin --delete \$branch"
-printf '%s\n' '7. git remote prune origin   # remove all stale branches'
-printf '%s\n' "8. git fetch --prune         # remove any no longer existing \
+printf '%s\n' '3. git switch main'
+printf '%s\n' "4. git merge --squash \$branch"
+printf '%s\n' "5. git commit --message='"
+printf '%s\n' "6. git branch --delete \$branch"
+printf '%s\n' "7. git push origin --delete \$branch"
+printf '%s\n' '8. git remote prune origin   # remove all stale branches'
+printf '%s\n' "9. git fetch --prune         # remove any no longer existing \
 remote references"
 printf '%s\n' ''
 printf '%s\n' "$(gettext 'Complete!')"
