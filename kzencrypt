@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# #############################################################################
+# SPDX-FileComment: Encrypt (sign) kz GPG files
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
 
 gpg --import /usr/share/kz/kz-public-key.gpg
 gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign ~/kz-install-decrypted.sh
