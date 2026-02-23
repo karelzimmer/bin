@@ -6,6 +6,8 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-gpg --import /usr/share/kz/kz-public-key.gpg
-gpg --output ~/kz-install-decrypted.sh --decrypt ~/kz-scripts/usr/bin/kz-install.sh.gpg
-gpg --output ~/kz-setup-decrypted.sh   --decrypt ~/kz-scripts/usr/bin/kz-setup.sh.gpg
+gpg --import  /usr/share/kz/kz-public-key.gpg
+gpg --output  ~/kz-install-decrypted.sh \
+    --decrypt ~/kz-scripts/usr/bin/kz-install.sh.gpg
+gpg --output  ~/kz-setup-decrypted.sh   \
+    --decrypt ~/kz-scripts/usr/bin/kz-setup.sh.gpg

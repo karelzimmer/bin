@@ -7,5 +7,7 @@
 # #############################################################################
 
 gpg --import /usr/share/kz/kz-public-key.gpg
-gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign ~/kz-install-decrypted.sh
-gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg   --sign ~/kz-setup-decrypted.sh
+gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg \
+    --sign   ~/kz-install-decrypted.sh
+gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg   \
+    --sign   ~/kz-setup-decrypted.sh
