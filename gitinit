@@ -16,6 +16,16 @@ source /usr/bin/gettext.sh
 
 
 # #############################################################################
+# Constants
+# #############################################################################
+
+# List NORMAL last here so that -x doesn't bork the display.
+readonly BOLD='\033[1m'
+readonly GREEN=$BOLD'\033[32m'
+readonly NORMAL='\033[0m'
+
+
+# #############################################################################
 # Main
 # #############################################################################
 
@@ -41,5 +51,5 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 git config --list
 
-printf '%s\n' "$(gettext 'Complete!')"
+printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
 exit 0
