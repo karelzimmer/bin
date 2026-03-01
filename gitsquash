@@ -19,10 +19,9 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-
-declare SEPERATOR_LINE_LEN=${COLUMNS:-79}
-declare SEPERATOR_LINE=''
+readonly SEPERATOR_LINE_LEN=${COLUMNS:-79}
 SEPERATOR_LINE=$(eval printf -- '-%.0s' "{1..$SEPERATOR_LINE_LEN}")
+readonly SEPERATOR_LINE
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
