@@ -19,7 +19,7 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-SEPARATOR_LINE=$(eval printf -- '-%.0s' '{1..80}')
+SEPARATOR_LINE=$(eval printf '=%.0s' '{1..80}')
 readonly SEPARATOR_LINE
 
 # List NORMAL last here so that -x doesn't bork the display.
