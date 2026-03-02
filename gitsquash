@@ -19,8 +19,8 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-SEPERATOR_LINE=$(eval printf -- '-%.0s' '{1..80}')
-readonly SEPERATOR_LINE
+SEPARATOR_LINE=$(eval printf -- '-%.0s' '{1..80}')
+readonly SEPARATOR_LINE
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
@@ -46,7 +46,7 @@ set -o pipefail
 # Trap exit signal.
 trap 'exit $?' EXIT
 
-printf '\n%s\n\n' "$SEPERATOR_LINE"
+printf '\n%s\n\n' "$SEPARATOR_LINE"
 
 printf '%s\n' "$(gettext '*** git squash merge in 10 steps ***')"
 printf '%s\n' ""
@@ -69,5 +69,5 @@ printf '%s\n' "10. git fetch --prune         # remove any no longer existing \
 remote references"
 printf '%s\n' ""
 printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
-printf '\n%s\n\n' "$SEPERATOR_LINE"
+printf '\n%s\n\n' "$SEPARATOR_LINE"
 exit 0
