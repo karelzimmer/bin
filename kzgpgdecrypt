@@ -10,3 +10,6 @@ gpg --output  ~/kz-install-decrypted.sh \
     --decrypt ~/kz-scripts/usr/bin/kz-install.sh.gpg
 gpg --output  ~/kz-setup-decrypted.sh   \
     --decrypt ~/kz-scripts/usr/bin/kz-setup.sh.gpg
+
+printf  '\n%s\n' \
+        'Use "kzgpgencrypt" or "kzgpgsign" to encrypt (sign) the kz GPG files.'

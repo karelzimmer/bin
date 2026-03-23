@@ -8,3 +8,5 @@
 
 rm --force --verbose ~/kz-install-decrypted.sh
 rm --force --verbose ~/kz-setup-decrypted.sh
+
+printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
