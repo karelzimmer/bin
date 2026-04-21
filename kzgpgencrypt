@@ -7,8 +7,8 @@
 # #############################################################################
 
 gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg \
-    --sign   ~/kz-install-decrypted.sh              2> /dev/null
+    --sign   ~/kz-install-decrypted.sh
 gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg   \
-    --sign   ~/kz-setup-decrypted.sh                2> /dev/null
+    --sign   ~/kz-setup-decrypted.sh
 
 printf '\n%s\n' 'Use "kzgpgdelete" to delete the decrypted kz GPG files.'

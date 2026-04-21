@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-rm --verbose ~/kz-install-decrypted.sh
-rm --verbose ~/kz-setup-decrypted.sh
+rm ~/kz-install-decrypted.sh
+rm ~/kz-setup-decrypted.sh
 
 printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
