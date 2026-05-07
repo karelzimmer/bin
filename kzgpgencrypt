@@ -12,3 +12,4 @@ gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg   \
     --sign   ~/kz-setup-decrypted.sh
 
 printf '\n%s\n' 'Use "kzgpgdelete" to delete the decrypted kz GPG files.'
+printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
