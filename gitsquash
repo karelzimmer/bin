@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+
 # #############################################################################
 # Imports
 # #############################################################################
@@ -22,10 +23,6 @@ source /usr/bin/gettext.sh
 SEPARATOR_LINE=$(eval printf '=%.0s' '{1..80}')
 readonly SEPARATOR_LINE
 readonly FILLER='    '
-
-# List NORMAL last here so that -x doesn't bork the display.
-readonly GREEN='\033[1;32m'
-readonly NORMAL='\033[0m'
 
 
 # #############################################################################
