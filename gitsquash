@@ -75,7 +75,5 @@ printf '%s\n' "$(gettext 'MAINTENANCE:')"
 printf '%s\n' "${FILLER}git remote prune origin # remove all stale branches"
 printf '%s\n' "${FILLER}git fetch --prune       # remove all stale references"
 printf '%s\n' ""
-printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
-printf '%s\n' ""
 printf '%s\n' "$SEPARATOR_LINE"
 exit 0
