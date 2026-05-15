@@ -49,22 +49,22 @@ trap 'exit $?' EXIT
 # Main.
 printf '%b\n' "$SEPARATOR_LINE
 
-$(gettext '*** git squash merge in 10 steps ***')
+    $(gettext 'Git squash merge in 10 steps.')
 
-$(gettext "Works best in two separate terminals by copying and pasting.")
+    $(gettext "Works best in two separate terminals by copying and pasting.")
 
-$(gettext 'The following will be executed:')
+    $(gettext 'The following will be executed:')
 
 $BOLD$(gettext 'Prepare...')$NORMAL
-    1.  git branch              # note branch to be squashed
-    2.  branch=                 # set squash branch name here
+    1.  git branch                  # note branch to be squashed
+    2.  branch=                     # set squash branch name here
 
 $BOLD$(gettext 'Merge...')$NORMAL
     3.  git switch main
     4.  git merge --squash \$branch
 
 $BOLD$(gettext 'Commit...')$NORMAL
-    5.  git commit              # set commit message in editor
+    5.  git commit                  # set commit message in editor
     6.  git push origin
 
 $BOLD$(gettext 'Cleanup...')$NORMAL
@@ -72,8 +72,8 @@ $BOLD$(gettext 'Cleanup...')$NORMAL
     8.  git push origin --delete \$branch
 
 $BOLD$(gettext 'Maintenance...')$NORMAL
-    9.  git remote prune origin # remove all stale branches
-   10.  git fetch --prune       # remove all stale references
+    9.  git remote prune origin     # remove all stale branches
+   10.  git fetch --prune           # remove all stale references
 
 $SEPARATOR_LINE"
 exit 0
