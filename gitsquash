@@ -20,9 +20,8 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-SEPARATOR_LINE=$(eval printf '=%.0s' '{1..79}')
+SEPARATOR_LINE=$(eval printf -- '=%.0s' '{1..79}')
 readonly SEPARATOR_LINE
-readonly FILLER='    '
 
 
 # #############################################################################
@@ -44,34 +43,33 @@ set -o pipefail
 trap 'exit $?' EXIT
 
 # Main.
-printf '%s\n' "$SEPARATOR_LINE"
-printf '%s\n' ""
-printf '%s\n' "$(gettext '*** git squash merge in 10 steps ***')"
-printf '%s\n' ""
-printf '%s\n' "$(gettext "Works best in two separate terminals by copying and \
-pasting.")"
-printf '%s\n' ""
-printf '%s\n' "$(gettext 'The following will be executed:')"
-printf '%s\n' ""
-printf '%s\n' "$(gettext 'PREPARE:')"
-printf '%s\n' "${FILLER}git branch              # note branch to be squashed"
-printf '%s\n' "${FILLER}branch=                 # set squash branch name here"
-printf '%s\n' ""
-printf '%s\n' "$(gettext 'MERGE:')"
-printf '%s\n' "${FILLER}git switch main"
-printf '%s\n' "${FILLER}git merge --squash \$branch"
-printf '%s\n' ""
-printf '%s\n' "$(gettext 'COMMIT:')"
-printf '%s\n' "${FILLER}git commit              # set commit message in editor"
-printf '%s\n' "${FILLER}git push origin"
-printf '%s\n' ""
-printf '%s\n' "$(gettext 'CLEANUP:')"
-printf '%s\n' "${FILLER}git branch --delete \$branch"
-printf '%s\n' "${FILLER}git push origin --delete \$branch"
-printf '%s\n' ""
-printf '%s\n' "$(gettext 'MAINTENANCE:')"
-printf '%s\n' "${FILLER}git remote prune origin # remove all stale branches"
-printf '%s\n' "${FILLER}git fetch --prune       # remove all stale references"
-printf '%s\n' ""
-printf '%s\n' "$SEPARATOR_LINE"
+printf '%s\n' "$SEPARATOR_LINE
+
+$(gettext '*** git squash merge in 10 steps ***')
+
+$(gettext "Works best in two separate terminals by copying and pasting.")
+
+$(gettext 'The following will be executed:')
+
+$(gettext 'PREPARE')
+    1.  git branch              # note branch to be squashed
+    2.  branch=                 # set squash branch name here
+
+$(gettext 'MERGE')
+    3.  git switch main
+    4.  git merge --squash \$branch
+
+$(gettext 'COMMIT')
+    5.  git commit              # set commit message in editor
+    6.  git push origin
+
+$(gettext 'CLEANUP')
+    7.  git branch --delete \$branch
+    8.  git push origin --delete \$branch
+
+$(gettext 'MAINTENANCE')
+    9.  git remote prune origin # remove all stale branches
+   10.  git fetch --prune       # remove all stale references
+
+$SEPARATOR_LINE"
 exit 0
