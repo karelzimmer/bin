@@ -51,23 +51,23 @@ $(gettext "Works best in two separate terminals by copying and pasting.")
 
 $(gettext 'The following will be executed:')
 
-$(gettext '*** PREPARE ***')
+$(gettext '*** Prepare ***')
     1.  git branch              # note branch to be squashed
     2.  branch=                 # set squash branch name here
 
-$(gettext '*** MERGE ***')
+$(gettext '*** Merge ***')
     3.  git switch main
     4.  git merge --squash \$branch
 
-$(gettext '*** COMMIT ***')
+$(gettext '*** Commit ***')
     5.  git commit              # set commit message in editor
     6.  git push origin
 
-$(gettext '*** CLEANUP ***')
+$(gettext '*** Cleanup ***')
     7.  git branch --delete \$branch
     8.  git push origin --delete \$branch
 
-$(gettext '*** MAINTENANCE ***')
+$(gettext '*** Maintenance ***')
     9.  git remote prune origin # remove all stale branches
    10.  git fetch --prune       # remove all stale references
 
