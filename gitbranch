@@ -60,5 +60,5 @@ done < <(
         sed     --expression='s|/.git||'
         )
 
-printf '%s\n' "$(gettext 'Complete!')"
+printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
 exit 0

@@ -47,5 +47,5 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 git config --list
 
-printf '%s\n' "$(gettext 'Complete!')"
+printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
 exit 0

@@ -121,7 +121,7 @@ function validate_html {
 # This function controls the termination of the script.
 function term {
     printf '%s\n' 'Controleer de tabbladen in Google Chrome.'
-    printf '%s\n' "$(gettext 'Complete!')"
+    printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
 
     exit 0
 }
