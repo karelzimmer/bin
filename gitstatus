@@ -22,7 +22,6 @@ source /usr/bin/gettext.sh
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
-readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
 
@@ -61,5 +60,5 @@ done < <(
         sed     --expression='s|/.git||'
         )
 
-printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
+printf '%s\n' "$(gettext 'Complete!')"
 exit 0
