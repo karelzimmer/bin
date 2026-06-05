@@ -9,16 +9,29 @@
 
 
 # #############################################################################
+# Imports
+# #############################################################################
+
+source common.sh
+
+
+# #############################################################################
+# Constants
+# #############################################################################
+
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+
+# #############################################################################
 # Functions
 # #############################################################################
 
 # This function performs initial actions.
 function init() {
-    # Script-hardening.
-    set -o errexit
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
+    :
 }
 
 
@@ -26,10 +39,10 @@ function init() {
 function process() {
     local source=${1:-}
     local target=${2:-}
-    local missing_files=$HOME/missing-files.txt
+    local missing_files=/tmp/missing-files.txt
     local source_filename=''
-    local source_files=$HOME/source-files.txt
-    local target_files=$HOME/target-files.txt
+    local source_files=/tmp/source-files.txt
+    local target_files=/tmp/target-files.txt
 
     if ! [[ -n "$source" && -n "$target" ]]; then
         echo "Gebruik: $0 <source> <target>"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # #############################################################################
-# SPDX-FileComment: Git clone of all public remote repos in the home directory
+# SPDX-FileComment: Git clone of all public remote REPOS in the home directory
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -11,6 +11,7 @@
 # Imports
 # #############################################################################
 
+source common.sh
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
@@ -22,44 +23,35 @@ source /usr/bin/gettext.sh
 
 readonly USER_NAME='karelzimmer'
 
-# List NORMAL last here so that -x doesn't bork the display.
-readonly BOLD='\033[1m'
-readonly GREEN='\033[1;32m'
-readonly NORMAL='\033[0m'
-
 
 # #############################################################################
 # Globals
 # #############################################################################
 
-declare repo=''
-declare repos=''
+declare REPO=''
+declare REPOS=''
+
+
+# #############################################################################
+# Functions
+# #############################################################################
 
 
 # #############################################################################
 # Main
 # #############################################################################
 
-# Script-hardening.
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
-
-# Trap exit signal.
-trap 'exit $?' EXIT
-
-# Get all public repositories for USER_NAME with curl via GitHub REST API, and
+# Get all public REPOSitories for USER_NAME with curl via GitHub REST API, and
 # extract required info with jq when available.
 if [[ -n $(type -t jq) ]]; then
-    repos=$(
-        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
+    REPOS=$(
+        curl --silent "https://api.github.com/users/$USER_NAME/REPOS"   |
         jq '.[] | {name: .name}'                                        |
         jq --raw-output .name
         )
 else
-    repos=$(
-        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
+    REPOS=$(
+        curl --silent "https://api.github.com/users/$USER_NAME/REPOS"   |
         grep --regexp='"full_name"'                                     |
         cut --delimiter=':' --fields=2-                                 |
         sed --expression='s/,//'                                        |
@@ -68,13 +60,13 @@ else
         )
 fi
 
-for repo in $repos; do
-    # Skip special repository.
-    if [[ $repo = "$USER_NAME" ]]; then
+for REPO in $REPOS; do
+    # Skip special REPOSitory.
+    if [[ $REPO = "$USER_NAME" ]]; then
         continue
     fi
-    printf "${BOLD}Clone %s...$NORMAL\n" "$HOME/$repo"
-    git clone "https://github.com/$USER_NAME/$repo.git" "$HOME/$repo" || true
+    printf "${BOLD}Clone %s...$NORMAL\n" "$ORIGIN/$REPO"
+    git clone "https://github.com/$USER_NAME/$REPO.git" "$ORIGIN/$REPO" || true
     printf '\n'
 done
 

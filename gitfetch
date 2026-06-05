@@ -11,6 +11,7 @@
 # Imports
 # #############################################################################
 
+source common.sh
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
@@ -20,39 +21,30 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-# List NORMAL last here so that -x doesn't bork the display.
-readonly BOLD='\033[1m'
-readonly GREEN='\033[1;32m'
-readonly NORMAL='\033[0m'
-
 
 # #############################################################################
 # Globals
 # #############################################################################
 
-declare repo=''
+declare REPO=''
+
+
+# #############################################################################
+# Functions
+# #############################################################################
 
 
 # #############################################################################
 # Main
 # #############################################################################
 
-# Script-hardening.
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
-
-# Trap exit signal.
-trap 'exit $?' EXIT
-
-while read -r repo; do
-    printf "${BOLD}Fetch %s...$NORMAL\n" "$repo"
-    cd "$repo"
+while read -r REPO; do
+    printf "${BOLD}Fetch %s...$NORMAL\n" "$REPO"
+    cd "$REPO"
     git fetch --all --prune --verbose
     printf '\n'
 done < <(
-        find    "$HOME"     \
+        find    "$ORIGIN"   \
                 -maxdepth 2 \
                 -name .git  \
                 -type d     \

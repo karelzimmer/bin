@@ -11,6 +11,7 @@
 # Imports
 # #############################################################################
 
+source common.sh
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
@@ -22,21 +23,23 @@ source /usr/bin/gettext.sh
 
 readonly PROGRAM_NAME='ckhtml'
 
-readonly CSS_DIR=$HOME/kz-uploads/dist/css
-readonly HTML_DIR_NL=$HOME/kz-uploads/dist/html/nl
-readonly HTML_DIR_EN=$HOME/kz-uploads/dist/html/en
+readonly REPO=$ORIGIN/kz-uploads
+readonly CSS_DIR=$REPO/dist/css
+readonly HTML_DIR_NL=$REPO/dist/html/nl
+readonly HTML_DIR_EN=$REPO/dist/html/en
 
-readonly HOME_URL=https://karelzimmer.nl
-readonly CSS_URL=$HOME_URL/css
-readonly HTML_URL_NL=$HOME_URL/html/nl
-readonly HTML_URL_EN=$HOME_URL/html/en
+readonly URL=https://karelzimmer.nl
+readonly CSS_URL=$URL/css
+readonly HTML_URL_NL=$URL/html/nl
+readonly HTML_URL_EN=$URL/html/en
 
 readonly CSS_VALIDATOR_URL='http://jigsaw.w3.org/css-validator/validator?uri='
 readonly HTML_VALIDATOR_URL='http://validator.w3.org/check?uri='
 
-# List NORMAL last here so that -x doesn't bork the display.
-readonly GREEN='\033[1;32m'
-readonly NORMAL='\033[0m'
+
+# #############################################################################
+# Globals
+# #############################################################################
 
 
 # #############################################################################
@@ -45,15 +48,7 @@ readonly NORMAL='\033[0m'
 
 # This function performs initial actions.
 function init() {
-
-    # Script-hardening.
-    set -o errexit
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
-
-    # Trap exit signal.
-    trap 'exit $?' EXIT
+    :
 }
 
 
