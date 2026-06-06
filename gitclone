@@ -45,13 +45,13 @@ declare REPOS=''
 # extract required info with jq when available.
 if [[ -n $(type -t jq) ]]; then
     REPOS=$(
-        curl --silent "https://api.github.com/users/$USER_NAME/REPOS"   |
+        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         jq '.[] | {name: .name}'                                        |
         jq --raw-output .name
         )
 else
     REPOS=$(
-        curl --silent "https://api.github.com/users/$USER_NAME/REPOS"   |
+        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         grep --regexp='"full_name"'                                     |
         cut --delimiter=':' --fields=2-                                 |
         sed --expression='s/,//'                                        |
