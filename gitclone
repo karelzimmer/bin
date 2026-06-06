@@ -70,5 +70,4 @@ for REPO in $REPOS; do
     printf '\n'
 done
 
-printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
-exit 0
+complete_exit

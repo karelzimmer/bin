@@ -15,7 +15,7 @@ set -o pipefail
 # Trap exit signal.
 trap 'exit $?' EXIT
 
-# List NORMAL last here so that debugging (-vx) doesn't bork the display.
+# List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
 readonly GREEN=$BOLD'\033[32m'
 readonly RED=$BOLD'\033[31m'
@@ -23,3 +23,9 @@ readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
 readonly ORIGIN=$HOME
+
+# This function controls the completion of the scripts.
+function complete_exit() {
+    printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
+    exit 0
+}

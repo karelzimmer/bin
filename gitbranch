@@ -53,5 +53,4 @@ done < <(
         sed     --expression='s|/.git||'
         )
 
-printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
-exit 0
+complete_exit

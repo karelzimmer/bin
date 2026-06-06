@@ -11,6 +11,7 @@
 # Imports
 # #############################################################################
 
+source common.sh
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
@@ -19,10 +20,6 @@ source /usr/bin/gettext.sh
 # #############################################################################
 # Constants
 # #############################################################################
-
-# List NORMAL last here so that -x doesn't bork the display.
-readonly GREEN='\033[1;32m'
-readonly NORMAL='\033[0m'
 
 
 # #############################################################################
@@ -33,15 +30,6 @@ readonly NORMAL='\033[0m'
 # #############################################################################
 # Main
 # #############################################################################
-
-# Script-hardening.
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
-
-# Trap exit signal.
-trap 'exit $?' EXIT
 
 read -rp 'Git user.name [e.g. Karel Zimmer]: '
 git config --global user.name "$REPLY"
@@ -56,5 +44,4 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 git config --list
 
-printf '%b\n' "${GREEN}$(gettext 'Complete!')${NORMAL}"
-exit 0
+complete_exit
