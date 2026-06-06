@@ -43,7 +43,7 @@ declare REPOS=''
 
 # Get all public REPOSitories for USER_NAME with curl via GitHub REST API, and
 # extract required info with jq when available.
-if [[ -n $(type -t jq) ]]; then
+if type jq &> /dev/null; then
     REPOS=$(
         curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         jq '.[] | {name: .name}'                                        |
