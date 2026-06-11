@@ -44,5 +44,9 @@ ${bold}Onderhoud...${normal}
     9.  git remote prune origin # verwijder alle verouderde branches
    10.  git fetch --prune       # verwijder alle verouderde referenties
 
+Per repo:
+Op primaire machine 1x stap 1 t/m 10.
+Op secundaire machines stap 1 t/m 3, stap 7, stap 9 en 10, en git pull.
+
 $separator_line"
 exit 0
