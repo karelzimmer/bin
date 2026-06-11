@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# #############################################################################
+# SPDX-FileComment: Renamen van bestanden
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+
+# init
+# Renamen van BACKUP-<user>@<host> naar BACKUP_<host>_<user>
+
+# verwerk
+for file in BACKUP-*; do
+    user_host=${file#BACKUP-}
+    user=${user_host%@*}
+    host=${user_host#*@}
+    # echo "mv $file BACKUP_${host}_${user}"
+    mv --verbose "$file" "BACKUP_${host}_${user}"
+done
+
+# afsl_script
+exit 0
