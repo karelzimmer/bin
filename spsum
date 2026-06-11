@@ -6,38 +6,21 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-# #############################################################################
-# Imports
-# #############################################################################
+# List NORMAL last here so that -x doesn't bork the display.
+bold='\033[1m'
+green=$bold'\033[32m'
+normal=$bold'\033[0m'
 
-source common.sh
+searchdir=$HOME/Downloads
 
-
-# #############################################################################
-# Constants
-# #############################################################################
-
-
-# #############################################################################
-# Globals
-# #############################################################################
-
-
-# #############################################################################
-# Functions
-# #############################################################################
-
+iso=''
+sha256sum=''
 
 # #############################################################################
 # Main
 # #############################################################################
 
-readonly SEARCHDIR=$HOME/Downloads
-
-declare iso=''
-declare sha256sum=''
-
-cd "$SEARCHDIR"
+cd "$searchdir" || exit 1
 
 for iso in *.iso; do
     if test -e "$iso".sha256; then
@@ -64,10 +47,10 @@ for iso in *.iso; do
     fi
 done
 printf  '\n%s\n%s\n\n%s\n'                                      \
-        'To check the image files execute:'              \
-        "cd $SEARCHDIR; sha256sum --check *.iso.sha256; cd -"   \
+        'To check the image files execute:'                     \
+        "cd $searchdir; sha256sum --check *.iso.sha256; cd -"   \
         'To remove the checksum files execute:'
-find "$SEARCHDIR"/*{sum,SUM,256.}* -printf 'rm %p\n' 2>/dev/null
+find "$searchdir"/*{sum,SUM,256.}* -printf 'rm %p\n' 2>/dev/null
 
-printf '%s\n' 'Complete!'
+printf '%b\n' "${green}Klaar!${normal}"
 exit 0

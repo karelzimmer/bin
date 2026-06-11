@@ -1,73 +1,55 @@
 #!/usr/bin/env bash
 # #############################################################################
-# SPDX-FileComment: Git clone of all public remote REPOS in the home directory
+# SPDX-FileComment: Git clone of all public remote repos in the home directory
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
+        
+# List NORMAL last here so that -x doesn't bork the display.
+bold='\033[1m'
+green=$bold'\033[32m'
+normal=$bold'\033[0m'
 
+# Where the the code is stored locally.
+origin=$(xdg-user-dir PROJECTS)
 
-# #############################################################################
-# Imports
-# #############################################################################
-
-source common.sh
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
-
-
-# #############################################################################
-# Constants
-# #############################################################################
-
-readonly USER_NAME='karelzimmer'
-
-
-# #############################################################################
-# Globals
-# #############################################################################
-
-declare REPO=''
-declare REPOS=''
-
-
-# #############################################################################
-# Functions
-# #############################################################################
-
+user_name='karelzimmer'
+repo=''
+repos=''
 
 # #############################################################################
 # Main
 # #############################################################################
 
-# Get all public REPOSitories for USER_NAME with curl via GitHub REST API, and
-# extract required info with jq when available.
+# Get all public repositories for <user_name> with curl via GitHub REST API,
+# and extract required info with jq when available.
 if type jq &> /dev/null; then
-    REPOS=$(
-        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
+    repos=$(
+        curl --silent "https://api.github.com/users/$user_name/repos"   |
         jq '.[] | {name: .name}'                                        |
         jq --raw-output .name
         )
 else
-    REPOS=$(
-        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
+    repos=$(
+        curl --silent "https://api.github.com/users/$user_name/repos"   |
         grep --regexp='"full_name"'                                     |
         cut --delimiter=':' --fields=2-                                 |
         sed --expression='s/,//'                                        |
         sed --expression='s/"//g'                                       |
-        sed --expression='s|karelzimmer/||'
+        sed --expression="s|$user_name/||"
         )
 fi
 
-for REPO in $REPOS; do
-    # Skip special REPOSitory.
-    if [[ $REPO = "$USER_NAME" ]]; then
+for repo in $repos; do
+    # Skip special repository.
+    if [[ $repo = "$user_name" ]]; then
         continue
     fi
-    printf "${BOLD}Clone %s...$NORMAL\n" "$ORIGIN/$REPO"
-    git clone "https://github.com/$USER_NAME/$REPO.git" "$ORIGIN/$REPO" || true
+    printf "${bold}Clone %s...${normal}\n" "$origin/$repo"
+    git clone "https://github.com/$user_name/$repo.git" "$origin/$repo" || true
     printf '\n'
 done
 
-complete_exit
+printf '%b\n' "${green}Klaar!${normal}"
+exit 0

@@ -6,65 +6,43 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+# List NORMAL last here so that -x doesn't bork the display.
+bold='\033[1m'
+normal=$bold'\033[0m'
 
-# #############################################################################
-# Imports
-# #############################################################################
-
-source common.sh
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
-
-# #############################################################################
-# Constants
-# #############################################################################
-
-SEPARATOR_LINE=$(eval printf -- '=%.0s' '{1..79}')
-readonly SEPARATOR_LINE
-
-
-# #############################################################################
-# Globals
-# #############################################################################
-
-
-# #############################################################################
-# Functions
-# #############################################################################
-
+separator_line=$(eval printf -- '=%.0s' '{1..79}')
 
 # #############################################################################
 # Main
 # #############################################################################
 
-printf '%b\n' "$SEPARATOR_LINE
+printf '%b\n' "$separator_line
 
-    $(gettext 'Git squash merge in 10 steps.')
+    Git squash merge in 10 stappen.
 
-    $(gettext "Works best in two separate terminals by copying and pasting.")
+    Werkt het beste in twee aparte terminals door te kopiëren en plakken.
 
-    $(gettext 'The following will be executed:')
+    Het volgende zal worden uitgevoerd:
 
-$BOLD$(gettext 'Prepare...')$NORMAL
-    1.  git branch                  # note branch to be squashed
-    2.  branch=                     # set squash branch name here
+${bold}Voorbereiden...${normal}
+    1.  git branch              # noteer de branch die samengevoegd moet worden
+    2.  branch=                 # stel hier de naam van de squash-branch in
 
-$BOLD$(gettext 'Merge...')$NORMAL
+${bold}Samenvoegen...${normal}
     3.  git switch main
     4.  git merge --squash \$branch
 
-$BOLD$(gettext 'Commit...')$NORMAL
-    5.  git commit                  # set commit message in editor
+${bold}Bevestigen...${normal}
+    5.  git commit              # stel de commit-bericht in de editor in
     6.  git push origin
 
-$BOLD$(gettext 'Cleanup...')$NORMAL
+${bold}Opruimen...${normal}
     7.  git branch --delete \$branch
     8.  git push origin --delete \$branch
 
-$BOLD$(gettext 'Maintenance...')$NORMAL
-    9.  git remote prune origin     # remove all stale branches
-   10.  git fetch --prune           # remove all stale references
+${bold}Onderhoud...${normal}
+    9.  git remote prune origin # verwijder alle verouderde branches
+   10.  git fetch --prune       # verwijder alle verouderde referenties
 
-$SEPARATOR_LINE"
+$separator_line"
 exit 0

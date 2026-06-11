@@ -6,45 +6,27 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+# List NORMAL last here so that -x doesn't bork the display.
+bold='\033[1m'
+green=$bold'\033[32m'
+normal=$bold'\033[0m'
 
-# #############################################################################
-# Imports
-# #############################################################################
+# Where the the code is stored locally.
+origin=$(xdg-user-dir PROJECTS)
 
-source common.sh
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
-
-
-# #############################################################################
-# Constants
-# #############################################################################
-
-
-# #############################################################################
-# Globals
-# #############################################################################
-
-declare REPO=''
-
-
-# #############################################################################
-# Functions
-# #############################################################################
-
+repo=''
 
 # #############################################################################
 # Main
 # #############################################################################
 
-while read -r REPO; do
-    printf "${BOLD}Branch %s...$NORMAL\n" "$REPO"
-    cd "$REPO"
+while read -r repo; do
+    printf "${bold}Branch %s...${normal}\n" "$repo"
+    cd "$repo" || exit 1
     git branch --all --verbose
     printf '\n'
 done < <(
-        find    "$ORIGIN"   \
+        find    "$origin"   \
                 -maxdepth 2 \
                 -name .git  \
                 -type d     \
@@ -53,4 +35,5 @@ done < <(
         sed     --expression='s|/.git||'
         )
 
-complete_exit
+printf '%b\n' "${green}Klaar!${normal}"
+exit 0

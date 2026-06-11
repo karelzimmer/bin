@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+# shellcheck shell=bash
 # #############################################################################
-# SPDX-FileComment: Git status of all local branches in the home directory
+# SPDX-FileComment: Distribute personal Bash scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -14,26 +15,18 @@ normal=$bold'\033[0m'
 # Where the the code is stored locally.
 origin=$(xdg-user-dir PROJECTS)
 
-declare repo=''
-
 # #############################################################################
 # Main
 # #############################################################################
 
-while read -r repo; do
-    printf "${bold}Status %s...${normal}\n" "$repo"
-    cd "$repo" || exit 1
-    git status --verbose
-    printf '\n'
-done < <(
-        find    "$origin"   \
-                -maxdepth 2 \
-                -name .git  \
-                -type d     \
-                -print      |
-        sort                |
-        sed     --expression='s|/.git||'
-        )
+# Fill ~/bin with repo bin.
+rsync   --archive               \
+        --verbose               \
+        --exclude='LICENSE'     \
+        --exclude='README.md'   \
+        --exclude='.git*'       \
+        "$origin/bin"           \
+        "$HOME"
 
 printf '%b\n' "${green}Klaar!${normal}"
 exit 0

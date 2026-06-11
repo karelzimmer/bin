@@ -9,6 +9,10 @@
 rm --verbose ~/kz-install-decrypted.sh
 rm --verbose ~/kz-setup-decrypted.sh
 
+# #############################################################################
+# Main
+# #############################################################################
+
 printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
 printf  '\n%s\n' \
         'Use "kzgpgencrypt" or "kzgpgsign" to encrypt (sign) the kz GPG files.'
