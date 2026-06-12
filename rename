@@ -11,11 +11,11 @@
 
 # verwerk
 for file in BACKUP-*; do
-    user_host=${file#BACKUP-}
-    user=${user_host%@*}
-    host=${user_host#*@}
-    # echo "mv $file BACKUP_${host}_${user}"
-    mv --verbose "$file" "BACKUP_${host}_${user}"
+    user_host=$(echo "$file" | cut --delimiter='-' --fields=2)
+    user=$(echo "$user_host" | cut --delimiter='@' --fields=1)
+    host=$(echo "$user_host" | cut --delimiter='@' --fields=2)
+    echo "mv $file BACKUP_${host}_${user}"
+    # mv --verbose "$file" "BACKUP_${host}_${user}"
 done
 
 # afsl_script
