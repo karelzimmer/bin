@@ -49,7 +49,7 @@ printf  '\n%s\n%s\n\n%s\n'                                      \
         'To check the image files execute:'                     \
         "cd $searchdir; sha256sum --check *.iso.sha256; cd -"   \
         'To remove the checksum files execute:'
-find "$searchdir"/*{sum,SUM,256.}* -printf 'rm %p\n' 2>/dev/null
+find "$searchdir/"*{sum,SUM,256.}* -printf 'rm %p\n' 2>/dev/null
 
 printf '%b\n' "${green}Klaar!${normal}"
 exit 0
