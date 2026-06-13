@@ -8,7 +8,7 @@
 
 # List NORMAL last here so that -x doesn't bork the display.
 bold='\033[1m'
-normal=$bold'\033[0m'
+normal='\033[0m'
 
 separator_line=$(eval printf -- '=%.0s' '{1..79}')
 

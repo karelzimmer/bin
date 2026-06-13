@@ -8,8 +8,8 @@
 
 # List NORMAL last here so that -x doesn't bork the display.
 bold='\033[1m'
-green=$bold'\033[32m'
-normal=$bold'\033[0m'
+green='\033[1;32m'
+normal='\033[0m'
 
 # Where the the code is stored locally.
 origin=$(xdg-user-dir PROJECTS)
