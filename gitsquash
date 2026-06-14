@@ -23,8 +23,8 @@ printf '%b\n' "$separator_line
     Werkt het beste in twee aparte terminals door te kopiëren en plakken.
 
     Het volgende zal worden uitgevoerd ${bold}per repo...${normal}
-    A. Op ${bold}een machine 1 x${normal} stap 1 t/m 10,
-    B. Op ${bold}andere machines${normal} stap 1 t/m 3, stap 7, stap 9 en 10, \
+    A. Op ${bold}één machine 1x${normal} stap 1 t/m 10,
+    B. Op ${bold}andere machine${normal} stap 1 t/m 3, stap 7, stap 9 en 10, \
 en git pull
 
 ${bold}Voorbereiden...${normal}
