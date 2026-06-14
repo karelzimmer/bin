@@ -22,7 +22,10 @@ printf '%b\n' "$separator_line
 
     Werkt het beste in twee aparte terminals door te kopiëren en plakken.
 
-    Het volgende zal worden uitgevoerd:
+    Het volgende zal worden uitgevoerd ${bold}per repo...${normal}
+    A. Op ${bold}een machine 1 x${normal} stap 1 t/m 10,
+    B. Op ${bold}andere machines${normal} stap 1 t/m 3, stap 7, stap 9 en 10, \
+en git pull
 
 ${bold}Voorbereiden...${normal}
     1.  git branch              # noteer de branch die samengevoegd moet worden
@@ -33,7 +36,7 @@ ${bold}Samenvoegen...${normal}
     4.  git merge --squash \$branch
 
 ${bold}Bevestigen...${normal}
-    5.  git commit              # stel de commit-bericht in de editor in
+    5.  git commit              # stel het commit-bericht in de editor in
     6.  git push origin
 
 ${bold}Opruimen...${normal}
@@ -43,10 +46,6 @@ ${bold}Opruimen...${normal}
 ${bold}Onderhoud...${normal}
     9.  git remote prune origin # verwijder alle verouderde branches
    10.  git fetch --prune       # verwijder alle verouderde referenties
-
-Per repo:
-Op een machine 1 x stap 1 t/m 10.
-Op andere machines stap 1 t/m 3, stap 7, stap 9 en 10, en git pull.
 
 $separator_line"
 exit 0
