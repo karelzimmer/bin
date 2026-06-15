@@ -24,7 +24,10 @@ printf '%b\n' "$separator_line
 
     Het volgende zal worden uitgevoerd ${bold}per repo...${normal}
     A. Op ${bold}één machine 1x${normal} stap 1 t/m 10,
-    B. Op ${bold}andere machine${normal} stap 1 t/m 3, stap 7, stap 9 en 10
+    B. Op ${bold}andere machine${normal} stap 1 t/m 3, git pull, stap 7, stap \
+9 en 10
+
+$separator_line
 
 ${bold}Voorbereiden...${normal}
     1.  git branch              # noteer de branch die samengevoegd moet worden
