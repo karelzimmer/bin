@@ -7,14 +7,19 @@
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-bold='\033[1m'
-normal='\033[0m'
+readonly BOLD='\033[1m'
+readonly NORMAL='\033[0m'
 
-separator_line=$(eval printf -- '=%.0s' '{1..79}')
+declare separator_line=''
+
 
 # #############################################################################
 # Main
 # #############################################################################
+
+separator_line=$(eval printf -- '=%.0s' '{1..79}')
+
+clear -x
 
 printf '%b\n' "$separator_line
 
@@ -22,30 +27,30 @@ printf '%b\n' "$separator_line
 
     Werkt het beste in twee aparte terminals door te kopiëren en plakken.
 
-    Het volgende zal worden uitgevoerd ${bold}per repo...${normal}
-    A. Op ${bold}één machine 1x${normal} stap 1 t/m 10,
-    B. Op ${bold}andere machine${normal} stap 1 t/m 3, git pull, stap 7, stap \
+    Het volgende zal worden uitgevoerd ${BOLD}per repo...${NORMAL}
+    A. Op ${BOLD}een machine 1x${NORMAL} stap 1 t/m 10,
+    B. Op ${BOLD}andere machine${NORMAL} stap 1 t/m 3, git pull, stap 7, stap \
 9 en 10
 
 $separator_line
 
-${bold}Voorbereiden...${normal}
+${BOLD}Voorbereiden...${NORMAL}
     1.  git branch              # noteer de branch die samengevoegd moet worden
     2.  branch=                 # stel hier de naam van de squash-branch in
 
-${bold}Samenvoegen...${normal}
+${BOLD}Samenvoegen...${NORMAL}
     3.  git switch main
     4.  git merge --squash \$branch
 
-${bold}Bevestigen...${normal}
+${BOLD}Bevestigen...${NORMAL}
     5.  git commit              # stel het commit-bericht in de editor in
-    6.  git push origin
+    6.  git push origin main
 
-${bold}Opruimen...${normal}
+${BOLD}Opruimen...${NORMAL}
     7.  git branch --delete \$branch
     8.  git push origin --delete \$branch
 
-${bold}Onderhoud...${normal}
+${BOLD}Onderhoud...${NORMAL}
     9.  git remote prune origin # verwijder alle verouderde branches
    10.  git fetch --prune       # verwijder alle verouderde referenties
 

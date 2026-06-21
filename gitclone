@@ -7,16 +7,16 @@
 # #############################################################################
         
 # List NORMAL last here so that -x doesn't bork the display.
-bold='\033[1m'
-green='\033[1;32m'
-normal='\033[0m'
+readonly BOLD='\033[1m'
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
 
-# Where the the code is stored locally.
-origin=$(xdg-user-dir PROJECTS)
+readonly USER_NAME='karelzimmer'
 
-user_name='karelzimmer'
-repo=''
-repos=''
+declare gitroot=''
+declare repo=''
+declare repos=''
+
 
 # #############################################################################
 # Main
@@ -26,30 +26,36 @@ repos=''
 # and extract required info with jq when available.
 if type jq &> /dev/null; then
     repos=$(
-        curl --silent "https://api.github.com/users/$user_name/repos"   |
+        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         jq '.[] | {name: .name}'                                        |
         jq --raw-output .name
         )
 else
     repos=$(
-        curl --silent "https://api.github.com/users/$user_name/repos"   |
+        curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         grep --regexp='"full_name"'                                     |
         cut --delimiter=':' --fields=2-                                 |
         sed --expression='s/,//'                                        |
         sed --expression='s/"//g'                                       |
-        sed --expression="s|$user_name/||"
+        sed --expression="s|$USER_NAME/||"
         )
 fi
 
 for repo in $repos; do
     # Skip special repository.
-    if [[ $repo = "$user_name" ]]; then
+    if [[ $repo = "$USER_NAME" ]]; then
         continue
     fi
-    printf "${bold}Clone %s...${normal}\n" "$origin/$repo"
-    git clone "https://github.com/$user_name/$repo.git" "$origin/$repo" || true
+    # Repo bin in HOME, others in PROJECTS directory.
+    if [[ $repo = 'bin' ]]; then
+        gitroot="$HOME"
+    else
+        gitroot=$(xdg-user-dir PROJECTS)
+    fi
+    printf "${BOLD}Clone %s...${NORMAL}\n" "$gitroot"
+    git clone "https://github.com/$USER_NAME/$repo.git" "$gitroot" || true
     printf '\n'
 done
 
-printf '%b\n' "${green}Klaar!${normal}"
+printf '%b\n' "${GREEN}Klaar!${NORMAL}"
 exit 0

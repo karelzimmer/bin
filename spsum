@@ -7,13 +7,13 @@
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-green='\033[1;32m'
-normal='\033[0m'
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
 
-searchdir=$HOME/Downloads
+declare iso=''
+declare searchdir=$HOME/Downloads
+declare sha256sum=''
 
-iso=''
-sha256sum=''
 
 # #############################################################################
 # Main
@@ -51,5 +51,5 @@ printf  '\n%s\n%s\n\n%s\n'                                      \
         'To remove the checksum files execute:'
 find "$searchdir/"*{sum,SUM,256.}* -printf 'rm %p\n' 2>/dev/null
 
-printf '%b\n' "${green}Klaar!${normal}"
+printf '%b\n' "${GREEN}Klaar!${NORMAL}"
 exit 0

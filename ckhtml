@@ -14,10 +14,10 @@
 readonly PROGRAM_NAME='ckhtml'
 
 # Where the the code is stored locally.
-ORIGIN=$(xdg-user-dir PROJECTS)
-readonly ORIGIN
+GITROOT=$(xdg-user-dir PROJECTS)
+readonly GITROOT
 
-readonly REPO=$ORIGIN/kz-uploads
+readonly REPO=$GITROOT/kz-uploads
 readonly CSS_DIR=$REPO/dist/css
 readonly HTML_DIR_NL=$REPO/dist/html/nl
 readonly HTML_DIR_EN=$REPO/dist/html/en

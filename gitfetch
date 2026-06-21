@@ -7,34 +7,30 @@
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-bold='\033[1m'
-green='\033[1;32m'
-normal='\033[0m'
-
-# Where the the code is stored locally.
-origin=$(xdg-user-dir PROJECTS)
-repo=''
+readonly BOLD='\033[1m'
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
 
 declare repo=''
+
 
 # #############################################################################
 # Main
 # #############################################################################
 
 while read -r repo; do
-    printf "${bold}Fetch %s...${normal}\n" "$repo"
-    cd "$repo" || exit 1
-    git fetch --all --prune --verbose
+    printf "${BOLD}Fetch %s...${NORMAL}\n" "$repo"
+    cd "$HOME/$repo" || exit 1
+    git fetch --all --verbose
     printf '\n'
 done < <(
-        find    "$origin"   \
-                -maxdepth 2 \
-                -name .git  \
-                -type d     \
-                -print      |
-        sort                |
-        sed     --expression='s|/.git||'
+        find    "$HOME"         \
+                -type   d       \
+                -name   '.git'  \
+                -printf '%P\n'  |
+        sed     's|/.git||'     |
+        sort
         )
 
-printf '%b\n' "${green}Klaar!${normal}"
+printf '%b\n' "${GREEN}Klaar!${NORMAL}"
 exit 0

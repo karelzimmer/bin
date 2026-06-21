@@ -6,16 +6,18 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-origin=$(xdg-user-dir PROJECTS)
+GITROOT=$(xdg-user-dir PROJECTS)
+readonly GITROOT
+
 
 # #############################################################################
 # Main
 # #############################################################################
 
 gpg --output  ~/kz-install-decrypted.sh \
-    --decrypt "$origin/kz-scripts/usr/bin/kz-install.sh.gpg"
+    --decrypt "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg"
 gpg --output  ~/kz-setup-decrypted.sh   \
-    --decrypt "$origin/kz-scripts/usr/bin/kz-setup.sh.gpg"
+    --decrypt "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
 
 printf  '\n%s\n' \
         'Use "kzgpgencrypt" or "kzgpgsign" to encrypt (sign) the kz GPG files.'

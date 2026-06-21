@@ -7,8 +7,9 @@
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-green='\033[1;32m'
-normal='\033[0m'
+GREEN='\033[1;32m'
+NORMAL='\033[0m'
+
 
 # #############################################################################
 # Main
@@ -27,5 +28,5 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 git config --list
 
-printf '%b\n' "${green}Klaar!${normal}"
+printf '%b\n' "${GREEN}Klaar!${NORMAL}"
 exit 0

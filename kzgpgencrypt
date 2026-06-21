@@ -6,15 +6,17 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-origin=$(xdg-user-dir PROJECTS)
+GITROOT=$(xdg-user-dir PROJECTS)
+readonly GITROOT
+
 
 # #############################################################################
 # Main
 # #############################################################################
 
-gpg --output "$origin/kz-scripts/usr/bin/kz-install.sh.gpg" \
+gpg --output "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg" \
     --sign   ~/kz-install-decrypted.sh
-gpg --output "$origin/kz-scripts/usr/bin/kz-setup.sh.gpg"   \
+gpg --output "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"   \
     --sign   ~/kz-setup-decrypted.sh
 
 printf '\n%s\n' 'Use "kzgpgdelete" to delete the decrypted kz GPG files.'
