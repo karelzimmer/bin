@@ -18,11 +18,12 @@ declare repo=''
 # Main
 # #############################################################################
 
+printf '%s\n' 'Zoek alle Git-repositories in de Persoonlijke map...'
+
 while read -r repo; do
-    printf "${BOLD}Status %s...${NORMAL}\n" "$repo"
+    printf "\n${BOLD}Status %s...${NORMAL}" "$repo"
     cd "$HOME/$repo" || exit 1
     git status --verbose
-    printf '\n'
 done < <(
         find    "$HOME"         \
                 -type   d       \
