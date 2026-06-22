@@ -18,7 +18,7 @@ declare repo=''
 # Main
 # #############################################################################
 
-printf '%s\n' 'Zoek alle Git-repositories in de Persoonlijke map...'
+printf '%s\n' 'Zoek naar alle Git-repositories in de Persoonlijke map...'
 
 while read -r repo; do
     printf "\n${BOLD}Fetch %s...${NORMAL}" "$repo"
