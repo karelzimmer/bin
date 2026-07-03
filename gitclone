@@ -52,8 +52,8 @@ for repo in $repos; do
     else
         gitroot=$(xdg-user-dir PROJECTS)
     fi
-    printf "${BOLD}Clone %s...${NORMAL}\n" "$gitroot"
-    git clone "https://github.com/$USER_NAME/$repo.git" "$gitroot" || true
+    printf "${BOLD}Clone %s...${NORMAL}\n" "$gitroot/$repo"
+    git clone "https://github.com/$USER_NAME/$repo.git" "$gitroot/$repo" || true
     printf '\n'
 done
 
