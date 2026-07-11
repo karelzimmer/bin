@@ -2,13 +2,15 @@
 # #############################################################################
 # SPDX-FileComment: Bundelen van bestanden tot een shell-archief
 #
-# Gebruik:   ./bundle.sh <bestand>... > BESTAND
-#            Bundelen:  $ ./bundle *.sh > scripts.shar
-#            Uitpakken: $ bash scripts.shar
-#
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
+
+# =============================================================================
+# Gebruik:   ./bundle.sh <bestand>... > BESTAND
+#            Bundelen:  $ ./bundle *.sh > scripts.shar
+#            Uitpakken: $ bash scripts.shar
+# =============================================================================
 
 # init
 echo '# Pak dit bestand uit met bash. Voorbeeld: $ bash bestand.shar'

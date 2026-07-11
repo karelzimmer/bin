@@ -31,8 +31,8 @@ readonly CSS_VALIDATOR_URL='http://jigsaw.w3.org/css-validator/validator?uri='
 readonly HTML_VALIDATOR_URL='http://validator.w3.org/check?uri='
 
 # List NORMAL last here so that -x doesn't bork the display.
-GREEN='\033[1;32m'
-NORMAL='\033[0m'
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
 
 
 # #############################################################################

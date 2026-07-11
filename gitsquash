@@ -6,22 +6,32 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+
+# #############################################################################
+# Constants
+# #############################################################################
+
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
 readonly NORMAL='\033[0m'
 
-declare separator_line=''
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+declare SEPARATOR_LINE=''
 
 
 # #############################################################################
 # Main
 # #############################################################################
 
-separator_line=$(eval printf -- '=%.0s' '{1..79}')
+SEPARATOR_LINE=$(eval printf -- '=%.0s' '{1..79}')
 
 clear -x
 
-printf '%b\n' "$separator_line
+printf '%b\n' "$SEPARATOR_LINE
 
     Git squash merge in 10 stappen.
 
@@ -32,7 +42,7 @@ printf '%b\n' "$separator_line
     B. Op ${BOLD}andere machine${NORMAL} stap 1 t/m 3, git pull, stap 7, stap \
 9 en 10
 
-$separator_line
+$SEPARATOR_LINE
 
 ${BOLD}Voorbereiden...${NORMAL}
     1.  git branch              # noteer de branch die samengevoegd moet worden
@@ -54,5 +64,5 @@ ${BOLD}Onderhoud...${NORMAL}
     9.  git remote prune origin # verwijder alle verouderde branches
    10.  git fetch --prune       # verwijder alle verouderde referenties
 
-$separator_line"
+$SEPARATOR_LINE"
 exit 0

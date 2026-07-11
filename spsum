@@ -6,11 +6,21 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+
+# #############################################################################
+# Constants
+# #############################################################################
+
 # List NORMAL last here so that -x doesn't bork the display.
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-declare iso=''
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+declare ISO=''
 declare searchdir=$HOME/Downloads
 declare sha256sum=''
 
@@ -21,28 +31,28 @@ declare sha256sum=''
 
 cd "$searchdir" || exit 1
 
-for iso in *.iso; do
-    if test -e "$iso".sha256; then
-        printf '%s\n' "Checksum file $iso.sha256 already created."
+for ISO in *.iso; do
+    if test -e "$ISO".sha256; then
+        printf '%s\n' "Checksum file $ISO.sha256 already created."
         continue
     fi
     # shellcheck disable=SC2062
     sha256sum=$(
         grep    --word-regexp           \
-                --regexp=" $iso$"       \
-                --regexp=' *'"$iso$"    \
-                --regexp='('"$iso"')'   \
+                --regexp=" $ISO$"       \
+                --regexp=' *'"$ISO$"    \
+                --regexp='('"$ISO"')'   \
                 --exclude=*.iso         \
-                --exclude="$iso".sha256 \
+                --exclude="$ISO".sha256 \
                 --exclude-dir=*         \
                 --no-filename           \
                 -- *                    || true 
                 )
     if [[ -z $sha256sum ]]; then
-        printf '%s\n' "No checksum found for $iso." >&2
+        printf '%s\n' "No checksum found for $ISO." >&2
     else
-        echo "$sha256sum" > "$iso".sha256
-        printf '%s\n' "Checksum file $iso.sha256 created."
+        echo "$sha256sum" > "$ISO".sha256
+        printf '%s\n' "Checksum file $ISO.sha256 created."
     fi
 done
 printf  '\n%s\n%s\n\n%s\n'                                      \

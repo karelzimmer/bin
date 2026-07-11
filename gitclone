@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
 # #############################################################################
-# SPDX-FileComment: Git clone of all public remote repos in the home directory
+# SPDX-FileComment: Git clone of all public remote REPOS in the home directory
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
-        
+
+
+
+# #############################################################################
+# Constants
+# #############################################################################
+
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-readonly USER_NAME='karelzimmer'
 
-declare gitroot=''
-declare repo=''
-declare repos=''
+# #############################################################################
+# Globals
+# #############################################################################
+
+declare REPO=''
+declare GITROOT=''
+declare REPOS=''
 
 
 # #############################################################################
@@ -25,13 +34,13 @@ declare repos=''
 # Get all public repositories for <user_name> with curl via GitHub REST API,
 # and extract required info with jq when available.
 if type jq &> /dev/null; then
-    repos=$(
+    REPOS=$(
         curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         jq '.[] | {name: .name}'                                        |
         jq --raw-output .name
         )
 else
-    repos=$(
+    REPOS=$(
         curl --silent "https://api.github.com/users/$USER_NAME/repos"   |
         grep --regexp='"full_name"'                                     |
         cut --delimiter=':' --fields=2-                                 |
@@ -41,19 +50,19 @@ else
         )
 fi
 
-for repo in $repos; do
+for REPO in $REPOS; do
     # Skip special repository.
-    if [[ $repo = "$USER_NAME" ]]; then
+    if [[ $REPO = "$USER_NAME" ]]; then
         continue
     fi
     # Repo bin in HOME, others in PROJECTS directory.
-    if [[ $repo = 'bin' ]]; then
-        gitroot="$HOME"
+    if [[ $REPO = 'bin' ]]; then
+        GITROOT="$HOME"
     else
-        gitroot=$(xdg-user-dir PROJECTS)
+        GITROOT=$(xdg-user-dir PROJECTS)
     fi
-    printf "${BOLD}Clone %s...${NORMAL}\n" "$gitroot/$repo"
-    git clone "https://github.com/$USER_NAME/$repo.git" "$gitroot/$repo" || true
+    printf "${BOLD}Clone %s...${NORMAL}\n" "$GITROOT/$REPO"
+    git clone "https://github.com/$USER_NAME/$REPO.git" "$GITROOT/$REPO" || true
     printf '\n'
 done
 

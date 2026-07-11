@@ -6,12 +6,22 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+
+# #############################################################################
+# Constants
+# #############################################################################
+
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-declare repo=''
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+declare REPO=''
 
 
 # #############################################################################
@@ -20,9 +30,9 @@ declare repo=''
 
 printf '%s\n' 'Zoek naar alle Git-repositories in de Persoonlijke map...'
 
-while read -r repo; do
-    printf "\n${BOLD}Branch %s...${NORMAL}" "$repo"
-    cd "$HOME/$repo" || exit 1
+while read -r REPO; do
+    printf "\n${BOLD}Branch %s...${NORMAL}" "$REPO"
+    cd "$HOME/$REPO" || exit 1
     git branch --all --verbose
 done < <(
         find    "$HOME"         \
