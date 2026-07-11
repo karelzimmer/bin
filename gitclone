@@ -21,9 +21,10 @@ readonly NORMAL='\033[0m'
 # Globals
 # #############################################################################
 
-declare REPO=''
 declare GITROOT=''
+declare REPO=''
 declare REPOS=''
+declare USER_NAME='karelzimmer'
 
 
 # #############################################################################
@@ -60,7 +61,7 @@ for REPO in $REPOS; do
     else
         GITROOT=$(xdg-user-dir PROJECTS)
     fi
-    printf "${BOLD}Clone %s...${NORMAL}\n" "$GITROOT/$REPO"
+    printf "\n${BOLD}Clone %s...${NORMAL}\n" "$GITROOT/$REPO"
     git clone "https://github.com/$USER_NAME/$REPO.git" "$GITROOT/$REPO" || true
     printf '\n'
 done

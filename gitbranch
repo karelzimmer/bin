@@ -31,7 +31,7 @@ declare REPO=''
 printf '%s\n' 'Zoek naar alle Git-repositories in de Persoonlijke map...'
 
 while read -r REPO; do
-    printf "\n${BOLD}Branch %s...${NORMAL}" "$REPO"
+    printf "\n${BOLD}Branch %s...${NORMAL}\n" "$REPO"
     cd "$HOME/$REPO" || exit 1
     git branch --all --verbose
 done < <(
