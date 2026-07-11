@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
-
+#
 # =============================================================================
 # Gebruik:   ./bundle.sh <bestand>... > BESTAND
 #            Bundelen:  $ ./bundle *.sh > scripts.shar
