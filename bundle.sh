@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # #############################################################################
-# SPDX-FileComment: Bundelen van bestanden tot een shell-archief
+# SPDX-FileComment: Bundelen van bestanden tot een shell-archief.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

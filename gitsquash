@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # #############################################################################
-# SPDX-FileComment: Git merge squash of a local branch
+# SPDX-FileComment: Git merge squash of a local branch.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

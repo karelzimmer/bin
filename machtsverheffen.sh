@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 # #############################################################################
-# SPDX-FileComment: Machtsverheffen, bereken 5^4 zonder machtsverheffen
+# SPDX-FileComment: Machtsverheffen, bereken 5^4 zonder machtsverheffen.
 #
 # NOVI: Datastructuren en Algoritmen: Dynamic Programming en Recursion
 # Dit is geen recursie, maar iteratie :-( !
