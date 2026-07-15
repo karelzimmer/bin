@@ -38,9 +38,10 @@ done < <(
         find    "$HOME"         \
                 -type   d       \
                 -name   '.git'  \
-                -printf '%P\n'  |
+                -printf '%P\n'  \
+                2> /dev/null    |
         sed     's|/.git||'     |
-        sort                    2> /dev/null
+        sort
         )
 
 printf '%b\n' "${GREEN}Klaar!${NORMAL}"
