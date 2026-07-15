@@ -40,7 +40,7 @@ done < <(
                 -name   '.git'  \
                 -printf '%P\n'  |
         sed     's|/.git||'     |
-        sort
+        sort                    2> /dev/null
         )
 
 printf '%b\n' "${GREEN}Klaar!${NORMAL}"
