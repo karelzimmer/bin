@@ -34,13 +34,12 @@ clear -x
 printf '%b\n' "$SEPARATOR_LINE
 
     Git squash merge in 10 stappen.
-
     Werkt het beste in twee aparte terminals door te kopiëren en plakken.
 
-    Het volgende zal worden uitgevoerd ${BOLD}per repo...${NORMAL}
-    A. Op ${BOLD}eerste machine${NORMAL} stap 1 t/m 10,
-    B. Op ${BOLD}andere machine${NORMAL} stap 1 t/m 3, git pull, stap 7, stap \
-9 en 10
+    Het volgende zal worden uitgevoerd ${BOLD}per repo${NORMAL}:
+    A. Op ${BOLD}eerste machine${NORMAL} stap 1 t/m 10.
+    B. Op ${BOLD}andere machine${NORMAL} stap 1 t/m 3, stap 7, stap 9 en 10, \
+git pull.
 
 $SEPARATOR_LINE
 
