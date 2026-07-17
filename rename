@@ -17,8 +17,8 @@ for file in BACKUP_*; do
     user_host=$(echo "$file" | cut --delimiter='_' --fields=2-3)
     host=$(echo "$user_host" | cut --delimiter='_' --fields=1)
     user=$(echo "$user_host" | cut --delimiter='_' --fields=2)
-    echo "mv $file backup_${host}_${user}"
-    # mv --verbose "$file" "backup_${host}_${user}"
+    # echo "mv $file backup_${host}_${user}"
+    mv --verbose "$file" "backup_${host}_${user}"
 done
 
 # afsl_script
