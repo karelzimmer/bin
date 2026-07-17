@@ -8,6 +8,9 @@
 
 # init
 # Renamen van BACKUP_<host>_<user> naar backup_<host>_<user>
+# Usage:
+# 1. cd <directory containing the BACKUP_* files>
+# 2. sudo ~/bin/rename
 
 # verwerk
 for file in BACKUP_*; do
