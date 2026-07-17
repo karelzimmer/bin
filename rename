@@ -7,15 +7,15 @@
 # #############################################################################
 
 # init
-# Renamen van BACKUP-<user>@<host> naar BACKUP_<host>_<user>
+# Renamen van BACKUP_<host>_<user> naar backup_<host>_<user>
 
 # verwerk
-for file in BACKUP-*; do
-    user_host=$(echo "$file" | cut --delimiter='-' --fields=2)
-    user=$(echo "$user_host" | cut --delimiter='@' --fields=1)
-    host=$(echo "$user_host" | cut --delimiter='@' --fields=2)
-    echo "mv $file BACKUP_${host}_${user}"
-    # mv --verbose "$file" "BACKUP_${host}_${user}"
+for file in BACKUP_*; do
+    user_host=$(echo "$file" | cut --delimiter='_' --fields=2-3)
+    host=$(echo "$user_host" | cut --delimiter='_' --fields=1)
+    user=$(echo "$user_host" | cut --delimiter='_' --fields=2)
+    echo "mv $file backup_${host}_${user}"
+    # mv --verbose "$file" "backup_${host}_${user}"
 done
 
 # afsl_script
