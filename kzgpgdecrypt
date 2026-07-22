@@ -11,7 +11,7 @@
 # Constants
 # #############################################################################
 
-# If no xdg-user-dir command is available (e.g. RHEL), we use a fallback.
+# Fallback if no xdg-user-dir command is available.
 if ! GITROOT=$(xdg-user-dir PROJECTS); then
     GITROOT=$HOME/Projecten
 fi
