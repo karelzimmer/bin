@@ -12,7 +12,7 @@
 # #############################################################################
 
 # Fallback if no xdg-user-dir command is available.
-if ! GITROOT=$(xdg-user-dir PROJECTS); then
+if ! GITROOT=$(xdg-user-dir PROJECTS 2> /dev/null); then
     GITROOT=$HOME/Projecten
 fi
 readonly GITROOT
