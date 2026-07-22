@@ -11,7 +11,9 @@
 # Constants
 # #############################################################################
 
-GITROOT=$(xdg-user-dir PROJECTS)
+if ! GITROOT=$(xdg-user-dir PROJECTS); then
+    GITROOT=$HOME/Projecten
+fi
 readonly GITROOT
 
 
