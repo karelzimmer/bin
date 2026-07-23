@@ -27,10 +27,13 @@ readonly GITROOT
 # Main
 # #############################################################################
 
-gpg --output  ~/kz-install-decrypted.sh \
+gpg --output  "$HOME/kz-install-decrypted.sh" \
     --decrypt "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg"
-gpg --output  ~/kz-setup-decrypted.sh   \
+printf '%s\n\n' "'$HOME/kz-install-decrypted.sh' is aangemaakt"
+
+gpg --output  "$HOME/kz-setup-decrypted.sh"   \
     --decrypt "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
+printf '%s\n\n' "'$HOME/kz-setup-decrypted.sh' is aangemaakt"
 
 printf  '\n%s\n' \
         '====================================================================='
