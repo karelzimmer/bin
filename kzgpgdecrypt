@@ -33,7 +33,7 @@ printf '%s\n\n' "'$HOME/kz-install-decrypted.sh' is aangemaakt"
 
 gpg --output  "$HOME/kz-setup-decrypted.sh"   \
     --decrypt "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
-printf '%s\n\n' "'$HOME/kz-setup-decrypted.sh' is aangemaakt"
+printf '%s\n' "'$HOME/kz-setup-decrypted.sh' is aangemaakt"
 
 printf  '\n%s\n' \
         '====================================================================='
