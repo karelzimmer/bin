@@ -7,9 +7,9 @@
 # #############################################################################
 
 # init
-# Renamen van BACKUP_<host>_<user> naar backup_<host>_<user>
+# Renamen van BACKUP_host_user naar backup_host_user
 # Usage:
-# 1. cd <directory containing the BACKUP_* files>
+# 1. cd DIRECTORY (containing the BACKUP_* files)
 # 2. sudo ~/bin/rename
 
 # verwerk
