@@ -36,19 +36,18 @@ printf '%b\n' "$SEPARATOR_LINE
     Git squash merge in 10 stappen.
     Werkt het beste in twee aparte terminals door te kopiëren en plakken.
 
-    Het volgende zal worden uitgevoerd ${BOLD}per repo${NORMAL}:
-    A. Op ${BOLD}eerste machine${NORMAL} stap 1 t/m 10.
-    B. Op ${BOLD}andere machine${NORMAL} stap 1 t/m 3, stap 7, stap 9 en 10, \
-git pull.
+    Het volgende dient te worden uitgevoerd ${BOLD}per repo${NORMAL}.
+    Op ${BOLD}eerste machine${NORMAL}: stap 1 t/m 10
+    Op ${BOLD}andere machine${NORMAL}: stappen gemerkt met * en 'git pull'
 
 $SEPARATOR_LINE
 
 ${BOLD}Voorbereiden...${NORMAL}
-    1.  git branch              # noteer de branch die samengevoegd moet worden
-    2.  branch=                 # stel hier de naam van de squash-branch in
+ *  1.  git branch              # noteer de branch die samengevoegd moet worden
+ *  2.  branch=                 # stel hier de naam van de squash-branch in
 
 ${BOLD}Samenvoegen...${NORMAL}
-    3.  git switch main
+ *  3.  git switch main
     4.  git merge --squash \$branch
 
 ${BOLD}Bevestigen...${NORMAL}
@@ -56,12 +55,12 @@ ${BOLD}Bevestigen...${NORMAL}
     6.  git push origin main
 
 ${BOLD}Opruimen...${NORMAL}
-    7.  git branch --delete \$branch
+ *  7.  git branch --delete \$branch
     8.  git push origin --delete \$branch
 
 ${BOLD}Onderhoud...${NORMAL}
-    9.  git remote prune origin # verwijder alle verouderde branches
-   10.  git fetch --prune       # verwijder alle verouderde referenties
+ *  9.  git remote prune origin # verwijder alle verouderde branches
+ * 10.  git fetch --prune       # verwijder alle verouderde referenties
 
 $SEPARATOR_LINE"
 exit 0
