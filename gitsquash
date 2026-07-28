@@ -55,8 +55,8 @@ ${BOLD}Bevestigen...${NORMAL}
     6.  git push origin main                # push main branch naar de remote
 
 ${BOLD}Opruimen...${NORMAL}
- *  7.  git branch --delete \$branch         # verwijder lokale branch
-    8.  git push origin --delete \$branch    # verwijder remote branch
+ *  7.  git branch --delete \$branch         # verwijder de lokale branch
+    8.  git push origin --delete \$branch    # verwijder de remote branch
 
 ${BOLD}Onderhoud...${NORMAL}
  *  9.  git pull --prune                    # verwijder verouderde verwijzingen
