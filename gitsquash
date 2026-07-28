@@ -52,7 +52,7 @@ ${BOLD}Samenvoegen...${NORMAL}
 
 ${BOLD}Bevestigen...${NORMAL}
     5.  git commit                          # stel commit-bericht op in editor
-    6.  git push origin main                # push main branch naar remote
+    6.  git push origin main                # push main branch naar de remote
 
 ${BOLD}Opruimen...${NORMAL}
  *  7.  git branch --delete \$branch         # verwijder lokale branch
