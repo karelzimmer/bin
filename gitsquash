@@ -34,7 +34,7 @@ clear -x
 printf '%b\n' "$SEPARATOR_LINE
 
     Git squash merge in 9 stappen.
-    Werkt het beste in twee aparte terminals door te kopiëren en plakken.
+    Werkt het beste in twee aparte terminals door te kopiëren en te plakken.
 
     Het volgende dient te worden uitgevoerd ${BOLD}per repo${NORMAL}.
     Op ${BOLD}eerste machine${NORMAL}: alle stappen
@@ -45,20 +45,18 @@ $SEPARATOR_LINE
 ${BOLD}Voorbereiden...${NORMAL}
  *  1.  git branch                          # noteer samen te voegen branch
  *  2.  branch=                             # stel naam van squash-branch in
+ *  3.  git switch main                     # schakel over naar de main branch
 
 ${BOLD}Samenvoegen...${NORMAL}
- *  3.  git switch main                     # schakel over naar de main branch
     4.  git merge --squash \$branch          # voer de squash merge uit
 
 ${BOLD}Bevestigen...${NORMAL}
     5.  git commit                          # stel commit-bericht op in editor
-    6.  git push origin main                # push main branch naar de remote
+    6.  git push origin main                # push main-branch naar de remote
+    7.  git push origin --delete \$branch    # verwijder de remote branch
 
 ${BOLD}Opruimen...${NORMAL}
- *  7.  git branch --delete \$branch         # verwijder de lokale branch
-    8.  git push origin --delete \$branch    # verwijder de remote branch
-
-${BOLD}Onderhoud...${NORMAL}
+ *  8.  git branch --delete \$branch         # verwijder de lokale branch
  *  9.  git pull --prune                    # verwijder verouderde verwijzingen
 
 $SEPARATOR_LINE"
