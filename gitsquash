@@ -12,7 +12,7 @@
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-readonly BOLD='\033[1m'
+readonly BLUE='\033[34m'
 readonly NORMAL='\033[0m'
 
 
@@ -36,26 +36,26 @@ printf '%b\n' "$SEPARATOR_LINE
     Git squash merge in 9 stappen.
     Werkt het beste in twee aparte terminals door te kopiëren en te plakken.
 
-    Het volgende dient te worden uitgevoerd ${BOLD}per repo${NORMAL}.
-    Op ${BOLD}eerste machine${NORMAL}: alle stappen
-    Op ${BOLD}andere machine${NORMAL}: stappen gemerkt met *
+    Het volgende dient te worden uitgevoerd ${BLUE}per repo${NORMAL}.
+    Op ${BLUE}eerste machine${NORMAL}: alle stappen
+    Op ${BLUE}andere machine${NORMAL}: stappen gemerkt met *
 
 $SEPARATOR_LINE
 
-${BOLD}Voorbereiden...${NORMAL}
+${BLUE}Voorbereiden...${NORMAL}
  *  1.  git branch                          # noteer samen te voegen branch
  *  2.  branch=                             # stel naam van squash-branch in
  *  3.  git switch main                     # schakel over naar de main branch
 
-${BOLD}Samenvoegen...${NORMAL}
+${BLUE}Samenvoegen...${NORMAL}
     4.  git merge --squash \$branch          # voer de squash merge uit
 
-${BOLD}Bevestigen...${NORMAL}
+${BLUE}Bevestigen...${NORMAL}
     5.  git commit                          # stel commit-bericht op in editor
     6.  git push origin main                # push main-branch naar de remote
     7.  git push origin --delete \$branch    # verwijder de remote branch
 
-${BOLD}Opruimen...${NORMAL}
+${BLUE}Opruimen...${NORMAL}
  *  8.  git branch --delete \$branch         # verwijder de lokale branch
  *  9.  git pull --prune                    # verwijder verouderde verwijzingen
 
