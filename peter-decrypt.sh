@@ -2,7 +2,7 @@
 
 my_secret_key=5
 
-function decrypt {
+decrypt {
     result=""
     secret_string=$1
     secret_number=$2

@@ -45,13 +45,13 @@ readonly NORMAL='\033[0m'
 # #############################################################################
 
 # This function performs initial actions.
-function init() {
+init() {
     :
 }
 
 
 # This function performs the script actions, such as checking the input.
-function process {
+process {
     local dir=''
     local -i number_of_processes=0
 
@@ -86,7 +86,7 @@ gestart [Enter]: " < /dev/tty
 
 
 # This function validates the CSS files.
-function validate_css {
+validate_css {
     local filename=''
 
     cd "$CSS_DIR" || exit 1
@@ -98,7 +98,7 @@ function validate_css {
 
 
 # This function validates the HTML files.
-function validate_html {
+validate_html {
     local filename=''
 
     cd "$HTML_DIR_NL" || exit 1
@@ -116,7 +116,7 @@ function validate_html {
 
 
 # This function controls the termination of the script.
-function term {
+term {
     printf '%s\n' 'Controleer de tabbladen in Google Chrome.'
     printf '%b\n' "${GREEN}Klaar!${NORMAL}"
     exit 0
@@ -126,7 +126,7 @@ function term {
 # Main
 # #############################################################################
 
-function main {
+main {
     init
     process
     term

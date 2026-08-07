@@ -13,13 +13,13 @@
 # #############################################################################
 
 # This function performs initial actions.
-function init() {
+init() {
     :
 }
 
 
 # This function performs the script actions.
-function process() {
+process() {
     local source=${1:-}
     local target=${2:-}
     local missing_files=/tmp/missing-files.txt
@@ -69,7 +69,7 @@ function process() {
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     exit 0
 }
 
@@ -78,7 +78,7 @@ function term() {
 # Main
 # #############################################################################
 
-function main() {
+main() {
     init    "$@"
     process "$@"
     term
