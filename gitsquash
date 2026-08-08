@@ -48,7 +48,7 @@ ${BLUE}Voorbereiden...${NORMAL}
  *  3.  git switch main             # schakel over naar de main branch
 
 ${BLUE}Samenvoegen...${NORMAL}
-    4.  git merge --squash \$branch  # voer de squash merge uit op main branch
+    4.  git merge --squash \$branch  # voer squash merge uit op de main branch
 
 ${BLUE}Bevestigen...${NORMAL}
     5.  git commit                  # stel het commit-bericht op in de editor
