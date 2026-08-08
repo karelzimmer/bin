@@ -44,7 +44,7 @@ $SEPARATOR_LINE
 
 ${BLUE}Voorbereiden...${NORMAL}
  *  1.  git branch                          # noteer de samen te voegen branch
- *  2.  branch=                             # stel de naam van squash-branch in
+ *  2.  branch=                             # stel de naam van squash branch in
  *  3.  git switch main                     # schakel over naar de main branch
 
 ${BLUE}Samenvoegen...${NORMAL}
@@ -52,7 +52,7 @@ ${BLUE}Samenvoegen...${NORMAL}
 
 ${BLUE}Bevestigen...${NORMAL}
     5.  git commit                          # stel commit-bericht op in editor
-    6.  git push origin main                # push main-branch naar de remote
+    6.  git push origin main                # push main branch naar de remote
     7.  git push origin --delete \$branch    # verwijder de remote branch
 
 ${BLUE}Opruimen...${NORMAL}
