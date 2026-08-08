@@ -43,21 +43,21 @@ printf '%b\n' "$SEPARATOR_LINE
 $SEPARATOR_LINE
 
 ${BLUE}Voorbereiden...${NORMAL}
- *  1.  git branch                          # noteer de samen te voegen branch
- *  2.  branch=                             # stel de naam van squash branch in
- *  3.  git switch main                     # schakel over naar de main branch
+ *  1.  git branch                  # noteer de samen te voegen branch
+ *  2.  branch=                     # stel de naam van de branch in
+ *  3.  git switch main             # schakel over naar de main branch
 
 ${BLUE}Samenvoegen...${NORMAL}
-    4.  git merge --squash \$branch          # voer de squash merge uit
+    4.  git merge --squash \$branch  # voer de squash merge uit op main branch
 
 ${BLUE}Bevestigen...${NORMAL}
-    5.  git commit                          # stel commit-bericht op in editor
-    6.  git push origin main                # push main branch naar de remote
-    7.  git push origin --delete \$branch    # verwijder de remote branch
+    5.  git commit                  # stel het commit-bericht op in de editor
+    6.  git push origin main        # push de main branch naar de remote
+    7.  git push origin -d \$branch  # verwijder de remote branch
 
 ${BLUE}Opruimen...${NORMAL}
- *  8.  git branch --delete --force \$branch # verwijder de lokale branch
- *  9.  git pull --prune                    # verwijder verouderde verwijzingen
+ *  8.  git branch -D \$branch       # verwijder de lokale branch
+ *  9.  git pull --prune            # verwijder verouderde verwijzingen
 
 $SEPARATOR_LINE"
 exit 0
