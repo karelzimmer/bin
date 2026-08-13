@@ -11,9 +11,6 @@
 # Constants
 # #############################################################################
 
-LINE=$(printf '=%.0s' {1..79})
-readonly LINE
-
 
 # #############################################################################
 # Globals
@@ -24,16 +21,10 @@ readonly LINE
 # Main
 # #############################################################################
 
-printf '%s\n\n' "$LINE"
-
 rm --verbose "$HOME/kz-install-decrypted.sh"
 
 rm --verbose "$HOME/kz-setup-decrypted.sh"
 
-printf '\n%s\n' "$LINE"
-
 printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
-printf '\n%s\n' "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) the \
+printf '%s\n' "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) the \
 kz GPG files."
-
-printf '\n%s\n' "$LINE"

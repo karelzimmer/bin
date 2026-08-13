@@ -20,18 +20,18 @@ readonly NORMAL='\033[0m'
 # Globals
 # #############################################################################
 
-declare SEPARATOR_LINE=''
+declare LINE=''
 
 
 # #############################################################################
 # Main
 # #############################################################################
 
-SEPARATOR_LINE=$(eval printf -- '=%.0s' '{1..79}')
+LINE=$(eval printf -- '=%.0s' '{1..79}')
 
 clear -x
 
-printf '%b\n' "$SEPARATOR_LINE
+printf '%b\n' "$LINE
 
     Git squash merge in 9 stappen.
     Werkt het beste in twee aparte terminals door te kopiëren en te plakken.
@@ -40,7 +40,7 @@ printf '%b\n' "$SEPARATOR_LINE
     Op ${BLUE}eerste machine${NORMAL}: alle stappen
     Op ${BLUE}andere machine${NORMAL}: stappen gemerkt met *
 
-$SEPARATOR_LINE
+$LINE
 
 ${BLUE}Voorbereiden...${NORMAL}
  *  1.  git branch                  # noteer de samen te voegen branch
@@ -59,5 +59,5 @@ ${BLUE}Opruimen...${NORMAL}
  *  8.  git branch -D \$branch       # verwijder de lokale squash branch
  *  9.  git pull --prune            # verwijder verouderde verwijzingen
 
-$SEPARATOR_LINE"
+$LINE"
 exit 0
