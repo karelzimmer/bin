@@ -40,4 +40,4 @@ printf '\n%s\n' "$LINE"
 printf '\n%s\n' 'Use "kzgpgdelete" to delete the decrypted kz GPG files.'
 printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
 
-printf '%s\n\n' "$LINE"
+printf '\n%s\n' "$LINE"
