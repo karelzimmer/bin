@@ -16,6 +16,8 @@ if ! GITROOT=$(xdg-user-dir PROJECTS 2> /dev/null); then
     GITROOT=$HOME/Projecten
 fi
 readonly GITROOT
+LINE=$(printf '=%.0s' {1..79})
+readonly LINE
 
 
 # #############################################################################
@@ -27,6 +29,8 @@ readonly GITROOT
 # Main
 # #############################################################################
 
+printf '%s\n\n' "$LINE"
+
 gpg --output  "$HOME/kz-install-decrypted.sh" \
     --decrypt "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg"
 printf '%s\n\n' "'$HOME/kz-install-decrypted.sh' is aangemaakt"
@@ -35,8 +39,10 @@ gpg --output  "$HOME/kz-setup-decrypted.sh"   \
     --decrypt "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
 printf '%s\n' "'$HOME/kz-setup-decrypted.sh' is aangemaakt"
 
-printf  '\n%s\n' \
-        '====================================================================='
-printf  '\n%s\n' \
-        'Use "kzgpgencrypt" or "kzgpgsign" to encrypt (sign) the kz GPG files.'
+printf '\n%s\n' "$LINE"
+
+printf '\n%s\n' "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) the \
+kz GPG files."
 printf '\n%s\n' 'Use "kzgpgdelete" to delete the decrypted kz GPG files.'
+
+printf '\n%s\n' "$LINE"
