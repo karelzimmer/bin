@@ -6,20 +6,45 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-# init
-# Renamen van BACKUP_host_user naar backup_host_user
+# Init
 # Usage:
-# 1. cd DIRECTORY (containing the BACKUP_* files)
+# 1. cd DIRECTORY (containing the files to be renamed)
 # 2. sudo ~/bin/rename
 
-# verwerk
+# Verwerk
+# Toegestane tekens in de bestandsnamen:
+# host: a-z, A-Z, 0-9, -
+# user: a-z, A-Z, 0-9, -, _ (let op underscore i.c.m. parameter expansion)
+
+# *** Variatie #1 *** Hernoem van BACKUP-user@host naar BACKUP_host_user
+# Voorbeeld: BACKUP-karel_zimmer@pc06 -> BACKUP_pc06_karel_zimmer
+# for file in BACKUP-*; do
+# OLD echo + cut:
+#     user_host=$(echo "$file" | cut --delimiter='-' --fields=2)
+#     user=$(echo "$user_host" | cut --delimiter='@' --fields=1)
+#     host=$(echo "$user_host" | cut --delimiter='@' --fields=2)
+# NEW Parameter Expansion:
+#     user_host=${file#BACKUP-}
+#     user=${user_host%@*}
+#     host=${user_host#*@}
+#     echo "mv $file BACKUP_${host}_${user}"
+#     # mv --verbose "$file" "BACKUP_${host}_${user}"
+# done
+
+# *** Variatie #2 *** Hernoem van BACKUP_host_user naar backup_host_user
+# Voorbeeld: BACKUP_pc06_karel_zimmer -> backup_pc06_karel_zimmer
 for file in BACKUP_*; do
-    user_host=$(echo "$file" | cut --delimiter='_' --fields=2-3)
-    host=$(echo "$user_host" | cut --delimiter='_' --fields=1)
-    user=$(echo "$user_host" | cut --delimiter='_' --fields=2)
-    # echo "mv $file backup_${host}_${user}"
+# OLD echo + cut:
+#     user_host=$(echo "$file" | cut --delimiter='_' --fields=2-3)
+#     host=$(echo "$user_host" | cut --delimiter='_' --fields=1)
+#     user=$(echo "$user_host" | cut --delimiter='_' --fields=2)
+# NEW Parameter Expansion:
+    host_user=${file#BACKUP_}
+    host=${host_user%%_*}
+    user=${host_user#*_}
+    echo "mv $file backup_${host}_${user}"
     mv --verbose "$file" "backup_${host}_${user}"
 done
 
-# afsl_script
+# Term
 exit 0
