@@ -33,7 +33,7 @@ printf '%s\n' 'Zoek naar alle Git-repositories in de Persoonlijke map...'
 while read -r REPO; do
     printf "\n${BLUE}Pull %s...${NORMAL}\n" "$REPO"
     cd "$HOME/$REPO" || exit 1
-    git pull --all --verbose
+    git pull --prune --verbose
 done < <(
         find    "$HOME"         \
                 -type   d       \
