@@ -55,7 +55,7 @@ process() {
         if [[ $source_file == */.* ]]; then
             continue
         fi
-        source_filename=$(basename "$source_file")
+        source_filename=${source_file##*/}
         if ! grep --fixed-strings --quiet "$source_filename" "$target_files"
         then
             echo "Bestand niet in target: $source_file" |

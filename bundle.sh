@@ -23,7 +23,7 @@ for file; do
         continue
     fi
 
-    file_base=$(basename "$file")
+    file_base=${file##*/}
 
     echo "cat > $file_base << 'Einde van $file_base'"
     cat "$file"
