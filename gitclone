@@ -57,7 +57,7 @@ for REPO in $REPOS; do
     fi
     # Repo bin in HOME, others in PROJECTS directory.
     if [[ $REPO = 'bin' ]]; then
-        GITROOT="$HOME"
+        GITROOT=$HOME
     else
         GITROOT=$(xdg-user-dir PROJECTS)
     fi
