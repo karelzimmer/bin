@@ -37,8 +37,8 @@ printf '%b\n' "$LINE
     Werkt het beste in twee aparte terminals door te kopiëren en te plakken.
 
     Het volgende dient te worden uitgevoerd ${BLUE}per repo${NORMAL}.
-    Op ${BLUE}eerste machine${NORMAL}: alle stappen
-    Op ${BLUE}andere machine${NORMAL}: stappen gemerkt met *
+    De ${BLUE}squash commit${NORMAL}: alle stappen
+    De ${BLUE}branch delete${NORMAL}: stappen gemerkt met *
 
 $LINE
 
