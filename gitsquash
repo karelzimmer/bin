@@ -38,7 +38,7 @@ printf '%b\n' "$LINE
 
     Het volgende dient te worden uitgevoerd ${BLUE}per repo${NORMAL}.
     De ${BLUE}squash commit${NORMAL}: alle stappen
-    De ${BLUE}branch delete${NORMAL}: stappen gemerkt met *
+    De ${BLUE}delete branch${NORMAL}: stappen gemerkt met *
 
 $LINE
 
