@@ -26,7 +26,7 @@ readonly NORMAL='\033[0m'
 # Main
 # #############################################################################
 
-printf "${BLUE}%s${NORMAL}\n" 'Please enter your Git user configuration...'
+printf "${BLUE}%s${NORMAL}\n" 'Please enter your Git user configuration:'
 
 read -rp 'Git user.name [Karel Zimmer]: ' < /dev/tty
 if [ -z "$REPLY" ]; then
@@ -34,8 +34,8 @@ if [ -z "$REPLY" ]; then
     printf '%s\n' "Using default Git user.name: $REPLY"
 fi
 git config --global user.name "$REPLY"
-printf '\n'
 
+printf '\n'
 read -rp 'Git user.email [karel.zimmer@gmail.com]: ' < /dev/tty
 if [ -z "$REPLY" ]; then
     REPLY='karel.zimmer@gmail.com'
