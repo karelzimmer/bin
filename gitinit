@@ -25,10 +25,16 @@ readonly NORMAL='\033[0m'
 # Main
 # #############################################################################
 
-read -rp 'Git user.name [e.g. Karel Zimmer]: ' < /dev/tty
+read -rp 'Git user.name [Karel Zimmer]: ' < /dev/tty
+if [ -z "$REPLY" ]; then
+    REPLY='Karel Zimmer'
+fi
 git config --global user.name "$REPLY"
 
-read -rp 'Git user.email [e.g. karel.zimmer@gmail.com]: ' < /dev/tty
+read -rp 'Git user.email [karel.zimmer@gmail.com]: ' < /dev/tty
+if [ -z "$REPLY" ]; then
+    REPLY='karel.zimmer@gmail.com'
+fi
 git config --global user.email "$REPLY"
 
 git config --global core.editor "code --wait"
