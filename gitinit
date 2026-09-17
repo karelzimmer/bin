@@ -12,6 +12,7 @@
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
+readonly BLUE='\033[1;34m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
@@ -25,15 +26,20 @@ readonly NORMAL='\033[0m'
 # Main
 # #############################################################################
 
+printf "${BLUE}%s${NORMAL}\n" 'Please enter your Git user configuration...'
+
 read -rp 'Git user.name [Karel Zimmer]: ' < /dev/tty
 if [ -z "$REPLY" ]; then
     REPLY='Karel Zimmer'
+    printf '%s\n' "Using default Git user.name: $REPLY"
 fi
 git config --global user.name "$REPLY"
+printf '\n'
 
 read -rp 'Git user.email [karel.zimmer@gmail.com]: ' < /dev/tty
 if [ -z "$REPLY" ]; then
     REPLY='karel.zimmer@gmail.com'
+    printf '%s\n' "Using default Git user.email: $REPLY"
 fi
 git config --global user.email "$REPLY"
 
@@ -42,7 +48,8 @@ git config --global pull.ff only
 git config --global credential.helper store
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
+printf "\n${BLUE}%s${NORMAL}\n" 'Current Git configuration:'
 git config --list
 
-printf '%b\n' "${GREEN}Klaar!${NORMAL}"
+printf '%b\n' "${GREEN}Complete!${NORMAL}"
 exit 0
