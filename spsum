@@ -48,7 +48,7 @@ for ISO in *.iso; do
                 --no-filename           \
                 -- *                    || true 
                 )
-    if [[ -z $sha256sum ]]; then
+    if [[ ! $sha256sum ]]; then
         printf '%s\n' "No checksum found for $ISO." >&2
     else
         echo "$sha256sum" > "$ISO".sha256
