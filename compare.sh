@@ -27,10 +27,10 @@ process() {
     local source_files=/tmp/source-files.txt
     local target_files=/tmp/target-files.txt
 
-    if ! [[ "$source" && "$target" ]]; then
+    if [[ ! "$source" && "$target" ]]; then
         echo "Gebruik: $0 <source> <target>"
         exit 1
-    elif ! [[ -d "$source" && -d "$target" ]]; then
+    elif [[ ! -d "$source" && -d "$target" ]]; then
         [[ -d "$source" ]] || echo "Source '$source' is geen map."
         [[ -d "$target" ]] || echo "Target '$target' is geen map."
         exit 1

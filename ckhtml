@@ -56,7 +56,7 @@ process() {
     local -i number_of_processes=0
 
     for dir in "$CSS_DIR" "$HTML_DIR_NL" "$HTML_DIR_EN"; do
-        if ! [[ -d $dir ]]; then
+        if [[ ! -d $dir ]]; then
             printf '%s\n' "$PROGRAM_NAME: map '$dir' bestaat niet"
             exit 1
         fi
