@@ -24,14 +24,14 @@ readonly GITROOT
 # Main
 # #############################################################################
 
-gpg --output  "$HOME/kz-install.sh.gpg" \
-    --decrypt "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg"
-printf '%s\n\n' "'$HOME/kz-install.sh.gpg' is aangemaakt"
+gpg     --output    "$HOME/kz-install.sh.gpg" \
+        --decrypt   "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg"
+printf  '%s\n\n'    "'$HOME/kz-install.sh.gpg' is aangemaakt"
 
-gpg --output  "$HOME/kz-setup.sh.gpg"   \
-    --decrypt "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
-printf '%s\n' "'$HOME/kz-setup.sh.gpg' is aangemaakt"
+gpg     --output    "$HOME/kz-setup.sh.gpg"   \
+        --decrypt   "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
+printf  '%s\n'      "'$HOME/kz-setup.sh.gpg' is aangemaakt"
 
-printf '\n%s\n' "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) the \
-kz GPG files."
-printf '%s\n' 'Use "kzgpgdelete" to delete the decrypted kz GPG files.'
+printf  '\n%s\n'    "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) \
+the kz GPG files.
+Use \"kzgpgdelete\" to delete the decrypted kz GPG files."

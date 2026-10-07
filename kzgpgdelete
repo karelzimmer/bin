@@ -25,6 +25,5 @@ rm --verbose "$HOME/kz-install.sh.gpg"
 
 rm --verbose "$HOME/kz-setup.sh.gpg"
 
-printf '\n%s\n' 'Use "kzgpgdecrypt" to decrypt the kz GPG files.'
-printf '%s\n' "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) the \
-kz GPG files."
+printf '\n%s\n' "Use \"kzgpgdecrypt\" to decrypt the kz GPG files.
+Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) the kz GPG files."
