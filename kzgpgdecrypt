@@ -32,6 +32,5 @@ gpg     --output    "$HOME/kz-setup.sh.gpg"   \
         --decrypt   "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"
 printf  '%s\n'      "'$HOME/kz-setup.sh.gpg' is aangemaakt"
 
-printf  '\n%s\n'    "Use \"kzgpgencrypt\" or \"kzgpgsign\" to encrypt (sign) \
-the kz GPG files.
+printf  '\n%s\n'    "Use \"kzgpgsign\" to sign the kz GPG files.
 Use \"kzgpgdelete\" to delete the decrypted kz GPG files."
