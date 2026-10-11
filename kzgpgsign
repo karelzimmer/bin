@@ -1,1 +1,34 @@
-kzgpgencrypt
+#!/usr/bin/env bash
+# #############################################################################
+# SPDX-FileComment: Sign kz GPG files.
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+
+
+# #############################################################################
+# Constants
+# #############################################################################
+
+GITROOT=$(xdg-user-dir PROJECTS)
+readonly GITROOT
+
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+
+# #############################################################################
+# Main
+# #############################################################################
+
+gpg     --output    "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg" \
+        --sign      "$HOME/kz-install.sh.gpg"
+
+gpg     --output    "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"   \
+        --sign      "$HOME/kz-setup.sh.gpg"
+
+printf  '\n%s\n'    "Use \"kzgpgdelete\" to delete the decrypted kz GPG files.
+Use \"kzgpgdecrypt\" to decrypt the kz GPG files."
