@@ -36,11 +36,11 @@ while read -r REPO; do
     printf "\n${BLUE}Cleanup %s${NORMAL}\n" "$REPO"
     cd "$HOME/$REPO" || exit 1
 
-    cmd='git count-objects # PRE'
+    cmd='git count-objects # PRE CLEANUP'
     printf "${BLUE}%s${NORMAL}\n" "$cmd"
     eval "$cmd"
 
-    cmd='git fsck --unreachable # PRE'
+    cmd='git fsck --unreachable # PRE CLEANUP'
     printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
     eval "$cmd"
 
@@ -48,7 +48,7 @@ while read -r REPO; do
     printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
     eval "$cmd"
 
-    cmd='git count-objects # POST'
+    cmd='git count-objects # POST CLEANUP'
     printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
     eval "$cmd"
 
