@@ -25,7 +25,7 @@ readonly GITROOT
 # #############################################################################
 
 gpg     --output    "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg" \
-        --sign      "$HOME/kz-install.gpg.sh"
+        --sign      "$HOME/kz-install.sh.gpg"
 
 gpg     --output    "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"   \
         --sign      "$HOME/kz-setup.sh.gpg"
