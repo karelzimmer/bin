@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# #############################################################################
+# SPDX-FileComment: Git cleanup of all local branches in the home directory.
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+
+
+# #############################################################################
+# Constants
+# #############################################################################
+
+# List NORMAL last here so that -x doesn't bork the display.
+readonly BLUE='\033[1;34m'
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
+
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+declare REPO=''
+
+
+# #############################################################################
+# Main
+# #############################################################################
+
+cmd=''
+
+printf '%s\n' 'Zoek naar alle Git-repositories in de Persoonlijke map...'
+
+while read -r REPO; do
+    printf "\n${BLUE}Cleanup %s${NORMAL}\n" "$REPO"
+    cd "$HOME/$REPO" || exit 1
+
+    cmd='git count-objects'
+    printf "${BLUE}%s${NORMAL}\n" "$cmd"
+    $cmd
+
+    cmd='git fsck --unreachable'
+    printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
+    $cmd
+
+    cmd='git gc --prune=now'
+    printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
+    $cmd
+
+    cmd='git count-objects'
+    printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
+    $cmd
+
+    cmd='git fsck --unreachable'
+    printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
+    $cmd
+done < <(
+        find    "$HOME"         \
+                -type   d       \
+                -name   '.git'  \
+                -printf '%P\n'  \
+                2> /dev/null    |
+        sed     's|/.git||'     |
+        sort
+        )
+
+printf '%b\n' "${GREEN}Klaar!${NORMAL}"
+exit 0

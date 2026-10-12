@@ -42,19 +42,19 @@ printf '%b\n' "$LINE
 
 $LINE
 
-${BLUE}Voorbereiden...${NORMAL}
+${BLUE}Voorbereiden${NORMAL}
  *  1.  git branch                  # noteer de samen te voegen branch
  *  2.  branch=                     # stel de naam van de squash branch in
  *  3.  git switch main             # schakel over naar de main branch
 
-${BLUE}Samenvoegen...${NORMAL}
+${BLUE}Samenvoegen${NORMAL}
     4.  git merge --squash \$branch  # voeg de squash branch samen met main
 
-${BLUE}Bevestigen...${NORMAL}
+${BLUE}Bevestigen${NORMAL}
     5.  git commit                  # stel het commit-bericht op in de editor
     6.  git push origin main        # push de lokale main branch naar de remote
 
-${BLUE}Opruimen...${NORMAL}
+${BLUE}Opruimen${NORMAL}
  *  7.  git push origin -d \$branch  # verwijder de remote squash branch
  *  8.  git branch -D \$branch       # verwijder de lokale squash branch
  *  9.  git pull -p                 # verwijder verouderde verwijzingen
