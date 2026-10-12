@@ -21,7 +21,7 @@
 # Main
 # #############################################################################
 
-rm --verbose "$HOME/kz-install.sh.gpg"
+rm --verbose "$HOME/kz-install.gpg.sh"
 
 rm --verbose "$HOME/kz-setup.sh.gpg"
 
