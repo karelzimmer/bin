@@ -14,7 +14,7 @@
 readonly PROGRAM_NAME='ckhtml'
 
 # Where the the code is stored locally.
-GITROOT=$(xdg-user-dir PROJECTS)
+GITROOT=$(xdg-user-dir PROJECTS 2> /dev/null || echo "$HOME")
 readonly GITROOT
 
 readonly REPO=$GITROOT/kz-uploads

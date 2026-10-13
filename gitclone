@@ -59,7 +59,7 @@ for REPO in $REPOS; do
     if [[ $REPO = 'bin' ]]; then
         GITROOT=$HOME
     else
-        GITROOT=$(xdg-user-dir PROJECTS)
+        GITROOT=$(xdg-user-dir PROJECTS 2> /dev/null || echo "$HOME")
     fi
     printf "\n${BLUE}Clone %s${NORMAL}\n" "$GITROOT/$REPO"
     git clone "https://github.com/$USER_NAME/$REPO.git" "$GITROOT/$REPO" || true
