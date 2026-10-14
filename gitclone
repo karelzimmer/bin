@@ -55,7 +55,7 @@ for REPO in $REPOS; do
     if [[ $REPO = "$USER_NAME" ]]; then
         continue
     fi
-    # Repo bin in HOME, others in PROJECTS directory.
+    # Repo bin in HOME, others in PROJECTS directory, if available.
     if [[ $REPO = 'bin' ]]; then
         GITROOT=$HOME
     else
