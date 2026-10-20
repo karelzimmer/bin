@@ -52,7 +52,7 @@ while read -r REPO; do
     printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
     eval "$cmd"
 
-    cmd='git fsck --unreachable # POST'
+    cmd='git fsck --unreachable # POST CLEANUP'
     printf "\n${BLUE}%s${NORMAL}\n" "$cmd"
     eval "$cmd"
 done < <(
