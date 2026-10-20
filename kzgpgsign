@@ -27,15 +27,15 @@ readonly GITROOT
 gpg     --yes                                                       \
         --output    "$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg" \
         --sign      "$HOME/kz-install.sh.gpg"
-printf  '%s\n'  \
+printf  '%s\n'                                                      \
         "'$GITROOT/kz-scripts/usr/bin/kz-install.sh.gpg' is aangemaakt"
 
 gpg     --yes                                                       \
         --output    "$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg"   \
         --sign      "$HOME/kz-setup.sh.gpg"
-printf  '%s\n'  \
+printf  '%s\n'                                                      \
         "'$GITROOT/kz-scripts/usr/bin/kz-setup.sh.gpg' is aangemaakt"
 
-printf  '\n%s\n%s\n'    \
+printf  '\n%s\n%s\n'                                                \
         "Use \"kzgpgdelete\" to delete the decrypted kz GPG files." \
         "Use \"kzgpgdecrypt\" to decrypt the kz GPG files."

@@ -21,10 +21,12 @@
 # Main
 # #############################################################################
 
-rm --verbose "$HOME/kz-install.sh.gpg"
+rm      --verbose                                           \
+        "$HOME/kz-install.sh.gpg"
 
-rm --verbose "$HOME/kz-setup.sh.gpg"
+rm      --verbose                                           \
+        "$HOME/kz-setup.sh.gpg"
 
-printf  '\n%s\n%s\n'    \
+printf  '\n%s\n%s\n'                                        \
         "Use \"kzgpgdecrypt\" to decrypt the kz GPG files." \
         "Use \"kzgpgsign\" to sign the kz GPG files."
