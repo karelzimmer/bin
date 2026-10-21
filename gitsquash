@@ -49,13 +49,11 @@ ${BLUE}Voorbereiden${NORMAL}
 
 ${BLUE}Samenvoegen${NORMAL}
     4.  git merge --squash \$branch  # voeg de squash branch samen met main
-
-${BLUE}Bevestigen${NORMAL}
     5.  git commit                  # stel het commit-bericht op in de editor
     6.  git push origin main        # push de lokale main branch naar de remote
+    7.  git push origin -d \$branch  # verwijder de remote squash branch
 
 ${BLUE}Opruimen${NORMAL}
- *  7.  git push origin -d \$branch  # verwijder de remote squash branch
  *  8.  git branch -D \$branch       # verwijder de lokale squash branch
  *  9.  git pull -p                 # verwijder verouderde verwijzingen
 
