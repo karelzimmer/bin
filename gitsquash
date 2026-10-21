@@ -55,7 +55,7 @@ ${BLUE}Samenvoegen${NORMAL}
 
 ${BLUE}Opruimen${NORMAL}
  *  8.  git branch -D \$branch       # verwijder de lokale squash branch
- *  9.  git pull -p                 # verwijder verouderde lokale verwijzingen
+ *  9.  git pull -p                 # verwijder oude lokale verwijzingen
 
 $LINE"
 exit 0
