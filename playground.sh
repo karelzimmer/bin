@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # #############################################################################
-# SPDX-FileComment: Maak 100 subdirs aan met ieder 26 lege bestanden.
+# SPDX-FileComment: Maak 100 subdirs aan met ieder 26 lege bestanden
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
