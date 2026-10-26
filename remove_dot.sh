@@ -21,7 +21,8 @@ fi
 # Functie om de punt te verwijderen in een specifiek bestand
 remove_dot() {
     local file="$1"
-    # sed zoekt naar de regel die begint met '# SPDX-FileComment:' en eindigt op een punt.
+    # sed zoekt naar de regel die begint met '# SPDX-FileComment:' en eindigt
+    # op een punt.
     # De punt net voor het einde van de regel ($) wordt verwijderd.
     sed -i -E 's/^(# SPDX-FileComment:.*)\.$/\1/' "$file"
 }
