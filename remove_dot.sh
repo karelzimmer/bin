@@ -24,7 +24,9 @@ remove_dot() {
     # sed zoekt naar de regel die begint met '# SPDX-FileComment:' en eindigt
     # op een punt.
     # De punt net voor het einde van de regel ($) wordt verwijderd.
-    sed -i -E 's/^(# SPDX-FileComment:.*)\.$/\1/' "$file"
+    # sed -i -E 's/^(# SPDX-FileComment:.*)\.$/\1/' "$file"
+    # Voor man-pagina's:
+    sed -i -E 's/^(.\\"# SPDX-FileComment:.*)\.$/\1/' "$file"
 }
 
 # Als het argument een map of '.' is, verwerk dan alle bestanden
