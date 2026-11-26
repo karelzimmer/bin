@@ -14,7 +14,7 @@ fi
 page=$1
 section=$2
 
-# Split 'page(section)' if that form is provided with quotation marks.
+# Split 'PAGE(SECTION)' if that form is provided with quotation marks.
 if [[ $# -eq 1 && $page =~ ^([^(]+)\(([^)]+)\)$ ]]; then
     page=${BASH_REMATCH[1]}
     section=${BASH_REMATCH[2]}
