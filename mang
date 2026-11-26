@@ -14,7 +14,7 @@ Gebruik: ${0##*/} [SECTIE] PAGINA
 Open een man-pagina in Yelp (GNOME Help).
 
 Opties:
-  -h, --help    toon deze hulptekst en sluit af
+  -h, --help    Toon deze hulptekst en sluit af
 
 Voorbeelden:
   ${0##*/} printf
