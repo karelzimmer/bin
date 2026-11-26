@@ -6,14 +6,25 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-if [[ $# -lt 1 || $# -gt 2 ]]; then
-    echo "Usage: ${0##*/} PAGE [SECTION]" >&2
+if [[ $# -eq 1 ]]; then
+    if [[ "$1" =~ ^([^(]+)\(([^)]+)\)$ ]]; then
+        page=${BASH_REMATCH[1]}
+        section=${BASH_REMATCH[2]}
+    else
+        page=$1
+        section=''
+    fi
+elif [[ $# -eq 2 ]]; then
+    section=$1
+    page=$2
+else
+    echo "Usage: ${0##*/} [SECTION] PAGE" >&2
     exit 1
 fi
 
-if ! man -w ${2:+$2} "$1" &> /dev/null; then
-    echo "No man page found for '$1'${2:+ in section $2}." >&2
+if ! man -w ${section:+$section} "$page" &> /dev/null; then
+    echo "No man page found for '$page'${section:+ in section $section}." >&2
     exit 1
 fi
 
-yelp "man:$1($2)" 2> /dev/null &
+yelp "man:$page($section)" &> /dev/null &
