@@ -11,13 +11,13 @@ if [[ $# -lt 1 || $# -gt 2 ]]; then
     exit 1
 fi
 
-page="$1"
-section="$2"
+page=$1
+section=$2
 
 # Split 'page(section)' if that form is provided with quotation marks.
-if [[ $# -eq 1 && "$page" =~ ^([^(]+)\(([^)]+)\)$ ]]; then
-    page="${BASH_REMATCH[1]}"
-    section="${BASH_REMATCH[2]}"
+if [[ $# -eq 1 && $page =~ ^([^(]+)\(([^)]+)\)$ ]]; then
+    page=${BASH_REMATCH[1]}
+    section=${BASH_REMATCH[2]}
 fi
 
 if ! man -w ${section:+"$section"} "$page" >/dev/null 2>&1; then
