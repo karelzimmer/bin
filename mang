@@ -60,8 +60,7 @@ else
 fi
 
 if ! man -w ${section:+$section} "$page" &> /dev/null; then
-    echo "Geen man-pagina gevonden voor '$page'${section:+ in sectie \
-$section}." >&2
+    echo "Er is geen pagina over $page${section:+ in sectie $section}" >&2
     exit 1
 fi
 
