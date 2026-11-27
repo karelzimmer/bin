@@ -36,6 +36,13 @@ case "$1" in
 esac
 
 if [[ $# -eq 1 ]]; then
+    # Extract page and section from the format 'PAGINA(SECTIE)'.
+    # This approach uses a regular expression match to extract the page and
+    # section into BASH_REMATCH.
+    # if [[ "$1" =~ ^([^(]+)\(([^)]+)\)$ ]]; then
+    #     page="${BASH_REMATCH[1]}"
+    #     section="${BASH_REMATCH[2]}"
+    # This approach uses Bash parameter expansion.
     if [[ "$1" == *\(*\) ]]; then
         page=${1%%(*}
         section=${1#*(}
