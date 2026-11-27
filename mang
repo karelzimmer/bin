@@ -29,8 +29,8 @@ case "$1" in
         exit 0
         ;;
     -* )
-        echo "${0##*/}: ongeldige optie '$1'" >&2
-        echo "Typ '${0##*/} --help' voor meer informatie." >&2
+        printf "%s\n" "${0##*/}: ongeldige optie -- '$1'" >&2
+        usage >&2
         exit 1
         ;;
 esac
@@ -60,7 +60,8 @@ else
 fi
 
 if ! man -w ${section:+$section} "$page" &> /dev/null; then
-    echo "Er is geen pagina over $page${section:+ in sectie $section}" >&2
+    printf  '%s\n' \
+            "Er is geen pagina over $page${section:+ in sectie $section}" >&2
     exit 1
 fi
 
