@@ -5,6 +5,11 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
+# Created with the help of Gemini (Google, 2026).
+
+mkdir --parents ~/.local/share/man/man1
+cp ~/bin/mang.1 ~/.local/share/man/man1
+mandb --user-db 1> /dev/null
 
 usage() {
     cat <<EOF

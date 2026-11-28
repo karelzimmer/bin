@@ -1,0 +1,77 @@
+.\"# ##########################################################################
+.\"# SPDX-FileComment: Man page for mang (Dutch)
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"# ###########################################################################
+.\"# Created with the help of Gemini (Google, 2026).
+
+.TH "MANG" "1" "4.2.1" "mang" "Gebruikersopdrachten"
+
+.SH NAAM
+mang \- open een man-pagina in Yelp (GNOME Help)
+
+.SH SAMENVATTING
+.B mang
+.RI [ sectie ]
+.I pagina
+.br
+.B mang
+.IB 'pagina ( sectie )'
+.br
+.B mang
+.RB [ \-h | \-\-help ]
+
+.SH BESCHRIJVING
+.B mang
+opent de opgegeven Linux man-pagina in de grafische help-viewer
+.BR yelp (1)
+op de achtergrond, zodat de terminal-prompt direct weer beschikbaar is.
+Vooraf wordt met
+.BR man (1)
+gecontroleerd of de gevraagde pagina daadwerkelijk op het systeem bestaat.
+
+.SH OPTIES
+.TP
+.BR \-h ", " \-\-help
+Toon een korte gebruiksaanwijzing en sluit af.
+
+.SH VOORBEELDEN
+Open de standaard man-pagina voor
+.BR printf (1):
+.PP
+.RS 4
+.EX
+mang printf
+.EE
+.RE
+.PP
+Open de C-bibliotheekfunctie
+.BR printf (3)
+uit sectie 3:
+.PP
+.RS 4
+.EX
+mang 3 printf
+mang 'printf(3)'
+.EE
+.RE
+.SH AFSLUITSTATUS
+.TP
+.B 0
+De man-pagina is gevonden en geopend in Yelp, of de hulptekst is getoond.
+.TP
+.B 1
+Ongeldige optie, onjuist aantal argumenten of de man-pagina bestaat niet.
+
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.br
+Gemaakt met hulp van Gemini (Google, 2026).
+
+.SH LICENTIE
+CC0-1.0 (Publiek domein).
+
+.SH ZIE OOK
+.BR man (1),
+.BR yelp (1)
