@@ -7,9 +7,10 @@
 # #############################################################################
 # Created with the help of Gemini (Google, 2026).
 
+# Install the Dutch man page for mang in the local user database.
 mkdir --parents ~/.local/share/man/man1
 cp ~/bin/mang.1 ~/.local/share/man/man1
-mandb --user-db 1> /dev/null
+mandb --user-db > /dev/null
 
 usage() {
     cat <<EOF
